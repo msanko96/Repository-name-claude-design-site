@@ -9,6 +9,9 @@ Thumbs.db
 .vscode/
 .idea/
 
+# Claude Code
+.claude/
+
 # Node (if added later)
 node_modules/
 npm-debug.log*
