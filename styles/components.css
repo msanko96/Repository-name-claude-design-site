@@ -55,7 +55,6 @@
   .nav-links { display: none; }
   .nav-inner { grid-template-columns: auto 1fr; }
 }
-
 /* ---------- HERO ---------- */
 .hero {
   position: relative;
