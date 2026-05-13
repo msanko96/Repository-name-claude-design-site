@@ -6,6 +6,29 @@
   const LS_LANG = "bex-lang";
 
   const T = {
+    "f4.chip.low":  { en: "low",  ru: "low"  },
+    "f4.chip.mid":  { en: "mid",  ru: "mid"  },
+    "f4.chip.high": { en: "high", ru: "high" },
+    "f4.chip.won":  { en: "won",  ru: "won"  },
+
+    // --- f.04 CRM mock cards ---
+    "f4.crm.c1.t": { en: "Logo refresh for cafe brand",          ru: "Логотип для кофейни" },
+    "f4.crm.c1.m": { en: "$300 · fixed",                          ru: "$300 · фикс" },
+    "f4.crm.c2.t": { en: "Webflow site for B2B SaaS",             ru: "Webflow-сайт для B2B SaaS" },
+    "f4.crm.c2.m": { en: "$4,200 · fixed",                        ru: "$4 200 · фикс" },
+    "f4.crm.c3.t": { en: "Senior React engineer · analytics SaaS", ru: "Senior React-инженер · analytics SaaS" },
+    "f4.crm.c3.m": { en: "$12,000 · fixed",                       ru: "$12 000 · фикс" },
+    "f4.crm.c4.t": { en: "Stripe billing dashboard · TypeScript", ru: "Stripe billing dashboard · TypeScript" },
+    "f4.crm.c4.m": { en: "$15,000 · signed",                      ru: "$15 000 · подписан" },
+    "f4.crm.c5.t": { en: "Next.js + Supabase platform",           ru: "Next.js + Supabase платформа" },
+    "f4.crm.c5.m": { en: "$9,000 · signed",                       ru: "$9 000 · подписан" },
+
+    // --- Page meta ---
+    "page.title": {
+      en: "BEX — System for attracting projects on Upwork",
+      ru: "BEX — Система привлечения проектов на Upwork"
+    },
+
     // --- Header ---
     "nav.experts":  { en: "Built by Experts", ru: "Команда экспертов" },
     "nav.features": { en: "Features",         ru: "Возможности" },
@@ -18,7 +41,7 @@
     "hero.meta.engine": { en: "Upwork lead engine", ru: "Инструмент поиска проектов на Upwork" },
     "hero.meta.live":   { en: "LIVE",              ru: "LIVE" },
     "hero.title": {
-      en: "System for<br/>attracting <em class=\"acc\">projects</em>.",
+      en: "System for<br/>attracting <em class=\"acc\">projects</em>",
       ru: "Система для<br/>привлечения <em class=\"acc\">проектов</em>"
     },
     "hero.sub": {
@@ -26,7 +49,7 @@
       ru: "BEX — это платформа, которая ускоряет лидогенерацию на Upwork: оценивает, фильтрует и генерирует отклики, чтобы ваша команда работала только с действительно стоящими проектами."
     },
     "hero.cta.demo": { en: "Get a demo",      ru: "Посмотреть демо" },
-    "hero.cta.how":  { en: "See how it works", ru: "Как это работает" },
+    "hero.cta.how":  { en: "See how it works", ru: "Посмотреть как это работает" },
 
     "hero.scanner.status": { en: "scanning upwork.com/feed",            ru: "сканирую upwork.com/feed" },
     "hero.scanner.noise":  { en: "// incoming · raw feed",              ru: "// входящее · сырая лента" },
@@ -50,7 +73,7 @@
     "trust.idx":    { en: "01 / Built by experts", ru: "01 / Команда экспертов" },
     "trust.title":  {
       en: "Why trust <em class=\"acc\">our platform?</em>",
-      ru: "Почему нам можно <em class=\"acc\">доверять?</em>"
+      ru: "Почему нам можно <em class=\"acc\">доверять</em>"
     },
     "trust.s1.label": { en: "years of experience in lead generation", ru: "лет опыта в лидогенерации" },
     "trust.s2.label": { en: "earned by our clients",                  ru: "заработано нашими клиентами" },
@@ -60,37 +83,37 @@
       en: "Since 2008 we've generated leads on Upwork and know how to get a steady stream of relevant projects across niches. Now we've packaged this expertise into a powerful automation platform.",
       ru: "С 2008 года мы работаем с Upwork: сначала выстроили стабильный поток проектов и лидов для себя, а затем начали помогать другим компаниям. Этот опыт лёг в основу нашей автоматизированной платформы."
     },
-    "trust.voices.head": { en: "// built by agencies who ship", ru: "// от агентств, которые отгружают" },
+    "trust.voices.head": { en: "// agencies and teams that run Upwork through BEX", ru: "// отзывы агентств и команд, которые работают с Upwork через BEX" },
     "trust.v1.q": {
       en: "We stopped refreshing the feed at 3am. BEX scores jobs faster than a human can read them — same first-reply advantage, without a night shift.",
-      ru: "Настроенные фильтры помогают быстрее находить подходящие проекты и не тратить время на лишнее."
+      ru: "Благодаря гибким фильтрам мы быстрее находим подходящие проекты и не тратим время на нерелевантные заявки."
     },
-    "trust.v1.who":  { en: "Andrew P.", ru: "Андрей П." },
-    "trust.v1.role": { en: "Lead-gen manager · dev agency", ru: "Руководитель лидогенерации · dev-агентство" },
+    "trust.v1.who":  { en: "Alexey M.", ru: "Алексей Морозов" },
+    "trust.v1.role": { en: "Lead-gen manager", ru: "Руководитель по лидогенерации" },
     "trust.v2.q": {
       en: "Scoring built on 50k real proposals isn't a gimmick. Our reply rate jumped from 6% to 18% in the first month — and we stopped wasting Connects on junk.",
-      ru: "Мы работаем с разными технологиями, и раньше всё было немного вразнобой. Сейчас стало гораздо больше структуры и ясности в работе с проектами."
+      ru: "Мы ведём несколько Upwork-направлений одновременно, и раньше было сложно держать всё под контролем. С BEX стало гораздо проще отслеживать проекты, распределять заявки и понимать, что реально приносит результат."
     },
-    "trust.v2.who":  { en: "Maria K.", ru: "Мария К." },
-    "trust.v2.role": { en: "Ops lead · fullstack agency", ru: "Операционный руководитель · fullstack-агентство" },
+    "trust.v2.who":  { en: "Ekaterina S.", ru: "Екатерина Соколова" },
+    "trust.v2.role": { en: "Operations Director", ru: "Операционный директор" },
     "trust.v3.q": {
       en: "I replaced a full-time lead-gen manager with BEX plus a junior who reviews the shortlist. Pipeline is cleaner, cheaper, and I can see every thread in one place.",
-      ru: "Раньше у нас были отдельные менеджеры по лидогенерации, но с переходом на BEX в этом больше нет необходимости."
+      ru: "Раньше у нас были отдельные менеджеры по лидогенерации, но после перехода на BEX необходимость в этом практически исчезла."
     },
-    "trust.v3.who":  { en: "Dan T.", ru: "Дэн Т." },
-    "trust.v3.role": { en: "Principal · design & webflow studio", ru: "Принципал · design & webflow студия" },
+    "trust.v3.who":  { en: "Dmitry V.", ru: "Дмитрий Волков" },
+    "trust.v3.role": { en: "Owner, design studio", ru: "Владелец дизайн-студии" },
 
     // --- 02 Features ---
     "feat.idx":   { en: "02 / Core features", ru: "02 / Основные возможности" },
     "feat.title": {
-      en: "Four modules that <em class=\"acc\">run the funnel.</em>",
+      en: "Four modules that <em class=\"acc\">run the funnel</em>",
       ru: "Четыре модуля, которые<br/><em class=\"acc\">ведут воронку</em>"
     },
 
     // f.01 Scoring
     "f1.title": { en: "Custom Job Scoring & Filtering", ru: "Умная оценка и фильтрация проектов" },
     "f1.lead": {
-      en: "A scoring system built on 15+ years of lead-gen and 50,000 real proposals. Our algorithms evaluate projects against actual agency results — so you only review jobs worth your time.",
+      en: "A scoring system built on 15+ years of lead-gen and 50,000+ real proposals. Our algorithms evaluate projects against actual agency results — so you only review jobs worth your time.",
       ru: "Система скоринга на основе 15+ лет опыта и 50 000+ реальных откликов. Оценивает проекты по реальным результатам — вы видите только те, на которые стоит откликаться."
     },
     "f1.viz.head":   { en: "// job_scoring · live", ru: "// скоринг · live" },
@@ -127,11 +150,11 @@
     },
     "f1.fd.li3":    {
       en: "<b>posting text</b> — tech stack match, scope clarity, red-flag phrases",
-      ru: "<b>текст вакансии</b> — совпадение стека, ясность ТЗ, «красные флаги»"
+      ru: "<b>текст вакансии</b> — подходит ли стек, насколько всё понятно, есть ли «красные флаги»"
     },
     "f1.fd.li4":    {
       en: "<b>your profile fit</b> — niche, past wins, response speed",
-      ru: "<b>профиль</b> — ниша, прошлые победы, скорость отклика"
+      ru: "<b>профиль</b> — совпадение по нише, опыт и скорость отклика"
     },
     "f1.fd.action": { en: "// scoring in action", ru: "// скоринг в действии" },
     "f1.fd.skip":   { en: "skip",     ru: "пропустить" },
@@ -151,7 +174,7 @@
     "f2.title": { en: "Email Notification Center", ru: "Центр email-уведомлений" },
     "f2.lead": {
       en: "Speed beats everything on Upwork. Stop refreshing the feed — get an email the moment a high-scoring job matching your preferences is posted, and apply while it's still fresh.",
-      ru: "Скорость решает на Upwork. Получайте уведомления о лучших проектах и откликайтесь сразу, без постоянного обновления ленты."
+      ru: "Скорость решает. Получайте уведомления о лучших проектах и откликайтесь сразу, без постоянного обновления ленты."
     },
     "f2.viz.head":  { en: "// notifications · 4 new", ru: "// уведомления · 4 новых" },
     "f2.viz.headR": { en: "live", ru: "live" },
@@ -186,7 +209,7 @@
     },
 
     // f.03 Cover letters
-    "f3.title": { en: "Partly Automated Cover Letters", ru: "Полу-автоматические сопроводительные" },
+    "f3.title": { en: "Partly Automated Cover Letters", ru: "Частично автоматизированные отклики" },
     "f3.lead": {
       en: "Work with proven templates and smart automation that drafts personalized proposals from your experience. Keep cover-letter quality high while dramatically cutting the time to apply.",
       ru: "Система помогает быстро собрать персонализированный отклик на основе вашего опыта. Вы полностью контролируете результат — редактируете и отправляете сами."
@@ -217,11 +240,11 @@
     },
 
     // f.04 CRM
-    "f4.title": { en: "Built-in CRM & Message Center",  ru: "Встроенная CRM и центр сообщений" },
+    "f4.title": { en: "Built-in CRM & Message Center",  ru: "Встроенный CRM и центр сообщений" },
     "f4.soon":  { en: "Soon", ru: "Скоро" },
     "f4.lead": {
       en: "One central dashboard for every lead — status, chat history, next steps. Manage communication right inside the platform, without spreadsheets or tab-juggling.",
-      ru: "Вся работа с лидами в одном месте — статус, история переписки, следующие шаги. Без таблиц и десятков вкладок."
+      ru: "Вся работа с лидами собрана в одном месте — от первого контакта до следующих шагов."
     },
     "f4.viz.head":  { en: "// pipeline", ru: "// воронка" },
     "f4.viz.headR": { en: "$84k closed", ru: "$84k закрыто" },
@@ -262,18 +285,18 @@
     // 03 Inside
     "in.idx":   { en: "03 / Inside the platform", ru: "03 / Внутри платформы" },
     "in.title": {
-      en: "Every job, <em class=\"acc\">pre-scored</em> —<br/>with the proposal already drafted.",
-      ru: "Каждый проект — <em class=\"acc\">с готовой оценкой</em><br/>и подготовленным откликом"
+      en: "Every job, <em class=\"acc\">pre-scored</em> —<br/>with the proposal already drafted",
+      ru: "Каждый проект уже <em class=\"acc\">оценен</em> —<br/>и отклик к нему подготовлен"
     },
     "in.A.lab": { en: "A · Signal at a glance", ru: "A · Основная информация сразу" },
     "in.A.p":   {
       en: "Payment verified, hire rate, total spent, reviews — the signal columns that used to take 30 seconds to read, now sit above the fold.",
-      ru: "Верификация платежа, hire rate, потраченный бюджет, отзывы — всё, что важно, видно сразу."
+      ru: "Всё, что важно для оценки проекта, видно сразу."
     },
     "in.B.lab": { en: "B · Proposals, ranked", ru: "B · Скоринг откликов" },
     "in.B.p":   {
       en: "BEX surfaces which of your team members has the best match for the job — with a clear score per offer.",
-      ru: "BEX показывает, кто из команды лучше всего подходит под проект — с понятным баллом по каждому отклику."
+      ru: "Выбираете, кто из команды лучше всего подходит под проект — и отправляете наиболее релевантный отклик."
     },
     "in.C.lab": { en: "C · Draft in one click", ru: "C · Черновик в один клик" },
     "in.C.p":   {
@@ -344,64 +367,64 @@
     "why.a1": { en: "a tool that works regardless of blocks or VPNs", ru: "работает стабильно, независимо от VPN и блокировок" },
     "why.a2": { en: "one system: search → scoring → proposal",        ru: "один процесс: поиск → оценка → отклик" },
     "why.a3": { en: "less manual work, more responses",               ru: "меньше ручной работы, больше ответов" },
-    "why.a4": { en: "scale the flow without scaling the team",        ru: "масштабируется без расширения команды" },
+    "why.a4": { en: "scale the flow without scaling the team",        ru: "можно масштабировать поток без расширения команды" },
 
     // 05 Audience
     "aud.idx":   { en: "05 / Who is this for", ru: "05 / Для кого это" },
     "aud.title": {
-      en: "Teams that do lead-gen <em class=\"acc\">themselves</em> —<br/>faster, simpler, leaner.",
-      ru: "Команды, которые сами ведут <em class=\"acc\">лидогенерацию</em> —<br/>быстрее, проще, легче."
+      en: "Teams that do lead-gen <em class=\"acc\">themselves</em>",
+      ru: "Команды, которые сами занимаются <em class=\"acc\">лидогенерацией</em>"
     },
     "aud.target.lab": { en: "target", ru: "цель" },
     "aud.target.p": {
       en: "Agencies and in-house teams who want to own the lead-gen process on Upwork, but spend less hours doing it.",
       ru: "Агентствам и in-house командам, которые хотят сами вести лидогенерацию на Upwork и тратить на неё меньше времени."
     },
-    "aud.fit": { en: "good fit", ru: "подходит" },
-    "aud.p1.role": { en: "Agency owner", ru: "Владелец агентства" },
-    "aud.p1.size": { en: "8–30 people · React / Node", ru: "8–30 человек · React / Node" },
+    "aud.fit": { en: "online", ru: "online" },
+    "aud.p1.role": { en: "Founder / Agency Lead", ru: "Founder / Agency Lead" },
+    "aud.p1.size": { en: "10–25 people · React / Node / SaaS", ru: "10–25 человек · React / Node / SaaS" },
     "aud.p1.q": {
       en: "I don't want to hire a separate lead-gen manager. I want a steady stream of jobs and the team only sees the ones worth replying to.",
-      ru: "Я не хочу нанимать отдельного лидгена. Хочу, чтобы поток заявок шёл сам, а команда видела только то, что стоит ответа."
+      ru: "Нет смысла держать отдельного лидгена ради постоянного мониторинга Upwork. Хочется, чтобы система сама находила релевантные проекты, а команда подключалась только там, где есть шанс на сделку."
     },
-    "aud.p1.n1": { en: "leads pipeline without manual scraping", ru: "пайплайн заявок без ручного скрейпа" },
+    "aud.p1.n1": { en: "one feed of relevant projects", ru: "единый поток подходящих проектов" },
     "aud.p1.n2": { en: "filter by budget and stack",              ru: "фильтр по бюджету и стеку" },
-    "aud.p1.n3": { en: "outreach reporting",                       ru: "отчётность по откликам" },
+    "aud.p1.n3": { en: "outreach reporting",                       ru: "аналитика по откликам и конверсии" },
 
-    "aud.p2.role": { en: "In-house ops lead", ru: "Ops-руководитель в продукте" },
-    "aud.p2.size": { en: "product team · 1–2 lead-gen seats", ru: "продуктовая команда · 1–2 лидгена" },
+    "aud.p2.role": { en: "Operations Manager", ru: "Operations Manager" },
+    "aud.p2.size": { en: "product team · 8–15 people", ru: "product team · 8–15 человек" },
     "aud.p2.q": {
       en: "Our manager used to spend 4 hours a day in Upwork tabs. Now we pay for a tool, not for «refresh the feed».",
-      ru: "Раньше менеджер сидел во вкладках Upwork по 4 часа в день. Сейчас мы платим за инструмент, а не за «обновлять ленту»."
+      ru: "Раньше менеджеры вручную мониторили Upwork и тратили часы на отсев проектов. Сейчас команда работает только с уже подходящими заявками и быстрее выходит на созвоны."
     },
-    "aud.p2.n1": { en: "less hands-on manager time", ru: "меньше ручного времени менеджера" },
+    "aud.p2.n1": { en: "less manual work", ru: "меньше ручной работы" },
     "aud.p2.n2": { en: "one queue, not 12 tabs",     ru: "единая очередь вместо вкладок" },
-    "aud.p2.n3": { en: "ops visibility for leads",   ru: "прозрачность для руководителя" },
+    "aud.p2.n3": { en: "ops visibility for leads",   ru: "прозрачность по всем откликам" },
 
-    "aud.p3.role": { en: "Solo / 2–3 person studio", ru: "Соло / студия из 2–3 человек" },
-    "aud.p3.size": { en: "design · webflow · niche dev", ru: "design · webflow · нишевый dev" },
+    "aud.p3.role": { en: "Independent Studio", ru: "Independent Studio" },
+    "aud.p3.size": { en: "webflow · design · niche dev", ru: "webflow · design · niche dev" },
     "aud.p3.q": {
       en: "I can't be first to reply on my own — and on Upwork that's everything. I need a tool that just says «this one's yours, write back».",
-      ru: "Не успеваю реагировать первым — а на Upwork это всё. Нужен инструмент, который сам скажет «вот это — твоё, отвечай»."
+      ru: "Когда команда маленькая, невозможно постоянно сидеть в ленте Upwork. Нужен инструмент, который сам показывает релевантные проекты и помогает отвечать быстрее других."
     },
-    "aud.p3.n1": { en: "scoring tuned to your stack", ru: "скоринг под ваш стек" },
-    "aud.p3.n2": { en: "30-sec proposal template",     ru: "шаблон отклика за 30 сек" },
+    "aud.p3.n1": { en: "scoring tuned to your stack", ru: "скоринг проектов под ваш стек" },
+    "aud.p3.n2": { en: "30-sec proposal template",     ru: "шаблоны откликов за 30 секунд" },
     "aud.p3.n3": { en: "never miss fresh jobs",        ru: "не пропускать свежие проекты" },
     "aud.req.lab": { en: "requirement", ru: "требование" },
     "aud.req.p": {
       en: "An active Upwork account is required to use the platform.",
-      ru: "Нужен активный аккаунт на Upwork."
+      ru: "Нужен активный аккаунт Upwork."
     },
 
     // 06 CTA
-    "cta.eyebrow": { en: "final frame · 06", ru: "финальный кадр · 06" },
+    "cta.eyebrow": { en: "contact us · 06", ru: "свяжитесь с нами · 06" },
     "cta.title": {
       en: "Want to build a <em class=\"acc\">stable sales channel</em> on Upwork?",
-      ru: "Хотите построить <em class=\"acc\">стабильный канал продаж</em> на Upwork?"
+      ru: "Хотите построить <em class=\"acc\">стабильный канал продаж</em> через Upwork?"
     },
     "cta.lead": {
       en: "Leave a request — we'll show a demo of the platform and walk you through a real funnel in under 20 minutes.",
-      ru: "Оставьте заявку — покажем демо и проведём по реальной воронке меньше чем за 20 минут."
+      ru: "Оставьте заявку — покажем, как это работает, на реальном примере."
     },
     "cta.email.ph": { en: "you@company.com", ru: "you@company.com" },
     "cta.btn":         { en: "Request a demo", ru: "Запросить демо" },
@@ -452,14 +475,13 @@
   ]);
 
   function getLang() {
-    const saved = localStorage.getItem(LS_LANG);
-    if (saved === "en" || saved === "ru") return saved;
-    return "en";
+    return "ru";
   }
 
   function applyLang(lang) {
-    document.documentElement.setAttribute("lang", lang === "ru" ? "ru" : "en");
-    document.documentElement.setAttribute("data-lang", lang);
+    lang = "ru";
+    document.documentElement.setAttribute("lang", "ru");
+    document.documentElement.setAttribute("data-lang", "ru");
     document.querySelectorAll("[data-i18n]").forEach(el => {
       const key = el.getAttribute("data-i18n");
       const entry = T[key];
