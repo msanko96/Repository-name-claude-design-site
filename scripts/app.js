@@ -700,7 +700,7 @@
       emailInput.disabled = true;
       if (btnLabel) btnLabel.textContent = t("cta.btn.loading");
       try {
-        const res = await fetch("https://webapi.procesio.app/api/webhooks/launch/92f2de5f-6868-421e-aff5-6b84a9a28dc1", {
+        const res = await fetch("/.netlify/functions/waitlist", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email: emailInput.value }),
