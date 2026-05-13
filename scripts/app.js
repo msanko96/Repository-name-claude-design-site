@@ -643,6 +643,58 @@
     if (state.hero === "feed") startFeedVariant();
   }
 
+  // ---------- CTA form: waitlist submission ----------
+  const ctaForm = document.getElementById("cta-form");
+  if (ctaForm) {
+    const emailInput = document.getElementById("cta-email");
+    const submitBtn = document.getElementById("cta-submit");
+    const btnLabel = submitBtn ? submitBtn.querySelector(".cta-btn-label") : null;
+
+    function t(key) {
+      const lang = document.documentElement.getAttribute("data-lang") || "en";
+      const dict = (window.__bexI18n && window.__bexI18n.T) || {};
+      const entry = dict[key];
+      if (!entry) return key;
+      return entry[lang] || entry.en || key;
+    }
+
+    let busy = false;
+    ctaForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (busy) return;
+      if (!emailInput.value || !emailInput.checkValidity()) {
+        emailInput.reportValidity();
+        return;
+      }
+      busy = true;
+      submitBtn.disabled = true;
+      emailInput.disabled = true;
+      if (btnLabel) btnLabel.textContent = t("cta.btn.loading");
+      try {
+        const res = await fetch("https://n8n.atrvd.com/webhook/bex/waitlist", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: emailInput.value }),
+        });
+        if (!res.ok) throw new Error("Request failed");
+        if (btnLabel) btnLabel.textContent = t("cta.btn.done");
+        emailInput.value = "";
+      } catch (err) {
+        if (btnLabel) btnLabel.textContent = t("cta.btn.error");
+        setTimeout(() => {
+          if (btnLabel) btnLabel.textContent = t("cta.btn");
+          submitBtn.disabled = false;
+          emailInput.disabled = false;
+          busy = false;
+        }, 2500);
+        return;
+      }
+      submitBtn.disabled = false;
+      emailInput.disabled = false;
+      busy = false;
+    });
+  }
+
   // ---------- Scroll-driven A/B/C/D highlight on ui-mock ----------
   const mock = document.querySelector(".ui-mock");
   const mockWrap = document.querySelector(".ui-mock-wrap");

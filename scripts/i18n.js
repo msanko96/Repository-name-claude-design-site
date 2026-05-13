@@ -404,8 +404,10 @@
       ru: "Оставьте заявку — покажем демо и проведём по реальной воронке меньше чем за 20 минут."
     },
     "cta.email.ph": { en: "you@company.com", ru: "you@company.com" },
-    "cta.btn":      { en: "Request a demo",  ru: "Запросить демо" },
-    "cta.btn.done": { en: "Requested ✓",     ru: "Заявка отправлена ✓" },
+    "cta.btn":         { en: "Request a demo", ru: "Запросить демо" },
+    "cta.btn.loading": { en: "Sending…",       ru: "Отправляем…" },
+    "cta.btn.done":    { en: "Requested ✓",    ru: "Заявка отправлена ✓" },
+    "cta.btn.error":   { en: "Try again",      ru: "Повторить" },
 
     // Footer
     "foot.brand":   { en: "BEX/01 — system for attracting projects", ru: "BEX/01 — система привлечения проектов" },

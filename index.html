@@ -7,8 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" />
-<link rel="stylesheet" href="styles/tokens.css?v=25" />
-<link rel="stylesheet" href="styles/components.css?v=25" />
+<link rel="stylesheet" href="styles/tokens.css?v=27" />
+<link rel="stylesheet" href="styles/components.css?v=27" />
 </head>
 <body>
 
@@ -835,9 +835,9 @@
       <div class="cta-eyebrow mono-label"><i></i> <span data-i18n="cta.eyebrow">final frame · 06</span></div>
       <h2 class="h2 cta-title" data-i18n="cta.title">Want to build a <em class="acc">stable sales channel</em> on Upwork?</h2>
       <p class="lead" data-i18n="cta.lead">Leave a request — we'll show a demo of the platform and walk you through a real funnel in under 20 minutes.</p>
-      <form class="cta-form" onsubmit="event.preventDefault(); var b=this.querySelector('button span.cta-btn-label'); var lang=document.documentElement.getAttribute('data-lang')||'en'; if(b) b.textContent = (window.__bexI18n && window.__bexI18n.T['cta.btn.done'][lang]) || 'Requested ✓'; return false;">
-        <input type="email" required placeholder="you@company.com" class="mono" data-i18n-attr="placeholder:cta.email.ph" />
-        <button class="btn" type="submit"><span class="cta-btn-label" data-i18n="cta.btn">Request a demo</span> <span class="dot"></span></button>
+      <form class="cta-form" id="cta-form" novalidate>
+        <input id="cta-email" name="email" type="email" required placeholder="you@company.com" class="mono" data-i18n-attr="placeholder:cta.email.ph" />
+        <button class="btn" type="submit" id="cta-submit"><span class="cta-btn-label" data-i18n="cta.btn">Request a demo</span> <span class="dot"></span></button>
       </form>
     </div>
   </section>
@@ -866,7 +866,7 @@
     "theme": "light"
   }/*EDITMODE-END*/;
 </script>
-<script src="scripts/i18n.js?v=1"></script>
-<script src="scripts/app.js?v=9"></script>
+<script src="scripts/i18n.js?v=3"></script>
+<script src="scripts/app.js?v=11"></script>
 </body>
 </html>

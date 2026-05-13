@@ -1594,9 +1594,11 @@ em.acc-bad { font-style: normal; color: var(--bad); }
   color: var(--text);
   font-size: 13px;
   outline: none;
-  transition: border-color var(--dur-fast);
+  transition: border-color var(--dur-fast), opacity var(--dur-fast);
 }
 .cta-form input:focus { border-color: var(--accent); }
+.cta-form input:disabled,
+.cta-form button:disabled { opacity: 0.55; cursor: not-allowed; }
 
 /* ---------- FOOTER ---------- */
 .footer { border-top: 1px solid var(--line-soft); padding: var(--s-6) 0; }
