@@ -40,6 +40,8 @@
     saveState({ theme: state.theme === "dark" ? "light" : "dark" });
   });
 
+  
+
   applyState();
 
   // ---------- Reveal on scroll ----------
@@ -533,28 +535,40 @@
     function fvStep(now) {
       fvRaf = null;
       const filterY = fvFilterTargetY;
-      const slideOut = Math.max(fvStageWidth, 260) + 80;
+      const cardH = fvCardHeight || 78;
+      const slideOut = Math.max(fvStageWidth, 260) + 100;
       const stillActive = [];
+
       fvActive.forEach(job => {
-        const t = (now - job.t0) / job.dur; // 0..1
-        if (t >= 1) { job.el.remove(); return; }
-        let x = 0, y = 0, o = 1;
-        // Phase A — drift down (0 → 0.45): faster, dim
-        // Phase B — inside filter (0.45 → 0.62): full opacity, verdict shown
-        // Phase C — quick exit (0.62 → 1): fast horizontal slide
-        if (t < 0.45) {
-          const p = t / 0.45;
-          const eased = 1 - Math.pow(1 - p, 2);
-          y = eased * filterY;
-          o = 0.3 + eased * 0.5; // 0.3 → 0.8
-          if (!job.driftApplied) {
-            job.el.classList.add("drifting");
-            job.driftApplied = true;
+        const elapsed = now - job.t0;
+        const t = Math.min(elapsed / job.dur, 1);
+
+        if (t >= 1) {
+          // card fully exited — NOW add to column (appears just as card disappears)
+          if (!job.verdictApplied) { job.verdictApplied = true; }
+          job.drop(); // always call drop at end, regardless of earlier state
+          if (!job.nextScheduled) {
+            job.nextScheduled = true;
+            if (state.hero === "feed") fvNextTimer = setTimeout(spawnFeedJob, 200);
           }
-        } else if (t < 0.62) {
-          y = filterY;
-          o = 1;
-          x = 0;
+          job.el.remove();
+          return;
+        }
+
+        let x = 0, y = 0, o = 0;
+
+        // A (0 → 0.42): slide in from above, fade 0→1
+        // B (0.42 → 0.64): rest at filter, verdict
+        // C (0.64 → 1.0): slide into column, opacity stays 1
+        if (t < 0.42) {
+          const p = t / 0.42;
+          const eased = 1 - Math.pow(1 - p, 2.4);
+          y = -cardH * (1 - eased) + filterY * eased;
+          o = Math.min(1, p * 2.5); // 0→1 ramp in first ~40%
+          if (!job.driftApplied) { job.el.classList.add("drifting"); job.driftApplied = true; }
+
+        } else if (t < 0.64) {
+          y = filterY; o = 1; x = 0;
           if (!job.onFilterApplied) {
             job.el.classList.remove("drifting");
             job.el.classList.add("on-filter");
@@ -567,27 +581,36 @@
               top.appendChild(span);
             }
             job.onFilterApplied = true;
+            // NOTE: drop() is NOT called here — it fires at t=1 when card fully exits
           }
+
         } else {
-          const p = (t - 0.62) / 0.38;
-          const eased = p * p;
+          // Phase C — slide into column, NO fade (stays fully visible)
+          const p = (t - 0.64) / 0.36;
+          const eased = Math.pow(p, 1.5); // ease-in
           y = filterY;
           x = (job.pass ? -1 : 1) * slideOut * eased;
-          o = Math.max(0, 1 - p * 1.1);
-          if (!job.verdictApplied) {
-            job.verdictApplied = true;
-            job.drop();
-            if (job.scheduleNext) { job.scheduleNext(); job.scheduleNext = null; }
+          o = 1; // fully visible throughout exit
+
+          // schedule next card only when THIS one is almost gone (90% through C)
+          if (!job.nextScheduled && p > 0.88) {
+            job.nextScheduled = true;
+            if (state.hero === "feed") fvNextTimer = setTimeout(spawnFeedJob, 180);
           }
         }
+
         job.el.style.setProperty("--x", x + "px");
         job.el.style.setProperty("--y", y + "px");
         job.el.style.setProperty("--o", o);
         stillActive.push(job);
       });
+
       fvActive = stillActive;
       if (fvActive.length) fvRaf = requestAnimationFrame(fvStep);
     }
+
+    // Heartbeat: if loop dies (tab switch, page bg), restart after 5s
+    let fvHeartbeat = null;
 
     function spawnFeedJob() {
       if (state.motion === "off" || state.hero !== "feed") return;
@@ -603,19 +626,16 @@
         if (state.hero !== "feed") return;
         const target = pass ? fvSignal : fvNoise;
         const item = document.createElement("div");
-        item.className = "fv-list-item";
+        item.className = "fv-list-item" + (pass ? " fv-item-from-right" : " fv-item-from-left");
         item.innerHTML = cardMarkup(j, pass ? "match" : "noise");
         target.prepend(item);
+        // keep max 5 items, no timeout removal — items stay until pushed out
         while (target.children.length > 5) target.lastElementChild.remove();
-        setTimeout(() => { if (item.parentNode) item.remove(); }, 9000);
       };
-      const dur = 2600 + Math.random() * 150; // ~2.6s total
-      const job = { el: card, t0: performance.now(), dur, pass, drop, scheduleNext: null };
-      // queue next spawn *before* this one reaches the filter, so pipeline stays tight but never overlaps
-      job.scheduleNext = () => {
-        if (state.hero !== "feed") return;
-        fvNextTimer = setTimeout(spawnFeedJob, 100);
-      };
+      const dur = 3400 + Math.random() * 200; // ~3.4s total
+      const job = { el: card, t0: performance.now(), dur, pass, drop,
+                    nextScheduled: false, verdictApplied: false,
+                    driftApplied: false, onFilterApplied: false };
       fvActive.push(job);
       if (!fvRaf) fvRaf = requestAnimationFrame(fvStep);
     }
@@ -624,12 +644,21 @@
       if (state.hero !== "feed" || state.motion === "off") return;
       if (fvTimer) clearInterval(fvTimer);
       if (fvNextTimer) { clearTimeout(fvNextTimer); fvNextTimer = null; }
+      if (fvHeartbeat) { clearInterval(fvHeartbeat); fvHeartbeat = null; }
       fvMeasure();
       spawnFeedJob();
+      // heartbeat: restart loop if it dies (tab switch, etc.)
+      fvHeartbeat = setInterval(() => {
+        if (state.hero !== "feed" || state.motion === "off") return;
+        if (fvActive.length === 0 && !fvNextTimer) {
+          spawnFeedJob();
+        }
+      }, 5000);
     }
     function stopFeedVariant() {
       if (fvTimer) { clearInterval(fvTimer); fvTimer = null; }
       if (fvNextTimer) { clearTimeout(fvNextTimer); fvNextTimer = null; }
+      if (fvHeartbeat) { clearInterval(fvHeartbeat); fvHeartbeat = null; }
       if (fvRaf) { cancelAnimationFrame(fvRaf); fvRaf = null; }
       fvActive.forEach(j => j.el.remove());
       fvActive = [];
