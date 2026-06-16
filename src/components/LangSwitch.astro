@@ -1,7 +1,7 @@
 ---
 import { altLangPath, type Lang } from "../i18n/utils";
-const { lang } = Astro.props as { lang: Lang };
-const href = altLangPath(lang);
+const { lang, href: hrefProp } = Astro.props as { lang: Lang; href?: string };
+const href = hrefProp ?? altLangPath(lang);
 const label = lang === "en" ? "RU" : "EN";
 ---
 <a class="lang-switch mono-label" href={href} aria-label={`Switch language to ${label}`}>{label}</a>

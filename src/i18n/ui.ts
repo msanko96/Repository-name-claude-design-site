@@ -434,7 +434,22 @@ export const T: Record<string, Entry> = {
     "foot.brand":   { en: "BEX/01 — system for attracting projects", ru: "BEX/01 — система привлечения проектов" },
     "foot.privacy": { en: "Privacy", ru: "Конфиденциальность" },
     "foot.terms":   { en: "Terms",   ru: "Условия" },
-    "foot.build":   { en: "build 2026.04 · cool-blue", ru: "сборка 2026.04 · cool-blue" }
+    "foot.build":   { en: "build 2026.04 · cool-blue", ru: "сборка 2026.04 · cool-blue" },
+
+    // --- Entry / gateway page (/start) ---
+    "entry.meta":  { en: "00 / Entry", ru: "00 / Вход" },
+    "entry.sub": {
+      en: "System for attracting projects on Upwork",
+      ru: "Система по привлечению проектов на Upwork"
+    },
+    "entry.freelancer":     { en: "I'm a freelancer", ru: "Я фрилансер" },
+    "entry.freelancer.hint":{ en: "Explore the site",  ru: "Узнать о продукте" },
+    "entry.agency":         { en: "Agency",            ru: "Агентство" },
+    "entry.agency.hint":    { en: "Go to the platform", ru: "Перейти на платформу" },
+    "entry.page.title": {
+      en: "BEX — Choose how you work",
+      ru: "BEX — Выберите, как вы работаете"
+    }
   };
 
 // Keys that always render the EN value regardless of locale — these are

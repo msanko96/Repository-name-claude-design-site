@@ -12,9 +12,11 @@ import Footer from "./Footer.astro";
 import type { Lang } from "../i18n/utils";
 
 const { lang } = Astro.props as { lang: Lang };
+// The landing lives at /site, so the language switch must stay on /site.
+const altLanding = lang === "en" ? "/site" : "/en/site";
 ---
 <Base lang={lang}>
-  <Header lang={lang} />
+  <Header lang={lang} langHref={altLanding} />
   <main id="top">
     <Hero lang={lang} />
     <Trust lang={lang} />

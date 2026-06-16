@@ -1,0 +1,191 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "./Header.astro";
+import { useTranslations, type Lang } from "../i18n/utils";
+
+const { lang } = Astro.props as { lang: Lang };
+const t = useTranslations(lang);
+
+// Platform URL (staging for now — swap for production when ready).
+const PLATFORM_URL = "https://staging.bench.exchange/";
+
+// The marketing landing lives at /site (this gateway is the homepage at /).
+const siteLanding = lang === "en" ? "/en/site" : "/site";
+const demoHref = lang === "en" ? "/en/site#cta" : "/site#cta";
+
+// Card destinations (per the chosen mapping)
+const freelancerHref = siteLanding; // "Я фрилансер" → marketing landing
+const agencyHref = PLATFORM_URL; // "Агентство" → the platform
+const agencyExternal = /^https?:\/\//.test(agencyHref);
+---
+<Base lang={lang} titleKey="entry.page.title">
+  <Header
+    lang={lang}
+    navLinks={false}
+    brandHref={siteLanding}
+    demoHref={demoHref}
+  />
+
+  <main id="top" class="gate-page">
+    <div class="grid-bg"></div>
+    <div class="container gate">
+      <div class="gate-eyebrow mono-label"><i></i> <span set:html={t("entry.meta")}></span></div>
+
+      <h1 class="gate-title">BEX</h1>
+      <p class="gate-sub mono-label" set:html={t("entry.sub")}></p>
+
+      <div class="gate-tree">
+        <span class="gate-node" aria-hidden="true"></span>
+        <svg class="gate-branches" viewBox="0 0 100 64" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M50 0 C50 42 25 22 25 64" fill="none" stroke="var(--line-soft)" stroke-width="1" vector-effect="non-scaling-stroke" />
+          <path d="M50 0 C50 42 75 22 75 64" fill="none" stroke="var(--line-soft)" stroke-width="1" vector-effect="non-scaling-stroke" />
+        </svg>
+
+        <div class="gate-cards">
+          <a class="gate-card" href={freelancerHref}>
+            <span class="gate-ico" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="8" r="3.4"/>
+                <path d="M5.5 19a6.5 6.5 0 0 1 13 0"/>
+              </svg>
+            </span>
+            <span class="gate-card-title" set:html={t("entry.freelancer")}></span>
+            <span class="gate-card-hint mono-label" set:html={t("entry.freelancer.hint")}></span>
+          </a>
+
+          <a
+            class="gate-card"
+            href={agencyHref}
+            rel={agencyExternal ? "noopener noreferrer" : undefined}
+          >
+            <span class="gate-ico" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9.5" y="3" width="5" height="5" rx="1"/>
+                <rect x="3" y="16" width="5" height="5" rx="1"/>
+                <rect x="16" y="16" width="5" height="5" rx="1"/>
+                <path d="M12 8v3M12 11H5.5v5M12 11h6.5v5"/>
+              </svg>
+            </span>
+            <span class="gate-card-title" set:html={t("entry.agency")}></span>
+            <span class="gate-card-hint mono-label" set:html={t("entry.agency.hint")}></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <style>
+    .gate-page {
+      position: relative;
+      min-height: calc(100vh - 72px);
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .gate {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: clamp(40px, 8vh, 110px) 0;
+    }
+    .gate-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      margin-bottom: var(--s-6);
+    }
+    .gate-eyebrow i {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+      animation: pulse 1.6s infinite;
+    }
+    .gate-title {
+      margin: 0;
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: clamp(72px, 13vw, 160px);
+      line-height: 1;
+      letter-spacing: -0.045em;
+      color: var(--text);
+    }
+    .gate-sub {
+      margin: var(--s-4) auto 0;
+      color: var(--text-mute);
+      letter-spacing: 0.12em;
+    }
+    .gate-tree {
+      position: relative;
+      max-width: 560px;
+      margin: clamp(36px, 6vh, 80px) auto 0;
+    }
+    .gate-node {
+      display: block;
+      width: 18px;
+      height: 18px;
+      margin: 0 auto;
+      border-radius: 5px;
+      background: var(--accent);
+      box-shadow: 0 0 18px var(--accent-glow);
+      position: relative;
+      z-index: 2;
+    }
+    .gate-branches {
+      display: block;
+      width: 100%;
+      height: 60px;
+      margin-top: -2px;
+    }
+    .gate-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--s-4);
+    }
+    .gate-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--s-3);
+      min-height: 156px;
+      padding: var(--s-7) var(--s-5);
+      background: var(--bg-elev);
+      border: 1px solid var(--line);
+      border-radius: var(--r-3);
+      color: var(--text);
+      text-decoration: none;
+      transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+    }
+    .gate-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+      background: color-mix(in oklch, var(--accent-glow) 8%, var(--bg-elev));
+    }
+    .gate-ico {
+      color: var(--text-dim);
+      transition: color 0.2s ease;
+    }
+    .gate-card:hover .gate-ico {
+      color: var(--accent);
+    }
+    .gate-card-title {
+      font-size: 17px;
+      font-weight: 600;
+    }
+    .gate-card-hint {
+      color: var(--text-mute);
+      letter-spacing: 0.08em;
+    }
+    @media (max-width: 560px) {
+      .gate-cards {
+        grid-template-columns: 1fr;
+      }
+      .gate-branches {
+        display: none;
+      }
+    }
+  </style>
+</Base>
