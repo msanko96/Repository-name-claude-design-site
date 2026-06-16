@@ -6,16 +6,16 @@ import { useTranslations, type Lang } from "../i18n/utils";
 const { lang } = Astro.props as { lang: Lang };
 const t = useTranslations(lang);
 
-// Platform URL (staging for now — swap for production when ready).
+// Platform URL — kept for later; agency currently routes to the landing.
 const PLATFORM_URL = "https://staging.bench.exchange/";
 
 // The marketing landing lives at /site (this gateway is the homepage at /).
 const siteLanding = lang === "en" ? "/en/site" : "/site";
 const demoHref = lang === "en" ? "/en/site#cta" : "/site#cta";
 
-// Card destinations (per the chosen mapping)
+// Card destinations
 const freelancerHref = siteLanding; // "Я фрилансер" → marketing landing
-const agencyHref = PLATFORM_URL; // "Агентство" → the platform
+const agencyHref = siteLanding; // "Агентство" → current landing (switch to PLATFORM_URL when ready)
 const agencyExternal = /^https?:\/\//.test(agencyHref);
 ---
 <Base lang={lang} titleKey="entry.page.title">
