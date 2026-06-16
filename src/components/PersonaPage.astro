@@ -9,6 +9,8 @@ const c = getPersona(persona, lang);
 
 const home = lang === "en" ? "/en/" : "/";
 const altPath = lang === "en" ? `/${persona}` : `/en/${persona}`;
+// Each persona form posts to its own endpoint (its own Procesio webhook).
+const formEndpoint = persona === "freelancer" ? "/api/freelancer" : "/api/waitlist";
 const titleKey = persona === "agency" ? "entry.page.title" : "entry.page.title";
 ---
 <Base lang={lang} titleKey={titleKey}>
@@ -125,7 +127,7 @@ const titleKey = persona === "agency" ? "entry.page.title" : "entry.page.title";
         <form
           class="pp-form"
           id="persona-form"
-          data-persona={persona}
+          data-endpoint={formEndpoint}
           novalidate
         >
           {c.form.fields.map((f) => (

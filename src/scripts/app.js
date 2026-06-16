@@ -729,16 +729,17 @@
         personaForm.reportValidity();
         return;
       }
-      const payload = { type: personaForm.dataset.persona || "" };
+      const payload = {};
       personaForm.querySelectorAll("input[name]").forEach((el) => {
-        if (el.value.trim()) payload[el.name] = el.value.trim();
+        payload[el.name] = el.value.trim();
       });
+      const endpoint = personaForm.dataset.endpoint || "/api/waitlist";
 
       busy = true;
       submitBtn.disabled = true;
       if (btnLabel) btnLabel.textContent = label("labelLoading");
       try {
-        const res = await fetch("/api/waitlist", {
+        const res = await fetch(endpoint, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
