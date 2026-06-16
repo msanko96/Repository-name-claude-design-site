@@ -32,7 +32,7 @@ export const T: Record<string, Entry> = {
     "nav.features": { en: "Features",         ru: "Возможности" },
     "nav.why":      { en: "Why BEX",          ru: "Зачем BEX" },
     "nav.who":      { en: "Who",              ru: "Для кого" },
-    "nav.demo":     { en: "Get a demo",       ru: "Получить демо" },
+    "nav.demo":     { en: "Get a demo",       ru: "Посмотреть демо" },
 
     // --- Hero ---
     "hero.meta.system": { en: "00 / System",       ru: "00 / Система" },

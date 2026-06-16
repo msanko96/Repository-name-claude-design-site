@@ -24,7 +24,7 @@ const titleKey = persona === "agency" ? "entry.page.title" : "entry.page.title";
           <span class="pp-pill"><i></i> {c.pill}</span>
           <h1 class="pp-title" set:html={c.title}></h1>
           <p class="pp-sub" set:html={c.sub}></p>
-          <a href="#apply" class="pp-btn pp-btn-lg">{c.cta}</a>
+          <a href="#apply" class="btn pp-cta"><span>{c.cta}</span> <span class="dot"></span></a>
         </div>
 
         <div class="pp-hero-viz reveal" style="transition-delay:120ms">
@@ -114,7 +114,7 @@ const titleKey = persona === "agency" ? "entry.page.title" : "entry.page.title";
               <li><span class="pp-check">✓</span> {f}</li>
             ))}
           </ul>
-          <a href="#apply" class="pp-btn pp-btn-block">{c.price.cta}</a>
+          <a href="#apply" class="btn pp-btn-wide"><span>{c.price.cta}</span> <span class="dot"></span></a>
         </div>
       </div>
     </section>
@@ -140,14 +140,14 @@ const titleKey = persona === "agency" ? "entry.page.title" : "entry.page.title";
             />
           ))}
           <button
-            class="pp-btn pp-btn-block pp-submit"
+            class="btn pp-btn-wide pp-submit"
             type="submit"
             data-label-default={c.form.submit}
             data-label-loading={c.form.loading}
             data-label-done={c.form.done}
             data-label-error={c.form.error}
           >
-            <span class="pp-submit-label">{c.form.submit}</span>
+            <span class="pp-submit-label">{c.form.submit}</span> <span class="dot"></span>
           </button>
         </form>
       </div>
@@ -179,15 +179,9 @@ const titleKey = persona === "agency" ? "entry.page.title" : "entry.page.title";
       letter-spacing: -0.02em; font-weight: 700; color: var(--text);
     }
     .pp-sub { margin: 22px 0 0; max-width: 46ch; color: var(--text-dim); font-size: clamp(16px, 1.2vw, 19px); line-height: 1.6; }
-    .pp-btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      background: var(--accent); color: #fff; font-weight: 700;
-      border-radius: var(--r-2); text-decoration: none;
-      transition: filter 0.18s ease, transform 0.18s ease;
-    }
-    .pp-btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
-    .pp-btn-lg { margin-top: 30px; padding: 15px 26px; font-size: 16px; }
-    .pp-btn-block { width: 100%; padding: 16px; font-size: 16px; }
+    /* Buttons reuse the global .btn — these just position/stretch it. */
+    .pp-cta { margin-top: 30px; }
+    .pp-btn-wide { width: 100%; justify-content: center; }
 
     /* ---- Hero viz cards ---- */
     .pp-hero-viz { display: flex; flex-direction: column; gap: 16px; }
