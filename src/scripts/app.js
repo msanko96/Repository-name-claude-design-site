@@ -712,4 +712,51 @@
     window.addEventListener("resize", onScroll);
     updateActive();
   }
+
+  // ---------- Persona form (/freelancer, /agency) ----------
+  const personaForm = document.getElementById("persona-form");
+  if (personaForm) {
+    const submitBtn = personaForm.querySelector(".pp-submit");
+    const btnLabel = personaForm.querySelector(".pp-submit-label");
+    const emailInput = personaForm.querySelector('input[name="email"]');
+    const label = (name) => (submitBtn && submitBtn.dataset[name]) || "";
+
+    let busy = false;
+    personaForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (busy) return;
+      if (!personaForm.checkValidity()) {
+        personaForm.reportValidity();
+        return;
+      }
+      const payload = { type: personaForm.dataset.persona || "" };
+      personaForm.querySelectorAll("input[name]").forEach((el) => {
+        if (el.value.trim()) payload[el.name] = el.value.trim();
+      });
+
+      busy = true;
+      submitBtn.disabled = true;
+      if (btnLabel) btnLabel.textContent = label("labelLoading");
+      try {
+        const res = await fetch("/api/waitlist", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        if (!res.ok) throw new Error("Request failed");
+        if (btnLabel) btnLabel.textContent = label("labelDone");
+        personaForm.querySelectorAll("input").forEach((el) => (el.value = ""));
+      } catch (err) {
+        if (btnLabel) btnLabel.textContent = label("labelError");
+        setTimeout(() => {
+          if (btnLabel) btnLabel.textContent = label("labelDefault");
+          submitBtn.disabled = false;
+          busy = false;
+        }, 2500);
+        return;
+      }
+      submitBtn.disabled = false;
+      busy = false;
+    });
+  }
 })();

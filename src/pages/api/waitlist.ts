@@ -21,24 +21,36 @@ const json = (status: number, body: unknown) =>
 export const OPTIONS: APIRoute = () =>
   new Response(null, { status: 204, headers: corsHeaders });
 
+// Only string fields are forwarded; everything else is dropped.
+const ALLOWED = new Set([
+  "type", "email", "name", "telegram", "tg_channel", "upwork",
+  "company", "website", "team_size",
+]);
+
 export const POST: APIRoute = async ({ request }) => {
-  let email: unknown;
+  let payload: Record<string, unknown>;
   try {
-    const payload = await request.json();
-    email = payload?.email;
+    payload = (await request.json()) ?? {};
   } catch {
     return json(400, { error: "invalid json" });
   }
 
+  const email = payload.email;
   if (typeof email !== "string" || !email.includes("@")) {
     return json(400, { error: "email required" });
+  }
+
+  // Pass through known fields (type + the persona form fields).
+  const data: Record<string, string> = {};
+  for (const [k, v] of Object.entries(payload)) {
+    if (ALLOWED.has(k) && typeof v === "string" && v.trim()) data[k] = v.trim();
   }
 
   try {
     const upstream = await fetch(PROCESIO_WEBHOOK, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
+      body: JSON.stringify(data),
     });
 
     if (!upstream.ok) {
