@@ -13,6 +13,9 @@ interface Props {
   demoHref?: string;
   /** Override for the language switch target (defaults to the alt-locale home). */
   langHref?: string;
+  /** Persona switch button: i18n key for its label + where it links. */
+  switchKey?: string;
+  switchHref?: string;
 }
 
 const {
@@ -21,6 +24,8 @@ const {
   brandHref = "#top",
   demoHref = "#cta",
   langHref,
+  switchKey,
+  switchHref,
 } = Astro.props;
 const t = useTranslations(lang);
 ---
@@ -46,7 +51,25 @@ const t = useTranslations(lang);
         <svg class="i-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
       </button>
       <LangSwitch lang={lang} href={langHref} />
-      <a href={demoHref} class="btn"><span set:html={t("nav.demo")}></span> <span class="dot"></span></a>
+      <div class="nav-cta">
+        <a href={demoHref} class="btn"><span set:html={t("nav.demo")}></span> <span class="dot"></span></a>
+        {switchKey && switchHref && (
+          <a href={switchHref} class="btn ghost nav-switch" set:html={t(switchKey) + " →"}></a>
+        )}
+      </div>
     </div>
   </div>
 </header>
+
+<style>
+  /* Demo button + persona switch stacked vertically. */
+  .nav-cta { display: flex; flex-direction: column; align-items: stretch; gap: 6px; }
+  .nav-switch {
+    justify-content: center;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  @media (max-width: 720px) {
+    .nav-switch { display: none; }
+  }
+</style>

@@ -11,10 +11,17 @@ const home = lang === "en" ? "/en/" : "/";
 const altPath = lang === "en" ? `/${persona}` : `/en/${persona}`;
 // Each persona form posts to its own endpoint (its own Procesio webhook).
 const formEndpoint = persona === "freelancer" ? "/api/freelancer" : "/api/waitlist";
-const titleKey = persona === "agency" ? "entry.page.title" : "entry.page.title";
+const titleKey = "entry.page.title";
+
+// Persona switch → the other persona.
+const otherHref =
+  persona === "freelancer"
+    ? (lang === "en" ? "/en/agency" : "/agency")
+    : (lang === "en" ? "/en/freelancer" : "/freelancer");
+const switchKey = persona === "freelancer" ? "nav.forAgencies" : "nav.forFreelancers";
 ---
 <Base lang={lang} titleKey={titleKey}>
-  <Header lang={lang} navLinks={false} brandHref={home} demoHref="#apply" langHref={altPath} />
+  <Header lang={lang} navLinks={false} brandHref={home} demoHref="#apply" langHref={altPath} switchKey={switchKey} switchHref={otherHref} />
 
   <main id="top" class="persona">
     <!-- HERO -->
