@@ -28,3 +28,6 @@ dist/
 
 # Netlify adapter output
 .netlify/
+
+# Directus DB dumps (contain content + admin hash/token — keep out of git)
+directus/backups/

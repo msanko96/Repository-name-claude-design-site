@@ -48,6 +48,27 @@ Available components for `directus:seed`:
 - `.env` (repo root) — `DIRECTUS_URL`, `DIRECTUS_TOKEN` (used by Astro build &
   the seed script), plus admin creds for the script
 
+## Data persistence & backups
+
+Content lives in the Postgres volume `bex-directus_db_data`, which **survives**
+`npm run directus:down`. Editing later is just:
+
+```bash
+npm run directus:up      # data is right where you left it
+# ...edit text at http://localhost:8055...
+npm run directus:down    # data stays in the volume
+```
+
+⚠️ Never run `docker compose ... down -v` — the `-v` flag deletes the volume.
+
+Edits made in the Directus UI live only in the DB (not in the repo). To snapshot
+or move content (e.g. to the deployed DB):
+
+```bash
+npm run directus:dump      # → directus/backups/directus.sql (git-ignored)
+npm run directus:restore   # load that dump back into a running stack
+```
+
 ## Deploy (later)
 
 - Host Directus (own VPS via this compose, or a PaaS) with a managed Postgres,

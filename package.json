@@ -15,7 +15,9 @@
     "directus:up": "docker compose --env-file directus/.env -f directus/docker-compose.yml up -d",
     "directus:down": "docker compose --env-file directus/.env -f directus/docker-compose.yml down",
     "directus:logs": "docker compose --env-file directus/.env -f directus/docker-compose.yml logs -f directus",
-    "directus:seed": "node --env-file=.env scripts/directus.mjs"
+    "directus:seed": "node --env-file=.env scripts/directus.mjs",
+    "directus:dump": "mkdir -p directus/backups && docker compose --env-file directus/.env -f directus/docker-compose.yml exec -T database pg_dump -U directus -d directus --clean --if-exists > directus/backups/directus.sql && echo 'dumped → directus/backups/directus.sql'",
+    "directus:restore": "docker compose --env-file directus/.env -f directus/docker-compose.yml exec -T database psql -U directus -d directus < directus/backups/directus.sql"
   },
   "devDependencies": {
     "astro": "^5.18.2"
