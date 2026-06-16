@@ -11,7 +11,11 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "directus:up": "docker compose --env-file directus/.env -f directus/docker-compose.yml up -d",
+    "directus:down": "docker compose --env-file directus/.env -f directus/docker-compose.yml down",
+    "directus:logs": "docker compose --env-file directus/.env -f directus/docker-compose.yml logs -f directus",
+    "directus:seed": "node --env-file=.env scripts/directus.mjs"
   },
   "devDependencies": {
     "astro": "^5.18.2"

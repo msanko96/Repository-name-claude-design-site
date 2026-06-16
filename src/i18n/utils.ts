@@ -1,4 +1,4 @@
-import { T, KEEP_EN, type Lang } from "./ui";
+import { T, KEEP_EN, type Lang } from "./dictionary";
 
 export type { Lang };
 
