@@ -1,0 +1,66 @@
+---
+import { useTranslations, type Lang } from "../i18n/utils";
+const { lang } = Astro.props as { lang: Lang };
+const t = useTranslations(lang);
+---
+<section id="trust" data-screen-label="01 Trust">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-index" set:html={t("trust.idx")}></div>
+      <h2 class="h2" set:html={t("trust.title")}></h2>
+    </div>
+
+    <div class="stats reveal">
+      <div class="stat">
+        <div class="stat-num mono" data-odo data-value="15" data-suffix="+">0</div>
+        <div class="stat-label" set:html={t("trust.s1.label")}></div>
+      </div>
+      <div class="stat">
+        <div class="stat-num mono" data-odo data-value="6" data-prefix="$" data-suffix="M+">0</div>
+        <div class="stat-label" set:html={t("trust.s2.label")}></div>
+      </div>
+      <div class="stat">
+        <div class="stat-num mono" data-odo data-value="50000" data-suffix="+" data-format="k">0</div>
+        <div class="stat-label" set:html={t("trust.s3.label")}></div>
+      </div>
+      <div class="stat">
+        <div class="stat-num mono" data-odo data-value="10" data-suffix="+">0</div>
+        <div class="stat-label" set:html={t("trust.s4.label")}></div>
+      </div>
+    </div>
+
+    <p class="lead trust-desc reveal" set:html={t("trust.desc")}></p>
+
+    <div class="voices reveal">
+      <div class="voice-head">
+        <span class="mono-label" set:html={t("trust.voices.head")}></span>
+      </div>
+      <div class="voice-grid">
+        <figure class="voice">
+          <img class="v-avatar v-photo" alt="" loading="lazy" src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=facearea&facepad=2.8&w=160&h=160&q=80" />
+          <blockquote set:html={t("trust.v1.q")}></blockquote>
+          <figcaption>
+            <b set:html={t("trust.v1.who")}></b>
+            <span set:html={t("trust.v1.role")}></span>
+          </figcaption>
+        </figure>
+        <figure class="voice">
+          <img class="v-avatar v-photo" alt="" loading="lazy" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=facearea&facepad=2.8&w=160&h=160&q=80" />
+          <blockquote set:html={t("trust.v2.q")}></blockquote>
+          <figcaption>
+            <b set:html={t("trust.v2.who")}></b>
+            <span set:html={t("trust.v2.role")}></span>
+          </figcaption>
+        </figure>
+        <figure class="voice">
+          <img class="v-avatar v-photo" alt="" loading="lazy" src="https://images.unsplash.com/photo-1552058544-f2b08422138a?auto=format&fit=facearea&facepad=2.8&w=160&h=160&q=80" />
+          <blockquote set:html={t("trust.v3.q")}></blockquote>
+          <figcaption>
+            <b set:html={t("trust.v3.who")}></b>
+            <span set:html={t("trust.v3.role")}></span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>

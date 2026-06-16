@@ -468,7 +468,7 @@ em.acc-bad { font-style: normal; color: var(--bad); }
   position: relative;
 }
 .voice::before {
-  content: """;
+  content: "\201D";
   position: absolute; top: 14px; right: 20px;
   font-size: 56px; line-height: 1;
   color: var(--accent);
@@ -903,7 +903,7 @@ em.acc-bad { font-style: normal; color: var(--bad); }
   0%, 100% { background: var(--bg-elev); }
   50% { background: color-mix(in oklch, var(--accent-glow) 18%, var(--bg-elev)); }
 }
-:root[data-theme="light"] @keyframes vsPassLight {
+@keyframes vsPassLight {
   0%, 100% { background: #fff; }
   50% { background: color-mix(in oklch, var(--accent-glow) 22%, #fff); }
 }
@@ -1022,7 +1022,7 @@ em.acc-bad { font-style: normal; color: var(--bad); }
     border-color: var(--accent);
   }
 }
-:root[data-theme="light"] @keyframes vnPulseLight {
+@keyframes vnPulseLight {
   0%, 100% {
     background: color-mix(in oklch, var(--accent-glow) 18%, #fff);
     border-color: color-mix(in oklch, var(--accent) 40%, var(--line));

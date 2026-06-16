@@ -1,0 +1,70 @@
+---
+import { useTranslations, type Lang } from "../i18n/utils";
+const { lang } = Astro.props as { lang: Lang };
+const t = useTranslations(lang);
+---
+<section id="audience" data-screen-label="05 Audience">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-index" set:html={t("aud.idx")}></div>
+      <h2 class="h2" set:html={t("aud.title")}></h2>
+    </div>
+    <div class="audience-grid reveal">
+      <div class="persona">
+        <div class="persona-head">
+          <div class="persona-av" style="background-image:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=160&h=160&fit=crop&crop=faces');"></div>
+          <div class="persona-id">
+            <b set:html={t("aud.p1.role")}></b>
+            <span set:html={t("aud.p1.size")}></span>
+          </div>
+          <span class="persona-fit"><i></i> <span set:html={t("aud.fit")}></span></span>
+        </div>
+        <p class="persona-quote" set:html={t("aud.p1.q")}></p>
+        <ul class="persona-needs">
+          <li set:html={t("aud.p1.n1")}></li>
+          <li set:html={t("aud.p1.n2")}></li>
+          <li set:html={t("aud.p1.n3")}></li>
+        </ul>
+      </div>
+
+      <div class="persona">
+        <div class="persona-head">
+          <div class="persona-av" style="background-image:url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=160&h=160&fit=crop&crop=faces');"></div>
+          <div class="persona-id">
+            <b set:html={t("aud.p2.role")}></b>
+            <span set:html={t("aud.p2.size")}></span>
+          </div>
+          <span class="persona-fit"><i></i> <span set:html={t("aud.fit")}></span></span>
+        </div>
+        <p class="persona-quote" set:html={t("aud.p2.q")}></p>
+        <ul class="persona-needs">
+          <li set:html={t("aud.p2.n1")}></li>
+          <li set:html={t("aud.p2.n2")}></li>
+          <li set:html={t("aud.p2.n3")}></li>
+        </ul>
+      </div>
+
+      <div class="persona">
+        <div class="persona-head">
+          <div class="persona-av" style="background-image:url('https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=160&h=160&fit=crop&crop=faces');"></div>
+          <div class="persona-id">
+            <b set:html={t("aud.p3.role")}></b>
+            <span set:html={t("aud.p3.size")}></span>
+          </div>
+          <span class="persona-fit"><i></i> <span set:html={t("aud.fit")}></span></span>
+        </div>
+        <p class="persona-quote" set:html={t("aud.p3.q")}></p>
+        <ul class="persona-needs">
+          <li set:html={t("aud.p3.n1")}></li>
+          <li set:html={t("aud.p3.n2")}></li>
+          <li set:html={t("aud.p3.n3")}></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="aud-foot reveal">
+      <span class="mono-label"><i></i> <span set:html={t("aud.req.lab")}></span></span>
+      <p set:html={t("aud.req.p")}></p>
+    </div>
+  </div>
+</section>

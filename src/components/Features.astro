@@ -1,0 +1,339 @@
+---
+import { useTranslations, type Lang } from "../i18n/utils";
+const { lang } = Astro.props as { lang: Lang };
+const t = useTranslations(lang);
+---
+<section id="features" data-screen-label="02 Features">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-index" set:html={t("feat.idx")}></div>
+      <h2 class="h2" set:html={t("feat.title")}></h2>
+    </div>
+
+    <div class="features">
+      <article class="feature reveal" data-feat="score">
+        <header>
+          <span class="feat-n mono">f.01</span>
+          <h3 class="h3" set:html={t("f1.title")}></h3>
+        </header>
+        <p set:html={t("f1.lead")} style="width: 640px"></p>
+        <div class="feat-viz viz-score ui-surface">
+          <div class="vs-head">
+            <span class="mono-label" set:html={t("f1.viz.head")}></span>
+            <span class="mono-label vs-head-r"><i></i> <span set:html={t("f1.viz.headR")}></span></span>
+          </div>
+          <div class="vs-list">
+            <div class="vs-row" data-score="91">
+              <div class="vs-row-top">
+                <div class="vs-title" set:html={t("f1.row1.title")}></div>
+                <span class="vs-score vs-score-good">91%</span>
+              </div>
+              <div class="vs-meta">
+                <span class="vs-m vs-m-price" set:html={t("f1.r1.price")}></span>
+                <span class="vs-m"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6.25"/><path d="M8 4.5V8l2.2 1.6" stroke-linecap="round"/></svg><span set:html={t("f1.ago.3h")}></span></span>
+                <span class="vs-m"><span class="vs-flag">🇦🇺</span><span set:html={t("f1.geo.au")}></span></span>
+                <span class="vs-m"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h7l3 3v7H3z" stroke-linejoin="round"/><path d="M10 3v3h3" stroke-linejoin="round"/><path d="M5.5 8.5h5M5.5 10.5h5" stroke-linecap="round"/></svg><span set:html={t("f1.prop.7")}></span></span>
+              </div>
+              <div class="vs-tags">
+                <span class="vs-tag">React</span>
+                <span class="vs-tag">TypeScript</span>
+                <span class="vs-tag">D3.js</span>
+              </div>
+            </div>
+            <div class="vs-row" data-score="78">
+              <div class="vs-row-top">
+                <div class="vs-title" set:html={t("f1.row2.title")}></div>
+                <span class="vs-score vs-score-good">78%</span>
+              </div>
+              <div class="vs-meta">
+                <span class="vs-m vs-m-price" set:html={t("f1.r2.price")}></span>
+                <span class="vs-m"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6.25"/><path d="M8 4.5V8l2.2 1.6" stroke-linecap="round"/></svg><span set:html={t("f1.ago.2h")}></span></span>
+                <span class="vs-m"><span class="vs-flag">🇺🇸</span><span set:html={t("f1.geo.us")}></span></span>
+                <span class="vs-m"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h7l3 3v7H3z" stroke-linejoin="round"/><path d="M10 3v3h3" stroke-linejoin="round"/><path d="M5.5 8.5h5M5.5 10.5h5" stroke-linecap="round"/></svg><span set:html={t("f1.prop.4")}></span></span>
+              </div>
+              <div class="vs-tags">
+                <span class="vs-tag">Next.js</span>
+                <span class="vs-tag">Webflow</span>
+                <span class="vs-tag">CMS</span>
+              </div>
+            </div>
+            <div class="vs-row" data-score="54">
+              <div class="vs-row-top">
+                <div class="vs-title" set:html={t("f1.row3.title")}></div>
+                <span class="vs-score vs-score-mid">54%</span>
+              </div>
+              <div class="vs-meta">
+                <span class="vs-m vs-m-price" set:html={t("f1.r3.price")}></span>
+                <span class="vs-m"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6.25"/><path d="M8 4.5V8l2.2 1.6" stroke-linecap="round"/></svg><span set:html={t("f1.ago.1d")}></span></span>
+                <span class="vs-m"><span class="vs-flag">🇬🇧</span><span set:html={t("f1.geo.uk")}></span></span>
+                <span class="vs-m"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h7l3 3v7H3z" stroke-linejoin="round"/><path d="M10 3v3h3" stroke-linejoin="round"/><path d="M5.5 8.5h5M5.5 10.5h5" stroke-linecap="round"/></svg><span set:html={t("f1.prop.8")}></span></span>
+              </div>
+              <div class="vs-tags">
+                <span class="vs-tag">Node.js</span>
+                <span class="vs-tag">PostgreSQL</span>
+                <span class="vs-tag">Stripe</span>
+              </div>
+            </div>
+            <div class="vs-row" data-score="32">
+              <div class="vs-row-top">
+                <div class="vs-title" set:html={t("f1.row4.title")}></div>
+                <span class="vs-score vs-score-bad">32%</span>
+              </div>
+              <div class="vs-meta">
+                <span class="vs-m vs-m-price" set:html={t("f1.r4.price")}></span>
+                <span class="vs-m"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6.25"/><path d="M8 4.5V8l2.2 1.6" stroke-linecap="round"/></svg><span set:html={t("f1.ago.2d")}></span></span>
+                <span class="vs-m"><span class="vs-flag">🇨🇦</span><span set:html={t("f1.geo.ca")}></span></span>
+                <span class="vs-m"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h7l3 3v7H3z" stroke-linejoin="round"/><path d="M10 3v3h3" stroke-linejoin="round"/><path d="M5.5 8.5h5M5.5 10.5h5" stroke-linecap="round"/></svg><span set:html={t("f1.prop.22")}></span></span>
+              </div>
+              <div class="vs-tags">
+                <span class="vs-tag">WordPress</span>
+                <span class="vs-tag">HTML</span>
+                <span class="vs-tag">CSS</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="feat-detail">
+          <div class="feat-detail-grid">
+            <div class="fd-col">
+              <span class="mono-label fd-label" set:html={t("f1.fd.inputs")}></span>
+              <ul class="fd-list">
+                <li set:html={t("f1.fd.li1")}></li>
+                <li set:html={t("f1.fd.li2")}></li>
+                <li set:html={t("f1.fd.li3")}></li>
+                <li set:html={t("f1.fd.li4")}></li>
+              </ul>
+            </div>
+            <div class="fd-col">
+              <span class="mono-label fd-label" set:html={t("f1.fd.action")}></span>
+              <div class="fd-score">
+                <div class="fd-score-row"><span>0 – 39</span><b class="fd-bad" set:html={t("f1.fd.skip")}></b><em set:html={t("f1.fd.skipDesc")}></em></div>
+                <div class="fd-score-row"><span>40 – 69</span><b class="fd-mid" set:html={t("f1.fd.review")}></b><em set:html={t("f1.fd.reviewDesc")}></em></div>
+                <div class="fd-score-row"><span>70 – 100</span><b class="fd-good" set:html={t("f1.fd.apply")}></b><em set:html={t("f1.fd.applyDesc")}></em></div>
+              </div>
+              <span class="mono-label fd-label" style="margin-top:14px;display:block" set:html={t("f1.fd.tunable")}></span>
+              <div class="fd-pills">
+                <span set:html={t("f1.fd.p1")}></span><span set:html={t("f1.fd.p2")}></span><span set:html={t("f1.fd.p3")}></span><span set:html={t("f1.fd.p4")}></span><span set:html={t("f1.fd.p5")}></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="feature reveal" data-feat="notify">
+        <header>
+          <span class="feat-n mono">f.02</span>
+          <h3 class="h3" set:html={t("f2.title")}></h3>
+        </header>
+        <p set:html={t("f2.lead")}></p>
+        <div class="feat-viz viz-notify ui-surface">
+          <div class="vn-head">
+            <span class="mono-label" set:html={t("f2.viz.head")}></span>
+            <span class="mono-label vn-head-r"><i></i> <span set:html={t("f2.viz.headR")}></span></span>
+          </div>
+          <div class="vn-body">
+            <div class="vn-group-label mono-label" set:html={t("f2.today")}></div>
+            <div class="vn-item vn-item-new">
+              <span class="vn-ico vn-ico-match">★</span>
+              <div class="vn-main">
+                <div class="vn-top">
+                  <b class="vn-subj" set:html={t("f2.n1.subj")}></b>
+                  <span class="vn-time">14:22 <i class="vn-unread"></i></span>
+                </div>
+                <div class="vn-desc" set:html={t("f2.n1.desc")}></div>
+              </div>
+            </div>
+            <div class="vn-item">
+              <span class="vn-ico vn-ico-ok">✓</span>
+              <div class="vn-main">
+                <div class="vn-top">
+                  <b class="vn-subj" set:html={t("f2.n2.subj")}></b>
+                  <span class="vn-time">12:25</span>
+                </div>
+                <div class="vn-desc" set:html={t("f2.n2.desc")}></div>
+              </div>
+            </div>
+            <div class="vn-item">
+              <span class="vn-ico vn-ico-warn">!</span>
+              <div class="vn-main">
+                <div class="vn-top">
+                  <b class="vn-subj" set:html={t("f2.n3.subj")}></b>
+                  <span class="vn-time">11:04</span>
+                </div>
+                <div class="vn-desc" set:html={t("f2.n3.desc")}></div>
+              </div>
+            </div>
+            <div class="vn-group-label mono-label" set:html={t("f2.yesterday")}></div>
+            <div class="vn-item vn-item-muted">
+              <span class="vn-ico vn-ico-err">×</span>
+              <div class="vn-main">
+                <div class="vn-top">
+                  <b class="vn-subj" set:html={t("f2.n4.subj")}></b>
+                  <span class="vn-time">13:08</span>
+                </div>
+                <div class="vn-desc" set:html={t("f2.n4.desc")}></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="feat-detail">
+          <div class="feat-detail-grid">
+            <div class="fd-col">
+              <span class="mono-label fd-label" set:html={t("f2.fd.how")}></span>
+              <ol class="fd-steps">
+                <li set:html={t("f2.fd.s1")}></li>
+                <li set:html={t("f2.fd.s2")}></li>
+                <li set:html={t("f2.fd.s3")}></li>
+                <li set:html={t("f2.fd.s4")}></li>
+              </ol>
+            </div>
+            <div class="fd-col">
+              <span class="mono-label fd-label" set:html={t("f2.fd.ch")}></span>
+              <div class="fd-channels">
+                <div class="fd-ch"><b set:html={t("f2.fd.email")}></b><span set:html={t("f2.fd.emailD")}></span></div>
+                <div class="fd-ch"><b set:html={t("f2.fd.slack")}></b><span set:html={t("f2.fd.slackD")}></span></div>
+                <div class="fd-ch"><b set:html={t("f2.fd.tg")}></b><span set:html={t("f2.fd.tgD")}></span></div>
+                <div class="fd-ch"><b set:html={t("f2.fd.wh")}></b><span set:html={t("f2.fd.whD")}></span></div>
+              </div>
+              <p class="fd-note" set:html={t("f2.fd.note")}></p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="feature reveal" data-feat="letter">
+        <header>
+          <span class="feat-n mono">f.03</span>
+          <h3 class="h3" set:html={t("f3.title")}></h3>
+        </header>
+        <p set:html={t("f3.lead")}></p>
+        <div class="feat-viz viz-letter ui-surface">
+          <div class="vl-head">
+            <span class="mono-label" set:html={t("f3.viz.head")}></span>
+            <button class="vl-generate" type="button"><span class="vl-spark">✦</span> <span set:html={t("f3.viz.gen")}></span></button>
+          </div>
+          <div class="vl-body">
+            <div class="vl-pad mono-label">
+              <span set:html={t("f3.viz.tpl")}></span>
+              <span class="vl-unsaved" set:html={t("f3.viz.unsaved")}></span>
+            </div>
+            <div class="vl-doc">
+              <div class="letter" id="letter-typer"></div>
+            </div>
+          </div>
+        </div>
+        <div class="feat-detail">
+          <div class="feat-detail-grid">
+            <div class="fd-col">
+              <span class="mono-label fd-label" set:html={t("f3.fd.lib")}></span>
+              <ul class="fd-templates">
+                <li><b>saas_onboarding.md</b><span set:html={t("f3.fd.tpl1.d")}></span></li>
+                <li><b>data_pipeline.md</b><span set:html={t("f3.fd.tpl2.d")}></span></li>
+                <li><b>shopify_migration.md</b><span set:html={t("f3.fd.tpl3.d")}></span></li>
+                <li><b>ai_integration.md</b><span set:html={t("f3.fd.tpl4.d")}></span></li>
+                <li><b set:html={t("f3.fd.tpl5.b")}></b><span set:html={t("f3.fd.tpl5.d")}></span></li>
+              </ul>
+            </div>
+            <div class="fd-col">
+              <span class="mono-label fd-label" set:html={t("f3.fd.pulls")}></span>
+              <div class="fd-tags">
+                <span set:html={t("f3.fd.t1")}></span><span set:html={t("f3.fd.t2")}></span><span set:html={t("f3.fd.t3")}></span><span set:html={t("f3.fd.t4")}></span><span set:html={t("f3.fd.t5")}></span><span set:html={t("f3.fd.t6")}></span>
+              </div>
+              <p class="fd-note" set:html={t("f3.fd.note")}></p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="feature reveal" data-feat="crm">
+        <header>
+          <span class="feat-n mono">f.04</span>
+          <h3 class="h3"><span set:html={t("f4.title")}></span> <span class="badge badge-inline" set:html={t("f4.soon")}></span></h3>
+        </header>
+        <p set:html={t("f4.lead")}></p>
+        <div class="feat-viz viz-crm ui-surface">
+          <div class="vc-head">
+            <span class="mono-label" set:html={t("f4.viz.head")}></span>
+            <span class="mono-label vc-head-r" set:html={t("f4.viz.headR")}></span>
+          </div>
+          <div class="vc-board vc-board-2col">
+
+            <div class="vc-col" data-stage="mql">
+              <div class="vc-col-head">
+                <span class="vc-col-ring vc-ring-mql"></span>
+                <span class="vc-col-title" set:html={t("f4.col.mql")}></span>
+                <span class="vc-col-num" data-vc-mql-count>3</span>
+              </div>
+              <div class="vc-col-bar" style="--sb: #9aa3b5;"></div>
+              <div class="vc-col-list">
+                <div class="vc-card">
+                  <div class="vc-card-tags"><span class="vc-chip vc-chip-low" set:html={t("f4.chip.low")}></span></div>
+                  <div class="vc-card-title" set:html={t("f4.crm.c1.t")}></div>
+                  <div class="vc-card-meta" set:html={t("f4.crm.c1.m")}></div>
+                </div>
+                <div class="vc-card">
+                  <div class="vc-card-tags"><span class="vc-chip vc-chip-mid" set:html={t("f4.chip.mid")}></span></div>
+                  <div class="vc-card-title" set:html={t("f4.crm.c2.t")}></div>
+                  <div class="vc-card-meta" set:html={t("f4.crm.c2.m")}></div>
+                </div>
+                <div class="vc-card vc-card-mover" data-vc-mover>
+                  <div class="vc-card-tags">
+                    <span class="vc-chip vc-chip-high vc-chip-from" set:html={t("f4.chip.high")}></span>
+                    <span class="vc-chip vc-chip-good vc-chip-to" set:html={t("f4.chip.won")}></span>
+                  </div>
+                  <div class="vc-card-title" set:html={t("f4.crm.c3.t")}></div>
+                  <div class="vc-card-meta" set:html={t("f4.crm.c3.m")}></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="vc-col" data-stage="won">
+              <div class="vc-col-head">
+                <span class="vc-col-ring vc-ring-won"></span>
+                <span class="vc-col-title" set:html={t("f4.col.won")}></span>
+                <span class="vc-col-num" data-vc-won-count>2</span>
+              </div>
+              <div class="vc-col-bar" style="--sb: var(--fv-green);"></div>
+              <div class="vc-col-list">
+                <div class="vc-card vc-card-won">
+                  <div class="vc-card-tags"><span class="vc-chip vc-chip-good" set:html={t("f4.chip.won")}></span></div>
+                  <div class="vc-card-title" set:html={t("f4.crm.c4.t")}></div>
+                  <div class="vc-card-meta" set:html={t("f4.crm.c4.m")}></div>
+                </div>
+                <div class="vc-card vc-card-won">
+                  <div class="vc-card-tags"><span class="vc-chip vc-chip-good" set:html={t("f4.chip.won")}></span></div>
+                  <div class="vc-card-title" set:html={t("f4.crm.c5.t")}></div>
+                  <div class="vc-card-meta" set:html={t("f4.crm.c5.m")}></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="feat-detail">
+          <div class="feat-detail-grid">
+            <div class="fd-col">
+              <span class="mono-label fd-label" set:html={t("f4.fd.stages")}></span>
+              <ul class="fd-list">
+                <li set:html={t("f4.fd.s1")}></li>
+                <li set:html={t("f4.fd.s2")}></li>
+                <li set:html={t("f4.fd.s3")}></li>
+                <li set:html={t("f4.fd.s4")}></li>
+                <li set:html={t("f4.fd.s5")}></li>
+              </ul>
+            </div>
+            <div class="fd-col">
+              <span class="mono-label fd-label" set:html={t("f4.fd.one")}></span>
+              <div class="fd-channels">
+                <div class="fd-ch"><b set:html={t("f4.fd.inbox")}></b><span set:html={t("f4.fd.inboxD")}></span></div>
+                <div class="fd-ch"><b set:html={t("f4.fd.assign")}></b><span set:html={t("f4.fd.assignD")}></span></div>
+                <div class="fd-ch"><b set:html={t("f4.fd.timer")}></b><span set:html={t("f4.fd.timerD")}></span></div>
+                <div class="fd-ch"><b set:html={t("f4.fd.tags")}></b><span set:html={t("f4.fd.tagsD")}></span></div>
+              </div>
+              <p class="fd-note fd-soon" set:html={t("f4.fd.note")}></p>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>

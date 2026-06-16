@@ -1,48 +1,33 @@
 /* BEX — app.js */
 (function () {
   const root = document.documentElement;
-  const LS_KEY = "bex-tweaks";
+  const LS_THEME = "bex-theme";
 
-  // Merge persisted values with defaults
-  const defaults = window.__TWEAKS || { accent: "cyan", hero: "scanner", motion: "full", theme: "dark" };
-  let state = { ...defaults };
+  // Fixed presentation defaults (edit-mode was removed); only theme persists.
+  const state = { accent: "cyan", hero: "feed", motion: "full", theme: "dark" };
   try {
-    const saved = JSON.parse(localStorage.getItem(LS_KEY) || "{}");
-    state = { ...state, ...saved };
+    const saved = localStorage.getItem(LS_THEME);
+    if (saved === "light" || saved === "dark") state.theme = saved;
   } catch (e) {}
+  // The inline head script may already have applied the persisted theme.
+  const attrTheme = root.getAttribute("data-theme");
+  if (attrTheme === "light" || attrTheme === "dark") state.theme = attrTheme;
 
-  function applyState() {
+  function applyTheme() {
     root.setAttribute("data-theme", state.theme);
-    root.setAttribute("data-accent", state.accent);
-    root.setAttribute("data-motion", state.motion);
-    root.setAttribute("data-hero", state.hero);
-  }
-
-  function saveState(partial) {
-    const prev = { ...state };
-    state = { ...state, ...partial };
-    localStorage.setItem(LS_KEY, JSON.stringify(state));
-    applyState();
-    // notify host for persistence
-    try { window.parent.postMessage({ type: "__edit_mode_set_keys", edits: partial }, "*"); } catch (e) {}
-    // hero variant switching — start/stop anims
-    if (partial.hero && partial.hero !== prev.hero) {
-      const stops = window.__heroStop || {};
-      const starts = window.__heroStart || {};
-      Object.values(stops).forEach(fn => { try { fn(); } catch(e){} });
-      const fn = starts[partial.hero];
-      if (fn) try { fn(); } catch(e){}
-    }
   }
 
   // ---------- Theme toggle ----------
-  document.getElementById("theme-toggle").addEventListener("click", () => {
-    saveState({ theme: state.theme === "dark" ? "light" : "dark" });
-  });
+  const themeToggle = document.getElementById("theme-toggle");
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      state.theme = state.theme === "dark" ? "light" : "dark";
+      try { localStorage.setItem(LS_THEME, state.theme); } catch (e) {}
+      applyTheme();
+    });
+  }
 
-  
-
-  applyState();
+  applyTheme();
 
   // ---------- Reveal on scroll ----------
   const io = new IntersectionObserver((entries) => {
@@ -177,11 +162,6 @@
       for (let i = 0; i < 3; i++) setTimeout(spawnOrbitNode, i * 250);
       ovTimer = setInterval(spawnOrbitNode, 520);
     }
-    function stopOrbit() { if (ovTimer) { clearInterval(ovTimer); ovTimer = null; } }
-    window.__heroStart = window.__heroStart || {};
-    window.__heroStart.orbit = startOrbit;
-    window.__heroStop  = window.__heroStop  || {};
-    window.__heroStop.orbit  = stopOrbit;
     if (state.hero === "orbit") startOrbit();
   }
 
@@ -220,14 +200,6 @@
       spawnStreamJob();
       stTimer = setInterval(spawnStreamJob, 780);
     }
-    function stopStream() {
-      if (stTimer) { clearInterval(stTimer); stTimer = null; }
-      stFeed.innerHTML = "";
-    }
-    window.__heroStart = window.__heroStart || {};
-    window.__heroStart.stream = startStream;
-    window.__heroStop  = window.__heroStop  || {};
-    window.__heroStop.stream  = stopStream;
     if (state.hero === "stream") startStream();
   }
 
@@ -244,8 +216,6 @@
     });
   }, { threshold: 0.4 });
   document.querySelectorAll(".viz-score").forEach(el => scoreIo.observe(el));
-
-  // ---------- Feature cards: static (no expand/collapse) ----------
 
   // ---------- Letter typer (hover-triggered, loops) ----------
   const letterEl = document.getElementById("letter-typer");
@@ -291,8 +261,8 @@
     function curLang() {
       return (document.documentElement.getAttribute("data-lang") === "ru") ? "ru" : "en";
     }
-    let preLines = LETTER[curLang()].pre;
-    let typeLines = LETTER[curLang()].type;
+    const preLines = LETTER[curLang()].pre;
+    const typeLines = LETTER[curLang()].type;
 
     const card = letterEl.closest('.feature');
     let runToken = 0;
@@ -355,16 +325,6 @@
       card.addEventListener("focusin", startLoop);
       card.addEventListener("focusout", stopLoop);
     }
-
-    // Re-render when language changes
-    const prevHandler = window.__onLangChange;
-    window.__onLangChange = function (lang) {
-      preLines = LETTER[lang === "ru" ? "ru" : "en"].pre;
-      typeLines = LETTER[lang === "ru" ? "ru" : "en"].type;
-      runToken++;
-      renderStatic();
-      if (prevHandler) try { prevHandler(lang); } catch (e) {}
-    };
   }
 
   // ---------- Why: chaos vs order — concrete UI metaphors ----------
@@ -655,20 +615,7 @@
         }
       }, 5000);
     }
-    function stopFeedVariant() {
-      if (fvTimer) { clearInterval(fvTimer); fvTimer = null; }
-      if (fvNextTimer) { clearTimeout(fvNextTimer); fvNextTimer = null; }
-      if (fvHeartbeat) { clearInterval(fvHeartbeat); fvHeartbeat = null; }
-      if (fvRaf) { cancelAnimationFrame(fvRaf); fvRaf = null; }
-      fvActive.forEach(j => j.el.remove());
-      fvActive = [];
-      fvFeed.innerHTML = "";
-    }
     window.addEventListener("resize", fvMeasure);
-    window.__heroStart = window.__heroStart || {};
-    window.__heroStart.feed = startFeedVariant;
-    window.__heroStop  = window.__heroStop  || {};
-    window.__heroStop.feed  = stopFeedVariant;
     if (state.hero === "feed") startFeedVariant();
   }
 
@@ -679,12 +626,9 @@
     const submitBtn = document.getElementById("cta-submit");
     const btnLabel = submitBtn ? submitBtn.querySelector(".cta-btn-label") : null;
 
-    function t(key) {
-      const lang = document.documentElement.getAttribute("data-lang") || "en";
-      const dict = (window.__bexI18n && window.__bexI18n.T) || {};
-      const entry = dict[key];
-      if (!entry) return key;
-      return entry[lang] || entry.en || key;
+    // Localized button labels are rendered into data-* attributes at build time.
+    function label(name) {
+      return (submitBtn && submitBtn.dataset[name]) || "";
     }
 
     let busy = false;
@@ -698,20 +642,20 @@
       busy = true;
       submitBtn.disabled = true;
       emailInput.disabled = true;
-      if (btnLabel) btnLabel.textContent = t("cta.btn.loading");
+      if (btnLabel) btnLabel.textContent = label("labelLoading");
       try {
-        const res = await fetch("/.netlify/functions/waitlist", {
+        const res = await fetch("/api/waitlist", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email: emailInput.value }),
         });
         if (!res.ok) throw new Error("Request failed");
-        if (btnLabel) btnLabel.textContent = t("cta.btn.done");
+        if (btnLabel) btnLabel.textContent = label("labelDone");
         emailInput.value = "";
       } catch (err) {
-        if (btnLabel) btnLabel.textContent = t("cta.btn.error");
+        if (btnLabel) btnLabel.textContent = label("labelError");
         setTimeout(() => {
-          if (btnLabel) btnLabel.textContent = t("cta.btn");
+          if (btnLabel) btnLabel.textContent = label("labelDefault");
           submitBtn.disabled = false;
           emailInput.disabled = false;
           busy = false;

@@ -1,0 +1,49 @@
+---
+import "../styles/tokens.css";
+import "../styles/components.css";
+import { useTranslations, type Lang } from "../i18n/utils";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<!doctype html>
+<html
+  lang={lang}
+  data-theme="dark"
+  data-accent="cyan"
+  data-motion="full"
+  data-hero="feed"
+  data-lang={lang}
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title set:html={t("page.title")} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    />
+    <!-- Apply persisted theme before paint to avoid a flash -->
+    <script is:inline>
+      try {
+        var th = localStorage.getItem("bex-theme");
+        if (th === "light" || th === "dark") {
+          document.documentElement.setAttribute("data-theme", th);
+        }
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <slot />
+    <script>
+      import "../scripts/app.js";
+    </script>
+  </body>
+</html>

@@ -22,3 +22,7 @@ npm-debug.log*
 
 # Build artifacts
 dist/
+.astro/
+
+# Netlify adapter output
+.netlify/

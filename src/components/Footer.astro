@@ -1,0 +1,19 @@
+---
+import { useTranslations, type Lang } from "../i18n/utils";
+import Logo from "./Logo.astro";
+const { lang } = Astro.props as { lang: Lang };
+const t = useTranslations(lang);
+---
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="foot-brand">
+      <Logo />
+    </div>
+    <div class="foot-links mono-label">
+      <a href="#" set:html={t("foot.privacy")}></a>
+      <a href="#" set:html={t("foot.terms")}></a>
+      <a href="#">hello@bex.io</a>
+    </div>
+    <div class="foot-build mono-label" set:html={t("foot.build")}></div>
+  </div>
+</footer>

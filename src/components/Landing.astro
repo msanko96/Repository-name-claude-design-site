@@ -1,0 +1,28 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "./Header.astro";
+import Hero from "./Hero.astro";
+import Trust from "./Trust.astro";
+import Features from "./Features.astro";
+import Inside from "./Inside.astro";
+import Why from "./Why.astro";
+import Audience from "./Audience.astro";
+import Cta from "./Cta.astro";
+import Footer from "./Footer.astro";
+import type { Lang } from "../i18n/utils";
+
+const { lang } = Astro.props as { lang: Lang };
+---
+<Base lang={lang}>
+  <Header lang={lang} />
+  <main id="top">
+    <Hero lang={lang} />
+    <Trust lang={lang} />
+    <Features lang={lang} />
+    <Inside lang={lang} />
+    <Why lang={lang} />
+    <Audience lang={lang} />
+    <Cta lang={lang} />
+  </main>
+  <Footer lang={lang} />
+</Base>

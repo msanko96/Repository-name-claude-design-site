@@ -1,14 +1,12 @@
-/* BEX — i18n
-   Dictionary: keys map to { en, ru }. Values may contain HTML.
-   Apply: set <element data-i18n="key.path">. For attributes use data-i18n-attr="placeholder:key".
-*/
-(function () {
-  const LS_LANG = "bex-lang";
+// AUTO-GENERATED from the legacy scripts/i18n.js dictionary.
+// Each key maps to { en, ru }; values may contain inline HTML.
+export type Lang = "ru" | "en";
 
-  const T = {
-    "f4.chip.low":  { en: "low",  ru: "low"  },
+type Entry = { en: string; ru?: string };
+
+export const T: Record<string, Entry> = {
+    // f4.chip.low / f4.chip.high are redefined later (Low / High) — keep those.
     "f4.chip.mid":  { en: "mid",  ru: "mid"  },
-    "f4.chip.high": { en: "high", ru: "high" },
     "f4.chip.won":  { en: "won",  ru: "won"  },
 
     // --- f.04 CRM mock cards ---
@@ -439,9 +437,9 @@
     "foot.build":   { en: "build 2026.04 · cool-blue", ru: "сборка 2026.04 · cool-blue" }
   };
 
-  // Keys that should always render the EN value, regardless of language —
-  // these are pieces of the *platform UI* that must stay English on the real product.
-  const KEEP_EN = new Set([
+// Keys that always render the EN value regardless of locale — these are
+// pieces of the *platform UI* shown in mockups that must stay English.
+export const KEEP_EN = new Set<string>([
     // f.01 — job listing cards (real Upwork postings)
     "f1.viz.head","f1.viz.headR",
     "f1.row1.title","f1.row2.title","f1.row3.title","f1.row4.title",
@@ -473,67 +471,3 @@
     "um.duration","um.dur.opt","um.fixed",
     "um.cancel","um.publish","um.connects",
   ]);
-
-  function getLang() {
-    return "ru";
-  }
-
-  function applyLang(lang) {
-    lang = "ru";
-    document.documentElement.setAttribute("lang", "ru");
-    document.documentElement.setAttribute("data-lang", "ru");
-    document.querySelectorAll("[data-i18n]").forEach(el => {
-      const key = el.getAttribute("data-i18n");
-      const entry = T[key];
-      if (!entry) return;
-      const useLang = KEEP_EN.has(key) ? "en" : lang;
-      const v = entry[useLang] ?? entry.en;
-      el.innerHTML = v;
-    });
-    document.querySelectorAll("[data-i18n-attr]").forEach(el => {
-      const spec = el.getAttribute("data-i18n-attr");
-      spec.split(",").forEach(part => {
-        const [attr, key] = part.split(":").map(s => s.trim());
-        const entry = T[key];
-        if (!entry || !attr) return;
-        const useLang = KEEP_EN.has(key) ? "en" : lang;
-        el.setAttribute(attr, entry[useLang] ?? entry.en);
-      });
-    });
-
-    // Sync language toggle UI — show the OPPOSITE language as the click target
-    document.querySelectorAll("[data-lang-current]").forEach(el => {
-      el.textContent = lang === "en" ? "RU" : "EN";
-    });
-    document.querySelectorAll("[data-lang-btn]").forEach(b => {
-      b.classList.toggle("active", b.dataset.langBtn === lang);
-    });
-
-    // Re-trigger anything that depends on language (e.g. typed cover letter)
-    if (window.__onLangChange) {
-      try { window.__onLangChange(lang); } catch(e) {}
-    }
-  }
-
-  function setLang(lang) {
-    localStorage.setItem(LS_LANG, lang);
-    applyLang(lang);
-  }
-
-  // Boot — apply ASAP, even before app.js, to avoid flash
-  const initial = getLang();
-  document.documentElement.setAttribute("data-lang", initial);
-
-  document.addEventListener("DOMContentLoaded", () => {
-    applyLang(initial);
-    document.querySelectorAll("[data-lang-btn]").forEach(b => {
-      b.addEventListener("click", () => setLang(b.dataset.langBtn));
-    });
-    // mobile: a single toggle
-    document.querySelectorAll("[data-lang-toggle]").forEach(b => {
-      b.addEventListener("click", () => setLang(getLang() === "en" ? "ru" : "en"));
-    });
-  });
-
-  window.__bexI18n = { T, getLang, setLang, applyLang };
-})();
