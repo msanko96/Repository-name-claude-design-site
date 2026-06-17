@@ -37,27 +37,23 @@ const t = useTranslations(lang);
       </div>
       <div class="voice-grid">
         <figure class="voice">
-          <img class="v-avatar v-photo" alt="" loading="lazy" src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=facearea&facepad=2.8&w=160&h=160&q=80" />
+          <a class="v-avatar-link" href="https://www.linkedin.com/in/pavel-lappo/" target="_blank" rel="noopener noreferrer" aria-label={t("trust.v1.who")}>
+            <img class="v-avatar v-photo" alt="" loading="lazy" src="/voices/pavel-lappo.jpg" />
+          </a>
           <blockquote set:html={t("trust.v1.q")}></blockquote>
           <figcaption>
-            <b set:html={t("trust.v1.who")}></b>
+            <a class="v-who-link" href="https://www.linkedin.com/in/pavel-lappo/" target="_blank" rel="noopener noreferrer" set:html={t("trust.v1.who")}></a>
             <span set:html={t("trust.v1.role")}></span>
           </figcaption>
         </figure>
         <figure class="voice">
-          <img class="v-avatar v-photo" alt="" loading="lazy" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=facearea&facepad=2.8&w=160&h=160&q=80" />
+          <a class="v-avatar-link" href="https://www.linkedin.com/in/lautsevich/" target="_blank" rel="noopener noreferrer" aria-label={t("trust.v2.who")}>
+            <img class="v-avatar v-photo" alt="" loading="lazy" src="/voices/pavel-lautsevich.jpg" />
+          </a>
           <blockquote set:html={t("trust.v2.q")}></blockquote>
           <figcaption>
-            <b set:html={t("trust.v2.who")}></b>
+            <a class="v-who-link" href="https://www.linkedin.com/in/lautsevich/" target="_blank" rel="noopener noreferrer" set:html={t("trust.v2.who")}></a>
             <span set:html={t("trust.v2.role")}></span>
-          </figcaption>
-        </figure>
-        <figure class="voice">
-          <img class="v-avatar v-photo" alt="" loading="lazy" src="https://images.unsplash.com/photo-1552058544-f2b08422138a?auto=format&fit=facearea&facepad=2.8&w=160&h=160&q=80" />
-          <blockquote set:html={t("trust.v3.q")}></blockquote>
-          <figcaption>
-            <b set:html={t("trust.v3.who")}></b>
-            <span set:html={t("trust.v3.role")}></span>
           </figcaption>
         </figure>
       </div>

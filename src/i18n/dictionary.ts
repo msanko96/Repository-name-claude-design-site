@@ -24,4 +24,12 @@ if (rows.length) {
   console.log(`[i18n] merged ${rows.length} key(s) from Directus`);
 }
 
+// Local overrides that win over Directus for specific keys. Used for the
+// real-people testimonials (LinkedIn names/roles) while Directus is still
+// being synced — remove a key here once Directus carries the same value.
+const LOCAL_OVERRIDES = ["trust.v1.who", "trust.v2.who", "trust.v2.role"];
+for (const key of LOCAL_OVERRIDES) {
+  if (LOCAL_T[key]) T[key] = LOCAL_T[key];
+}
+
 export { T, KEEP_EN };

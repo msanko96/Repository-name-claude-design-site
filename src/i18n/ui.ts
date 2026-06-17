@@ -90,14 +90,14 @@ export const T: Record<string, Entry> = {
       en: "We stopped refreshing the feed at 3am. BEX scores jobs faster than a human can read them — same first-reply advantage, without a night shift.",
       ru: "Благодаря гибким фильтрам мы быстрее находим подходящие проекты и не тратим время на нерелевантные заявки."
     },
-    "trust.v1.who":  { en: "Alexey M.", ru: "Алексей Морозов" },
+    "trust.v1.who":  { en: "Pavel Lappo", ru: "Pavel Lappo" },
     "trust.v1.role": { en: "Lead-gen manager", ru: "Руководитель по лидогенерации" },
     "trust.v2.q": {
       en: "Scoring built on 50k real proposals isn't a gimmick. Our reply rate jumped from 6% to 18% in the first month — and we stopped wasting Connects on junk.",
       ru: "Мы ведём несколько Upwork-направлений одновременно, и раньше было сложно держать всё под контролем. С BEX стало гораздо проще отслеживать проекты, распределять заявки и понимать, что реально приносит результат."
     },
-    "trust.v2.who":  { en: "Ekaterina S.", ru: "Екатерина Соколова" },
-    "trust.v2.role": { en: "Operations Director", ru: "Операционный директор" },
+    "trust.v2.who":  { en: "Pavel Lautsevich", ru: "Pavel Lautsevich" },
+    "trust.v2.role": { en: "Co-founder, LOVATA", ru: "Сооснователь, LOVATA" },
     "trust.v3.q": {
       en: "I replaced a full-time lead-gen manager with BEX plus a junior who reviews the shortlist. Pipeline is cleaner, cheaper, and I can see every thread in one place.",
       ru: "Раньше у нас были отдельные менеджеры по лидогенерации, но после перехода на BEX необходимость в этом практически исчезла."
@@ -412,6 +412,20 @@ export const T: Record<string, Entry> = {
     "aud.p3.n1": { en: "scoring tuned to your stack", ru: "скоринг проектов под ваш стек" },
     "aud.p3.n2": { en: "30-sec proposal template",     ru: "шаблоны откликов за 30 секунд" },
     "aud.p3.n3": { en: "never miss fresh jobs",        ru: "не пропускать свежие проекты" },
+
+    // --- Audience: real testimonials (replaces the persona cards) ---
+    "aud.t1.who":  { en: "Yana Kishko", ru: "Yana Kishko" },
+    "aud.t1.role": { en: "Head of Production", ru: "Руководитель продакшена" },
+    "aud.t1.q": {
+      en: "I can't be first to reply on my own — and on Upwork that's everything. I need a tool that just says «this one's yours, write back».",
+      ru: "Когда команда маленькая, невозможно постоянно сидеть в ленте Upwork. Нужен инструмент, который сам показывает релевантные проекты и помогает отвечать быстрее других."
+    },
+    "aud.t2.who":  { en: "Natallia Remarchuk", ru: "Natallia Remarchuk" },
+    "aud.t2.role": { en: "Freelancer", ru: "Фрилансер" },
+    "aud.t2.q": {
+      en: "I'm a freelancer. The platform made applying to relevant projects much quicker for me — with BEX I do it far faster.",
+      ru: "Я фрилансер. Платформа упростила для меня время на отклик на релевантный проект. С bex я это делаю намного быстрее."
+    },
     "aud.req.lab": { en: "requirement", ru: "требование" },
     "aud.req.p": {
       en: "An active Upwork account is required to use the platform.",
