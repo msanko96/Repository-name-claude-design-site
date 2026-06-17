@@ -14,11 +14,12 @@ import type { Lang } from "../i18n/utils";
 const { lang } = Astro.props as { lang: Lang };
 // The landing lives at /agency, so the language switch must stay on /agency.
 const altLanding = lang === "en" ? "/agency" : "/en/agency";
-// Persona switch → freelancer page.
+// Persona toggle destinations (current locale).
 const toFreelancer = lang === "en" ? "/en/freelancer" : "/freelancer";
+const toAgency = lang === "en" ? "/en/agency" : "/agency";
 ---
 <Base lang={lang}>
-  <Header lang={lang} langHref={altLanding} switchKey="nav.forFreelancers" switchHref={toFreelancer} />
+  <Header lang={lang} langHref={altLanding} personaActive="agency" freelancerHref={toFreelancer} agencyHref={toAgency} />
   <main id="top">
     <Hero lang={lang} />
     <Trust lang={lang} />

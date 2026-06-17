@@ -2,10 +2,11 @@
 import Base from "../layouts/Base.astro";
 import Header from "./Header.astro";
 import { getPersona, type Persona } from "../content/personas";
-import type { Lang } from "../i18n/utils";
+import { useTranslations, type Lang } from "../i18n/utils";
 
 const { lang, persona } = Astro.props as { lang: Lang; persona: Persona };
 const c = getPersona(persona, lang);
+const t = useTranslations(lang);
 
 const home = lang === "en" ? "/en/" : "/";
 const altPath = lang === "en" ? `/${persona}` : `/en/${persona}`;
@@ -13,23 +14,26 @@ const altPath = lang === "en" ? `/${persona}` : `/en/${persona}`;
 const formEndpoint = persona === "freelancer" ? "/api/freelancer" : "/api/waitlist";
 const titleKey = "entry.page.title";
 
-// Persona switch → the other persona.
-const otherHref =
-  persona === "freelancer"
-    ? (lang === "en" ? "/en/agency" : "/agency")
-    : (lang === "en" ? "/en/freelancer" : "/freelancer");
-const switchKey = persona === "freelancer" ? "nav.forAgencies" : "nav.forFreelancers";
+// Persona toggle destinations (current locale).
+const toFreelancer = lang === "en" ? "/en/freelancer" : "/freelancer";
+const toAgency = lang === "en" ? "/en/agency" : "/agency";
 ---
 <Base lang={lang} titleKey={titleKey}>
-  <Header lang={lang} navLinks={false} brandHref={home} demoHref="#apply" langHref={altPath} switchKey={switchKey} switchHref={otherHref} />
+  <Header lang={lang} navLinks={false} brandHref={home} demoHref="#apply" langHref={altPath} personaActive={persona} freelancerHref={toFreelancer} agencyHref={toAgency} />
 
-  <main id="top" class="persona">
+  <main id="top" class="persona-page">
     <!-- HERO -->
     <section class="pp-hero">
+      <div class="grid-bg"></div>
+      <div class="hero-scan" aria-hidden="true"></div>
       <div class="container pp-hero-grid">
         <div class="pp-hero-text reveal">
-          <span class="pp-pill"><i></i> {c.pill}</span>
-          <h1 class="pp-title" set:html={c.title}></h1>
+          <div class="hero-meta mono-label">
+            <span set:html={t("hero.meta.engine")}></span>
+            <span class="sep">—</span>
+            <span class="live"><i></i><span set:html={t("hero.meta.live")}></span></span>
+          </div>
+          <h1 class="h1 pp-title" set:html={c.title}></h1>
           <p class="pp-sub" set:html={c.sub}></p>
           <a href="#apply" class="btn pp-cta"><span>{c.cta}</span> <span class="dot"></span></a>
         </div>
@@ -37,14 +41,14 @@ const switchKey = persona === "freelancer" ? "nav.forAgencies" : "nav.forFreelan
         <div class="pp-hero-viz reveal" style="transition-delay:120ms">
           <div class="pp-card pp-score">
             <div class="pp-card-head">
-              <span class="pp-card-label">Скоринг вакансий · LIVE</span>
-              <span class="pp-badge pp-badge-green">4 подходят сегодня</span>
+              <span class="pp-card-label">{t("pp.viz.scoreLabel")}</span>
+              <span class="pp-badge pp-badge-green">{t("pp.viz.scoreBadge")}</span>
             </div>
             <div class="pp-rows">
               <div class="pp-row">
                 <div class="pp-row-main">
                   <div class="pp-row-title">Senior React Dev · B2B SaaS Das…</div>
-                  <div class="pp-row-meta">$4 000 · фикс · 🇦🇺 · 3ч назад</div>
+                  <div class="pp-row-meta">{t("pp.viz.row1.meta")}</div>
                 </div>
                 <div class="pp-bar"><i style="width:91%;background:var(--pp-good)"></i></div>
                 <span class="pp-pct">91%</span>
@@ -52,7 +56,7 @@ const switchKey = persona === "freelancer" ? "nav.forAgencies" : "nav.forFreelan
               <div class="pp-row">
                 <div class="pp-row-main">
                   <div class="pp-row-title">Webflow → Next.js migration · Sa…</div>
-                  <div class="pp-row-meta">$6 000 · фикс · 🇺🇸 · 2ч назад</div>
+                  <div class="pp-row-meta">{t("pp.viz.row2.meta")}</div>
                 </div>
                 <div class="pp-bar"><i style="width:78%;background:var(--accent)"></i></div>
                 <span class="pp-pct">78%</span>
@@ -60,7 +64,7 @@ const switchKey = persona === "freelancer" ? "nav.forAgencies" : "nav.forFreelan
               <div class="pp-row">
                 <div class="pp-row-main">
                   <div class="pp-row-title">Simple WordPress landing, quick</div>
-                  <div class="pp-row-meta">$500 · фикс · 🇨🇦 · 1д назад</div>
+                  <div class="pp-row-meta">{t("pp.viz.row3.meta")}</div>
                 </div>
                 <div class="pp-bar"><i style="width:32%;background:var(--text-mute)"></i></div>
                 <span class="pp-pct pp-pct-dim">32%</span>
@@ -70,14 +74,14 @@ const switchKey = persona === "freelancer" ? "nav.forAgencies" : "nav.forFreelan
 
           <div class="pp-card pp-notify">
             <div class="pp-card-head">
-              <span class="pp-card-label">Уведомления</span>
-              <span class="pp-badge pp-badge-accent">2 новых</span>
+              <span class="pp-card-label">{t("pp.viz.notifLabel")}</span>
+              <span class="pp-badge pp-badge-accent">{t("pp.viz.notifBadge")}</span>
             </div>
             <div class="pp-notif">
               <span class="pp-notif-ico">✓</span>
               <div class="pp-notif-main">
                 <div class="pp-notif-top">
-                  <b>Черновик отклика готов</b>
+                  <b>{t("pp.viz.notifTitle")}</b>
                   <span class="pp-notif-time">12:25</span>
                 </div>
                 <div class="pp-notif-desc">B2B SaaS Dashboard · React / TypeScript</div>
@@ -162,29 +166,28 @@ const switchKey = persona === "freelancer" ? "nav.forAgencies" : "nav.forFreelan
   </main>
 
   <style>
-    .persona { --pp-good: #34d39e; }
+    /* Renamed from .persona to avoid colliding with the global audience-card
+       .persona rule (which added card padding/border/bg to the whole page). */
+    .persona-page { --pp-good: #34d39e; }
 
     /* ---- Hero ---- */
-    .pp-hero { padding: clamp(48px, 8vh, 110px) 0 clamp(40px, 6vh, 80px); }
+    .pp-hero {
+      position: relative;
+      overflow: hidden;
+      /* Top padding matches the agency .hero (calc(var(--s-10) + 20px)). */
+      padding: calc(var(--s-10) + 20px) 0 clamp(40px, 6vh, 80px);
+    }
+    /* Content sits above the grid + accent-glow background layers. */
     .pp-hero-grid {
+      position: relative;
+      z-index: 1;
       display: grid;
       grid-template-columns: 1.05fr 1fr;
       gap: clamp(32px, 5vw, 72px);
       align-items: center;
     }
-    .pp-pill {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 7px 14px; border-radius: var(--r-pill);
-      border: 1px solid color-mix(in oklch, var(--accent) 40%, var(--line));
-      background: color-mix(in oklch, var(--accent-glow) 12%, transparent);
-      color: var(--text); font-size: 13px; font-weight: 600;
-    }
-    .pp-pill i { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent); }
-    .pp-title {
-      margin: 22px 0 0;
-      font-size: clamp(40px, 5.4vw, 68px); line-height: 1.02;
-      letter-spacing: -0.02em; font-weight: 700; color: var(--text);
-    }
+    /* Sizing comes from the global .h1 token so it matches the agency hero exactly. */
+    .pp-title { margin: 22px 0 0; color: var(--text); }
     .pp-sub { margin: 22px 0 0; max-width: 46ch; color: var(--text-dim); font-size: clamp(16px, 1.2vw, 19px); line-height: 1.6; }
     /* Buttons reuse the global .btn — these just position/stretch it. */
     .pp-cta { margin-top: 30px; }
@@ -226,7 +229,7 @@ const switchKey = persona === "freelancer" ? "nav.forAgencies" : "nav.forFreelan
 
     /* ---- Pricing ---- */
     .pp-pricing { padding: clamp(30px, 5vh, 60px) 0; }
-    .pp-price-card { max-width: 560px; margin: 0 auto; background: var(--bg-elev); border: 1px solid color-mix(in oklch, var(--accent) 30%, var(--line)); border-radius: var(--r-4); padding: clamp(28px, 4vw, 44px); }
+    .pp-price-card { max-width: 560px; margin: 0 auto; background: var(--bg-elev); border: 1px solid var(--line); border-radius: var(--r-4); padding: clamp(28px, 4vw, 44px); }
     .pp-price-label { color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 13px; }
     .pp-price-tagline { margin: 12px 0 0; color: var(--text-dim); line-height: 1.55; }
     .pp-price-amount { display: flex; align-items: baseline; gap: 8px; margin-top: 26px; }
@@ -253,6 +256,17 @@ const switchKey = persona === "freelancer" ? "nav.forAgencies" : "nav.forFreelan
     @media (max-width: 900px) {
       .pp-hero-grid { grid-template-columns: 1fr; }
       .pp-benefit-grid { grid-template-columns: 1fr; }
+    }
+    /* Phones: scoring row stacks — title/meta full width, bar + % below. */
+    @media (max-width: 560px) {
+      .pp-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px 12px;
+      }
+      .pp-row-main { grid-column: 1 / -1; }
+      .pp-row-title { white-space: normal; }
+      .pp-bar { grid-column: 1; align-self: center; }
+      .pp-pct { grid-column: 2; }
     }
   </style>
 </Base>

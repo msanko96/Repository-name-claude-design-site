@@ -35,6 +35,8 @@ export const T: Record<string, Entry> = {
     "nav.demo":     { en: "Get a demo",       ru: "Посмотреть демо" },
     "nav.forAgencies":    { en: "For agencies",    ru: "Для агентств" },
     "nav.forFreelancers": { en: "For freelancers", ru: "Для фрилансеров" },
+    "nav.persona.freelancer": { en: "Freelancer", ru: "Фрилансер" },
+    "nav.persona.agency":     { en: "Agency",     ru: "Агентство" },
 
     // --- Hero ---
     "hero.meta.system": { en: "00 / System",       ru: "00 / Система" },
@@ -451,7 +453,17 @@ export const T: Record<string, Entry> = {
     "entry.page.title": {
       en: "BEX — Choose how you work",
       ru: "BEX — Выберите, как вы работаете"
-    }
+    },
+
+    // --- Persona page hero viz (scoring + notification cards) ---
+    "pp.viz.scoreLabel":  { en: "Job scoring · LIVE",  ru: "Скоринг вакансий · LIVE" },
+    "pp.viz.scoreBadge":  { en: "4 match today",       ru: "4 подходят сегодня" },
+    "pp.viz.row1.meta":   { en: "$4,000 · fixed · 🇦🇺 · 3h ago", ru: "$4 000 · фикс · 🇦🇺 · 3ч назад" },
+    "pp.viz.row2.meta":   { en: "$6,000 · fixed · 🇺🇸 · 2h ago", ru: "$6 000 · фикс · 🇺🇸 · 2ч назад" },
+    "pp.viz.row3.meta":   { en: "$500 · fixed · 🇨🇦 · 1d ago",   ru: "$500 · фикс · 🇨🇦 · 1д назад" },
+    "pp.viz.notifLabel":  { en: "Notifications",       ru: "Уведомления" },
+    "pp.viz.notifBadge":  { en: "2 new",               ru: "2 новых" },
+    "pp.viz.notifTitle":  { en: "Cover letter draft ready", ru: "Черновик отклика готов" }
   };
 
 // Keys that always render the EN value regardless of locale — these are

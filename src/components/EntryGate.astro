@@ -179,10 +179,17 @@ const agencyExternal = /^https?:\/\//.test(agencyHref);
     @media (max-width: 560px) {
       .gate-cards {
         grid-template-columns: 1fr;
+        gap: 14px;
       }
-      .gate-branches {
-        display: none;
+      .gate-branches { display: none; }
+      /* smaller cards with breathing room from the edges */
+      .gate-tree { padding: 0 14px; }
+      .gate-card {
+        min-height: 0;
+        padding: 22px 18px;
+        gap: 8px;
       }
+      .gate-card-title { font-size: 16px; }
     }
   </style>
 </Base>
