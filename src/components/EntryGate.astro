@@ -176,20 +176,20 @@ const agencyExternal = /^https?:\/\//.test(agencyHref);
       color: var(--text-mute);
       letter-spacing: 0.08em;
     }
+    /* Phones: keep the two cards side by side with the connector lines,
+       just scaled down to fit. */
     @media (max-width: 560px) {
-      .gate-cards {
-        grid-template-columns: 1fr;
-        gap: 14px;
-      }
-      .gate-branches { display: none; }
-      /* smaller cards with breathing room from the edges */
-      .gate-tree { padding: 0 14px; }
+      .gate-tree { padding: 0 12px; }
+      .gate-cards { gap: 10px; }
+      .gate-branches { height: 40px; }
       .gate-card {
         min-height: 0;
-        padding: 22px 18px;
+        padding: 16px 10px;
         gap: 8px;
       }
-      .gate-card-title { font-size: 16px; }
+      .gate-ico svg { width: 22px; height: 22px; }
+      .gate-card-title { font-size: 14px; }
+      .gate-card-hint { font-size: 10px; letter-spacing: 0.04em; }
     }
   </style>
 </Base>
