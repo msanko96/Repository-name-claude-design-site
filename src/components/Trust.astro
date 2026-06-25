@@ -1,0 +1,62 @@
+---
+import { useTranslations, type Lang } from "../i18n/utils";
+const { lang } = Astro.props as { lang: Lang };
+const t = useTranslations(lang);
+---
+<section id="trust" data-screen-label="01 Trust">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-index" set:html={t("trust.idx")}></div>
+      <h2 class="h2" set:html={t("trust.title")}></h2>
+    </div>
+
+    <div class="stats reveal">
+      <div class="stat">
+        <div class="stat-num mono" data-odo data-value="15" data-suffix="+">0</div>
+        <div class="stat-label" set:html={t("trust.s1.label")}></div>
+      </div>
+      <div class="stat">
+        <div class="stat-num mono" data-odo data-value="6" data-prefix="$" data-suffix="M+">0</div>
+        <div class="stat-label" set:html={t("trust.s2.label")}></div>
+      </div>
+      <div class="stat">
+        <div class="stat-num mono" data-odo data-value="50000" data-suffix="+" data-format="k">0</div>
+        <div class="stat-label" set:html={t("trust.s3.label")}></div>
+      </div>
+      <div class="stat">
+        <div class="stat-num mono" data-odo data-value="10" data-suffix="+">0</div>
+        <div class="stat-label" set:html={t("trust.s4.label")}></div>
+      </div>
+    </div>
+
+    <p class="lead trust-desc reveal" set:html={t("trust.desc")}></p>
+
+    <div class="voices reveal">
+      <div class="voice-head">
+        <span class="mono-label" set:html={t("trust.voices.head")}></span>
+      </div>
+      <div class="voice-grid">
+        <figure class="voice">
+          <a class="v-avatar-link" href="https://www.linkedin.com/in/pavel-lappo/" target="_blank" rel="noopener noreferrer" aria-label={t("trust.v1.who")}>
+            <img class="v-avatar v-photo" alt="" loading="lazy" src="/voices/pavel-lappo.jpg" />
+          </a>
+          <blockquote set:html={t("trust.v1.q")}></blockquote>
+          <figcaption>
+            <a class="v-who-link" href="https://www.linkedin.com/in/pavel-lappo/" target="_blank" rel="noopener noreferrer" set:html={t("trust.v1.who")}></a>
+            <span set:html={t("trust.v1.role")}></span>
+          </figcaption>
+        </figure>
+        <figure class="voice">
+          <a class="v-avatar-link" href="https://www.linkedin.com/in/lautsevich/" target="_blank" rel="noopener noreferrer" aria-label={t("trust.v2.who")}>
+            <img class="v-avatar v-photo" alt="" loading="lazy" src="/voices/pavel-lautsevich.jpg" />
+          </a>
+          <blockquote set:html={t("trust.v2.q")}></blockquote>
+          <figcaption>
+            <a class="v-who-link" href="https://www.linkedin.com/in/lautsevich/" target="_blank" rel="noopener noreferrer" set:html={t("trust.v2.who")}></a>
+            <span set:html={t("trust.v2.role")}></span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>

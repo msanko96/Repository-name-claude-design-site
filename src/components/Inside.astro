@@ -1,0 +1,148 @@
+---
+import { useTranslations, type Lang } from "../i18n/utils";
+const { lang } = Astro.props as { lang: Lang };
+const t = useTranslations(lang);
+---
+<section id="inside" data-screen-label="03 Inside platform">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-index" set:html={t("in.idx")}></div>
+      <h2 class="h2" set:html={t("in.title")}></h2>
+    </div>
+
+    <div class="inside-layout reveal">
+      <!-- Annotations column -->
+      <div class="inside-notes">
+        <div class="inote">
+          <span class="mono-label" set:html={t("in.A.lab")}></span>
+          <p set:html={t("in.A.p")}></p>
+        </div>
+        <div class="inote">
+          <span class="mono-label" set:html={t("in.B.lab")}></span>
+          <p set:html={t("in.B.p")}></p>
+        </div>
+        <div class="inote">
+          <span class="mono-label" set:html={t("in.C.lab")}></span>
+          <p set:html={t("in.C.p")}></p>
+        </div>
+        <div class="inote">
+          <span class="mono-label" set:html={t("in.D.lab")}></span>
+          <p set:html={t("in.D.p")}></p>
+        </div>
+      </div>
+
+      <!-- The mock -->
+      <div class="ui-mock-wrap">
+        <div class="ui-mock" role="img" aria-label="BEX job-details interface">
+          <div class="um-head">
+            <div class="um-head-left">
+              <div class="um-title">
+                <span class="um-price">[$250]</span>
+                <span set:html={t("um.title.text")}></span>
+              </div>
+              <div class="um-meta-row">
+                <span class="um-pill" set:html={t("um.cat")}></span>
+                <span class="um-date" set:html={t("um.posted")}></span>
+              </div>
+            </div>
+            <div class="um-head-icons">
+              <svg class="um-ico" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8v14l-4-3-4 3z"/></svg>
+              <svg class="um-ico" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 11.5a3 3 0 0 0 4.24 0l2.12-2.12a3 3 0 0 0-4.24-4.24L9.5 6.3"/><path d="M11.5 8.5a3 3 0 0 0-4.24 0l-2.12 2.12a3 3 0 0 0 4.24 4.24L10.5 13.7"/></svg>
+              <svg class="um-ico" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4h5v5"/><path d="M16 4l-8 8"/><path d="M14 11v4a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h4"/></svg>
+              <svg class="um-ico um-ico-x" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M5 5l10 10M15 5L5 15"/></svg>
+            </div>
+          </div>
+
+          <div class="um-card um-signals" data-anno="A">
+            <div class="um-sig-col">
+              <div class="um-sig"><span class="um-flag">🇺🇸</span><span set:html={t("um.us")}></span></div>
+              <div class="um-sig"><span>🏢</span><span set:html={t("um.member")}></span></div>
+              <div class="um-sig"><span class="um-star">★</span><span><b>5.00</b> <span set:html={t("um.reviews")}></span></span></div>
+              <div class="um-sig"><span class="um-sh">🛡</span><span><b set:html={t("um.payLab")}></b> <span set:html={t("um.payVer")}></span></span></div>
+              <div class="um-sig"><span class="um-sh">📞</span><span><b set:html={t("um.phoneLab")}></b> <span set:html={t("um.phoneVer")}></span></span></div>
+            </div>
+            <div class="um-sig-col">
+              <div class="um-sig"><span>$</span><span><b>$62</b> <span set:html={t("um.avg")}></span></span></div>
+              <div class="um-sig"><span>💼</span><span><b>620</b> <span set:html={t("um.open")}></span></span></div>
+              <div class="um-sig"><span>👥</span><span><b>24,824</b> <span set:html={t("um.posted2")}></span></span></div>
+              <div class="um-sig"><span>📈</span><span><b>60%</b> <span set:html={t("um.hireRate")}></span></span></div>
+              <div class="um-sig"><span>$</span><span><b>$12.45M</b> <span set:html={t("um.spent")}></span></span></div>
+            </div>
+          </div>
+
+          <p class="um-body" set:html={t("um.body")}></p>
+          <a class="um-more" href="#" set:html={t("um.more")}></a>
+
+          <div class="um-anno-group" data-anno="B">
+            <div class="um-section-label" set:html={t("um.most")}></div>
+
+            <div class="um-offers">
+            <div class="um-offer um-offer-active">
+              <span class="um-radio"><i></i></span>
+              <div class="um-av" style="background-image:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=faces');"></div>
+              <div class="um-offer-name">
+                <b>KK Front-end</b>
+                <span class="um-tag" set:html={t("um.o1.tag")}></span>
+              </div>
+              <span class="um-score um-score-good">94%</span>
+            </div>
+            <div class="um-offer">
+              <span class="um-radio"></span>
+              <div class="um-av" style="background-image:url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&h=120&fit=crop&crop=faces');"></div>
+              <div class="um-offer-name">
+                <b>BEX React Dev</b>
+                <span class="um-tag" set:html={t("um.o2.tag")}></span>
+              </div>
+              <span class="um-score um-score-good">81%</span>
+            </div>
+            <div class="um-offer">
+              <span class="um-radio"></span>
+              <div class="um-av" style="background-image:url('https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=120&h=120&fit=crop&crop=faces');"></div>
+              <div class="um-offer-name">
+                <b>IZDAT Full-Stack</b>
+                <span class="um-tag" set:html={t("um.o3.tag")}></span>
+              </div>
+              <span class="um-score um-score-mid">72%</span>
+            </div>
+            <div class="um-other"><span set:html={t("um.other")}></span> <span class="um-badge">4</span></div>
+          </div>
+          </div>
+
+          <div class="um-row">
+            <div class="um-label" set:html={t("um.replyAs")}></div>
+            <div class="um-select"><span set:html={t("um.replyOpt")}></span> <span class="um-caret">▾</span></div>
+          </div>
+
+          <div class="um-cover" data-anno="C">
+            <div class="um-cover-head">
+              <div class="um-section-label" set:html={t("um.cover")}></div>
+              <button class="um-btn-primary"><span class="um-spark">✦</span> <span set:html={t("um.gen")}></span></button>
+            </div>
+            <div class="um-cover-preview">
+              <span class="um-mono-label" set:html={t("um.tpl")}></span>
+              <p set:html={t("um.cover.body")}></p>
+              <span class="um-caret-blink"></span>
+            </div>
+          </div>
+
+          <div class="um-row um-row-split">
+            <div class="um-field"><div class="um-label" set:html={t("um.duration")}></div><div class="um-select"><span set:html={t("um.dur.opt")}></span> <span class="um-caret">▾</span></div></div>
+            <div class="um-field"><div class="um-label" set:html={t("um.fixed")}></div><div class="um-select">$ 250</div></div>
+          </div>
+
+          <div class="um-actions" data-anno="D">
+            <button class="um-btn-ghost" set:html={t("um.cancel")}></button>
+            <button class="um-btn-submit" set:html={t("um.publish")}></button>
+          </div>
+          <div class="um-foot" set:html={t("um.connects")}></div>
+        </div>
+
+        <!-- Corner annotations -->
+        <span class="ui-anno ui-anno-a" data-anno="A">A</span>
+        <span class="ui-anno ui-anno-b" data-anno="B">B</span>
+        <span class="ui-anno ui-anno-c" data-anno="C">C</span>
+        <span class="ui-anno ui-anno-d" data-anno="D">D</span>
+      </div>
+    </div>
+  </div>
+</section>

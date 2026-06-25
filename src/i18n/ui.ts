@@ -1,14 +1,12 @@
-/* BEX — i18n
-   Dictionary: keys map to { en, ru }. Values may contain HTML.
-   Apply: set <element data-i18n="key.path">. For attributes use data-i18n-attr="placeholder:key".
-*/
-(function () {
-  const LS_LANG = "bex-lang";
+// AUTO-GENERATED from the legacy scripts/i18n.js dictionary.
+// Each key maps to { en, ru }; values may contain inline HTML.
+export type Lang = "ru" | "en";
 
-  const T = {
-    "f4.chip.low":  { en: "low",  ru: "low"  },
+type Entry = { en: string; ru?: string };
+
+export const T: Record<string, Entry> = {
+    // f4.chip.low / f4.chip.high are redefined later (Low / High) — keep those.
     "f4.chip.mid":  { en: "mid",  ru: "mid"  },
-    "f4.chip.high": { en: "high", ru: "high" },
     "f4.chip.won":  { en: "won",  ru: "won"  },
 
     // --- f.04 CRM mock cards ---
@@ -34,7 +32,11 @@
     "nav.features": { en: "Features",         ru: "Возможности" },
     "nav.why":      { en: "Why BEX",          ru: "Зачем BEX" },
     "nav.who":      { en: "Who",              ru: "Для кого" },
-    "nav.demo":     { en: "Get a demo",       ru: "Получить демо" },
+    "nav.demo":     { en: "Get a demo",       ru: "Посмотреть демо" },
+    "nav.forAgencies":    { en: "For agencies",    ru: "Для агентств" },
+    "nav.forFreelancers": { en: "For freelancers", ru: "Для фрилансеров" },
+    "nav.persona.freelancer": { en: "Freelancer", ru: "Фрилансер" },
+    "nav.persona.agency":     { en: "Agency",     ru: "Агентство" },
 
     // --- Hero ---
     "hero.meta.system": { en: "00 / System",       ru: "00 / Система" },
@@ -88,14 +90,14 @@
       en: "We stopped refreshing the feed at 3am. BEX scores jobs faster than a human can read them — same first-reply advantage, without a night shift.",
       ru: "Благодаря гибким фильтрам мы быстрее находим подходящие проекты и не тратим время на нерелевантные заявки."
     },
-    "trust.v1.who":  { en: "Alexey M.", ru: "Алексей Морозов" },
+    "trust.v1.who":  { en: "Pavel Lappo", ru: "Pavel Lappo" },
     "trust.v1.role": { en: "Lead-gen manager", ru: "Руководитель по лидогенерации" },
     "trust.v2.q": {
       en: "Scoring built on 50k real proposals isn't a gimmick. Our reply rate jumped from 6% to 18% in the first month — and we stopped wasting Connects on junk.",
       ru: "Мы ведём несколько Upwork-направлений одновременно, и раньше было сложно держать всё под контролем. С BEX стало гораздо проще отслеживать проекты, распределять заявки и понимать, что реально приносит результат."
     },
-    "trust.v2.who":  { en: "Ekaterina S.", ru: "Екатерина Соколова" },
-    "trust.v2.role": { en: "Operations Director", ru: "Операционный директор" },
+    "trust.v2.who":  { en: "Pavel Lautsevich", ru: "Pavel Lautsevich" },
+    "trust.v2.role": { en: "Co-founder, LOVATA", ru: "Сооснователь, LOVATA" },
     "trust.v3.q": {
       en: "I replaced a full-time lead-gen manager with BEX plus a junior who reviews the shortlist. Pipeline is cleaner, cheaper, and I can see every thread in one place.",
       ru: "Раньше у нас были отдельные менеджеры по лидогенерации, но после перехода на BEX необходимость в этом практически исчезла."
@@ -410,6 +412,20 @@
     "aud.p3.n1": { en: "scoring tuned to your stack", ru: "скоринг проектов под ваш стек" },
     "aud.p3.n2": { en: "30-sec proposal template",     ru: "шаблоны откликов за 30 секунд" },
     "aud.p3.n3": { en: "never miss fresh jobs",        ru: "не пропускать свежие проекты" },
+
+    // --- Audience: real testimonials (replaces the persona cards) ---
+    "aud.t1.who":  { en: "Yana Kishko", ru: "Yana Kishko" },
+    "aud.t1.role": { en: "Head of Production", ru: "Руководитель продакшена" },
+    "aud.t1.q": {
+      en: "I can't be first to reply on my own — and on Upwork that's everything. I need a tool that just says «this one's yours, write back».",
+      ru: "Когда команда маленькая, невозможно постоянно сидеть в ленте Upwork. Нужен инструмент, который сам показывает релевантные проекты и помогает отвечать быстрее других."
+    },
+    "aud.t2.who":  { en: "Natallia Remarchuk", ru: "Natallia Remarchuk" },
+    "aud.t2.role": { en: "Freelancer", ru: "Фрилансер" },
+    "aud.t2.q": {
+      en: "I'm a freelancer. The platform made applying to relevant projects much quicker for me — with BEX I do it far faster.",
+      ru: "Я фрилансер. Платформа упростила для меня время на отклик на релевантный проект. С bex я это делаю намного быстрее."
+    },
     "aud.req.lab": { en: "requirement", ru: "требование" },
     "aud.req.p": {
       en: "An active Upwork account is required to use the platform.",
@@ -436,12 +452,37 @@
     "foot.brand":   { en: "BEX/01 — system for attracting projects", ru: "BEX/01 — система привлечения проектов" },
     "foot.privacy": { en: "Privacy", ru: "Конфиденциальность" },
     "foot.terms":   { en: "Terms",   ru: "Условия" },
-    "foot.build":   { en: "build 2026.04 · cool-blue", ru: "сборка 2026.04 · cool-blue" }
+    "foot.build":   { en: "build 2026.04 · cool-blue", ru: "сборка 2026.04 · cool-blue" },
+
+    // --- Entry / gateway page (/start) ---
+    "entry.meta":  { en: "00 / Entry", ru: "00 / Вход" },
+    "entry.sub": {
+      en: "System for attracting projects on Upwork",
+      ru: "Система по привлечению проектов на Upwork"
+    },
+    "entry.freelancer":     { en: "I'm a freelancer", ru: "Я фрилансер" },
+    "entry.freelancer.hint":{ en: "Explore the site",  ru: "Узнать о продукте" },
+    "entry.agency":         { en: "Agency",            ru: "Агентство" },
+    "entry.agency.hint":    { en: "Go to the platform", ru: "Перейти на платформу" },
+    "entry.page.title": {
+      en: "BEX — Choose how you work",
+      ru: "BEX — Выберите, как вы работаете"
+    },
+
+    // --- Persona page hero viz (scoring + notification cards) ---
+    "pp.viz.scoreLabel":  { en: "Job scoring · LIVE",  ru: "Скоринг вакансий · LIVE" },
+    "pp.viz.scoreBadge":  { en: "4 match today",       ru: "4 подходят сегодня" },
+    "pp.viz.row1.meta":   { en: "$4,000 · fixed · 🇦🇺 · 3h ago", ru: "$4 000 · фикс · 🇦🇺 · 3ч назад" },
+    "pp.viz.row2.meta":   { en: "$6,000 · fixed · 🇺🇸 · 2h ago", ru: "$6 000 · фикс · 🇺🇸 · 2ч назад" },
+    "pp.viz.row3.meta":   { en: "$500 · fixed · 🇨🇦 · 1d ago",   ru: "$500 · фикс · 🇨🇦 · 1д назад" },
+    "pp.viz.notifLabel":  { en: "Notifications",       ru: "Уведомления" },
+    "pp.viz.notifBadge":  { en: "2 new",               ru: "2 новых" },
+    "pp.viz.notifTitle":  { en: "Cover letter draft ready", ru: "Черновик отклика готов" }
   };
 
-  // Keys that should always render the EN value, regardless of language —
-  // these are pieces of the *platform UI* that must stay English on the real product.
-  const KEEP_EN = new Set([
+// Keys that always render the EN value regardless of locale — these are
+// pieces of the *platform UI* shown in mockups that must stay English.
+export const KEEP_EN = new Set<string>([
     // f.01 — job listing cards (real Upwork postings)
     "f1.viz.head","f1.viz.headR",
     "f1.row1.title","f1.row2.title","f1.row3.title","f1.row4.title",
@@ -473,67 +514,3 @@
     "um.duration","um.dur.opt","um.fixed",
     "um.cancel","um.publish","um.connects",
   ]);
-
-  function getLang() {
-    return "ru";
-  }
-
-  function applyLang(lang) {
-    lang = "ru";
-    document.documentElement.setAttribute("lang", "ru");
-    document.documentElement.setAttribute("data-lang", "ru");
-    document.querySelectorAll("[data-i18n]").forEach(el => {
-      const key = el.getAttribute("data-i18n");
-      const entry = T[key];
-      if (!entry) return;
-      const useLang = KEEP_EN.has(key) ? "en" : lang;
-      const v = entry[useLang] ?? entry.en;
-      el.innerHTML = v;
-    });
-    document.querySelectorAll("[data-i18n-attr]").forEach(el => {
-      const spec = el.getAttribute("data-i18n-attr");
-      spec.split(",").forEach(part => {
-        const [attr, key] = part.split(":").map(s => s.trim());
-        const entry = T[key];
-        if (!entry || !attr) return;
-        const useLang = KEEP_EN.has(key) ? "en" : lang;
-        el.setAttribute(attr, entry[useLang] ?? entry.en);
-      });
-    });
-
-    // Sync language toggle UI — show the OPPOSITE language as the click target
-    document.querySelectorAll("[data-lang-current]").forEach(el => {
-      el.textContent = lang === "en" ? "RU" : "EN";
-    });
-    document.querySelectorAll("[data-lang-btn]").forEach(b => {
-      b.classList.toggle("active", b.dataset.langBtn === lang);
-    });
-
-    // Re-trigger anything that depends on language (e.g. typed cover letter)
-    if (window.__onLangChange) {
-      try { window.__onLangChange(lang); } catch(e) {}
-    }
-  }
-
-  function setLang(lang) {
-    localStorage.setItem(LS_LANG, lang);
-    applyLang(lang);
-  }
-
-  // Boot — apply ASAP, even before app.js, to avoid flash
-  const initial = getLang();
-  document.documentElement.setAttribute("data-lang", initial);
-
-  document.addEventListener("DOMContentLoaded", () => {
-    applyLang(initial);
-    document.querySelectorAll("[data-lang-btn]").forEach(b => {
-      b.addEventListener("click", () => setLang(b.dataset.langBtn));
-    });
-    // mobile: a single toggle
-    document.querySelectorAll("[data-lang-toggle]").forEach(b => {
-      b.addEventListener("click", () => setLang(getLang() === "en" ? "ru" : "en"));
-    });
-  });
-
-  window.__bexI18n = { T, getLang, setLang, applyLang };
-})();

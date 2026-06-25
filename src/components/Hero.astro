@@ -1,0 +1,137 @@
+---
+import { useTranslations, type Lang } from "../i18n/utils";
+const { lang } = Astro.props as { lang: Lang };
+const t = useTranslations(lang);
+---
+<section class="hero" data-screen-label="00 Hero">
+  <div class="grid-bg"></div>
+  <div class="hero-scan" aria-hidden="true"></div>
+  <div class="container hero-inner">
+
+    <div class="hero-meta mono-label">
+      <span set:html={t("hero.meta.system")}></span>
+      <span class="sep">—</span>
+      <span set:html={t("hero.meta.engine")}></span>
+      <span class="sep">—</span>
+      <span class="live"><i></i><span set:html={t("hero.meta.live")}></span></span>
+    </div>
+
+    <h1 class="h1 hero-title" set:html={t("hero.title")}></h1>
+
+    <p class="lead hero-sub" set:html={t("hero.sub")}></p>
+
+    <div class="hero-actions">
+      <a href="#cta" class="btn"><span set:html={t("hero.cta.demo")}></span> <span class="dot"></span></a>
+    </div>
+
+    <!-- Live signal viewer: SCANNER variant -->
+    <div class="signal-viewer hero-viz" data-variant="scanner" aria-hidden="true">
+      <div class="sv-head">
+        <span class="mono-label">signal_viewer.sh</span>
+        <span class="mono-label sv-status"><i></i> <span set:html={t("hero.scanner.status")}></span></span>
+      </div>
+      <div class="sv-body">
+        <div class="sv-col sv-noise">
+          <div class="mono-label sv-col-label" set:html={t("hero.scanner.noise")}></div>
+          <ul class="sv-list" id="sv-noise"></ul>
+        </div>
+        <div class="sv-filter">
+          <div class="sv-filter-bar"></div>
+          <div class="sv-filter-label mono-label" set:html={t("hero.filter")}></div>
+        </div>
+        <div class="sv-col sv-signal">
+          <div class="mono-label sv-col-label" set:html={t("hero.scanner.signal")}></div>
+          <ul class="sv-list" id="sv-signal"></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ORBIT variant -->
+    <div class="hero-viz orbit-viz" data-variant="orbit" aria-hidden="true">
+      <div class="ov-head">
+        <span class="mono-label">orbit_view.sh</span>
+        <span class="mono-label ov-status"><i></i> <span set:html={t("hero.orbit.status")}></span></span>
+      </div>
+      <div class="ov-stage" id="ov-stage">
+        <svg class="ov-rings" viewBox="0 0 600 360" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <radialGradient id="ovCore" cx="50%" cy="50%" r="50%">
+              <stop offset="0%"  stop-color="var(--accent)"  stop-opacity="1"/>
+              <stop offset="60%" stop-color="var(--accent)"  stop-opacity="0.2"/>
+              <stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <ellipse cx="300" cy="180" rx="270" ry="150" fill="none" stroke="var(--line-soft)" stroke-dasharray="2 6"/>
+          <ellipse cx="300" cy="180" rx="200" ry="110" fill="none" stroke="var(--line-soft)" stroke-dasharray="2 6"/>
+          <ellipse cx="300" cy="180" rx="130" ry="72"  fill="none" stroke="var(--line-soft)" stroke-dasharray="2 6"/>
+          <circle cx="300" cy="180" r="120" fill="url(#ovCore)" opacity="0.35"/>
+          <circle cx="300" cy="180" r="46"  fill="var(--bg-elev)" stroke="var(--accent)" stroke-width="1.5"/>
+        </svg>
+        <div class="ov-core">
+          <span class="mono ov-core-label" set:html={t("hero.core.label")}></span>
+          <span class="ov-core-sub mono-label" set:html={t("hero.core.sub")}></span>
+        </div>
+        <div class="ov-nodes" id="ov-nodes"></div>
+        <div class="ov-legend">
+          <span class="mono-label"><i class="lg-match"></i> <span set:html={t("hero.orbit.legend.match")}></span></span>
+          <span class="mono-label"><i class="lg-noise"></i> <span set:html={t("hero.orbit.legend.noise")}></span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEED variant — stream layout but with REAL upwork-style job cards -->
+    <div class="hero-viz feed-viz" data-variant="feed" aria-hidden="true">
+      <div class="ov-head">
+        <span class="mono-label">feed_view.sh</span>
+        <span class="mono-label ov-status"><i></i> <span set:html={t("hero.feed.status")}></span></span>
+      </div>
+      <div class="fv-stage">
+        <div class="fv-lanes">
+          <div class="fv-lane fv-lane-signal">
+            <div class="mono-label fv-lane-label" set:html={t("hero.lane.matched")}></div>
+            <div class="fv-list" id="fv-signal"></div>
+          </div>
+          <div class="fv-lane fv-lane-feed">
+            <div class="mono-label fv-lane-label" set:html={t("hero.lane.raw")}></div>
+            <div class="fv-feed" id="fv-feed"></div>
+            <div class="fv-filter">
+              <span class="mono-label" set:html={t("hero.filter")}></span>
+            </div>
+          </div>
+          <div class="fv-lane fv-lane-noise">
+            <div class="mono-label fv-lane-label" set:html={t("hero.lane.rejected")}></div>
+            <div class="fv-list" id="fv-noise"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STREAM variant -->
+    <div class="hero-viz stream-viz" data-variant="stream" aria-hidden="true">
+      <div class="ov-head">
+        <span class="mono-label">stream_view.sh</span>
+        <span class="mono-label ov-status"><i></i> <span set:html={t("hero.stream.status")}></span></span>
+      </div>
+      <div class="st-stage">
+        <div class="st-lanes">
+          <div class="st-lane st-lane-signal">
+            <div class="mono-label st-lane-label" set:html={t("hero.lane.matched")}></div>
+            <ul class="st-list" id="st-signal"></ul>
+          </div>
+          <div class="st-lane st-lane-feed">
+            <div class="mono-label st-lane-label" set:html={t("hero.lane.raw")}></div>
+            <div class="st-feed" id="st-feed"></div>
+            <div class="st-filter">
+              <span class="mono-label" set:html={t("hero.filter")}></span>
+            </div>
+          </div>
+          <div class="st-lane st-lane-noise">
+            <div class="mono-label st-lane-label" set:html={t("hero.lane.rejected")}></div>
+            <ul class="st-list st-list-noise" id="st-noise"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

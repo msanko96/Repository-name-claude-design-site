@@ -1,0 +1,40 @@
+---
+import { useTranslations, type Lang } from "../i18n/utils";
+const { lang } = Astro.props as { lang: Lang };
+const t = useTranslations(lang);
+---
+<section id="audience" data-screen-label="05 Audience">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-index" set:html={t("aud.idx")}></div>
+      <h2 class="h2" set:html={t("aud.title")}></h2>
+    </div>
+    <div class="voice-grid reveal">
+      <figure class="voice">
+        <a class="v-avatar-link" href="https://www.linkedin.com/in/yanakishko/" target="_blank" rel="noopener noreferrer" aria-label={t("aud.t1.who")}>
+          <img class="v-avatar v-photo" alt="" loading="lazy" src="/voices/yana-kishko.jpg" />
+        </a>
+        <blockquote set:html={t("aud.t1.q")}></blockquote>
+        <figcaption>
+          <a class="v-who-link" href="https://www.linkedin.com/in/yanakishko/" target="_blank" rel="noopener noreferrer" set:html={t("aud.t1.who")}></a>
+          <span set:html={t("aud.t1.role")}></span>
+        </figcaption>
+      </figure>
+      <figure class="voice">
+        <a class="v-avatar-link" href="https://www.linkedin.com/in/natalliaremarchuk/" target="_blank" rel="noopener noreferrer" aria-label={t("aud.t2.who")}>
+          <span class="v-avatar" data-mono="NR" style="--v-h: 265"></span>
+        </a>
+        <blockquote set:html={t("aud.t2.q")}></blockquote>
+        <figcaption>
+          <a class="v-who-link" href="https://www.linkedin.com/in/natalliaremarchuk/" target="_blank" rel="noopener noreferrer" set:html={t("aud.t2.who")}></a>
+          <span set:html={t("aud.t2.role")}></span>
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="aud-foot reveal">
+      <span class="mono-label"><i></i> <span set:html={t("aud.req.lab")}></span></span>
+      <p set:html={t("aud.req.p")}></p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,37 @@
+---
+import { useTranslations, type Lang } from "../i18n/utils";
+const { lang } = Astro.props as { lang: Lang };
+const t = useTranslations(lang);
+---
+<section id="why" data-screen-label="04 Why">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-index" set:html={t("why.idx")}></div>
+      <h2 class="h2" set:html={t("why.title")}></h2>
+    </div>
+
+    <div class="why-split reveal">
+      <div class="why-side why-before">
+        <div class="mono-label side-label" set:html={t("why.before.lab")}></div>
+        <div class="chaos-stage" aria-hidden="true"></div>
+        <ul class="why-list">
+          <li set:html={t("why.b1")}></li>
+          <li set:html={t("why.b2")}></li>
+          <li set:html={t("why.b3")}></li>
+          <li set:html={t("why.b4")}></li>
+        </ul>
+      </div>
+      <div class="why-arrow mono">→</div>
+      <div class="why-side why-after">
+        <div class="mono-label side-label" set:html={t("why.after.lab")}></div>
+        <div class="order-stage" aria-hidden="true"></div>
+        <ul class="why-list ok">
+          <li set:html={t("why.a1")}></li>
+          <li set:html={t("why.a2")}></li>
+          <li set:html={t("why.a3")}></li>
+          <li set:html={t("why.a4")}></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
