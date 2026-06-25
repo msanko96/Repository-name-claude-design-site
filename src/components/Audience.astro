@@ -2,6 +2,21 @@
 import { useTranslations, type Lang } from "../i18n/utils";
 const { lang } = Astro.props as { lang: Lang };
 const t = useTranslations(lang);
+
+// Shared voice-card utility strings (mirrors Trust.astro — the testimonial card).
+const VOICE_FIG =
+  "relative m-0 p-8 border border-line-soft rounded-3 bg-bg-elev flex flex-col gap-4 before:content-['”'] before:absolute before:top-[14px] before:right-5 before:text-[56px] before:leading-none before:text-accent before:opacity-20 before:[font-family:Georgia,serif]";
+const AV_LINK = "block w-[52px] h-[52px] self-start rounded-full";
+const AV_PHOTO =
+  "block w-[52px] h-[52px] rounded-full border border-line bg-bg-elev object-cover shrink-0 [filter:saturate(0.92)_contrast(1.02)]";
+// Fallback avatar: gradient circle + initials via ::before (data-mono) + gloss ::after.
+const AV_INITIALS =
+  "relative grid place-items-center w-[52px] h-[52px] rounded-full border border-line shrink-0 font-mono text-sm font-medium text-white tracking-[0.08em] bg-[linear-gradient(135deg,oklch(0.7_0.14_var(--v-h,220)),oklch(0.5_0.16_var(--v-h,220)))] before:content-[attr(data-mono)] before:[text-shadow:0_1px_2px_rgba(0,0,0,0.2)] after:content-[''] after:absolute after:inset-0 after:rounded-full after:[background:radial-gradient(circle_at_30%_25%,rgba(255,255,255,0.3),transparent_45%)] after:pointer-events-none";
+const BLOCKQUOTE = "m-0 text-[15px] leading-[1.55] text-text";
+const FIGCAP = "flex flex-col gap-0.5 pt-3 border-t border-line-soft mt-auto min-h-[62px]";
+const WHO_LINK =
+  "font-medium text-sm text-text no-underline hover:text-accent hover:underline [transition:color_var(--dur-fast)]";
+const ROLE_SPAN = "text-text-mute text-xs font-mono leading-[1.45]";
 ---
 <section id="audience" data-screen-label="05 Audience">
   <div class="container">
@@ -9,32 +24,32 @@ const t = useTranslations(lang);
       <div class="section-index" set:html={t("aud.idx")}></div>
       <h2 class="h2" set:html={t("aud.title")}></h2>
     </div>
-    <div class="voice-grid reveal">
-      <figure class="voice">
-        <a class="v-avatar-link" href="https://www.linkedin.com/in/yanakishko/" target="_blank" rel="noopener noreferrer" aria-label={t("aud.t1.who")}>
-          <img class="v-avatar v-photo" alt="" loading="lazy" src="/voices/yana-kishko.jpg" />
+    <div class="reveal grid grid-cols-2 max-[900px]:grid-cols-1 gap-4 max-w-[880px]">
+      <figure class={VOICE_FIG}>
+        <a class={AV_LINK} href="https://www.linkedin.com/in/yanakishko/" target="_blank" rel="noopener noreferrer" aria-label={t("aud.t1.who")}>
+          <img class={AV_PHOTO} alt="" loading="lazy" src="/voices/yana-kishko.jpg" />
         </a>
-        <blockquote set:html={t("aud.t1.q")}></blockquote>
-        <figcaption>
-          <a class="v-who-link" href="https://www.linkedin.com/in/yanakishko/" target="_blank" rel="noopener noreferrer" set:html={t("aud.t1.who")}></a>
-          <span set:html={t("aud.t1.role")}></span>
+        <blockquote class={BLOCKQUOTE} set:html={t("aud.t1.q")}></blockquote>
+        <figcaption class={FIGCAP}>
+          <a class={WHO_LINK} href="https://www.linkedin.com/in/yanakishko/" target="_blank" rel="noopener noreferrer" set:html={t("aud.t1.who")}></a>
+          <span class={ROLE_SPAN} set:html={t("aud.t1.role")}></span>
         </figcaption>
       </figure>
-      <figure class="voice">
-        <a class="v-avatar-link" href="https://www.linkedin.com/in/natalliaremarchuk/" target="_blank" rel="noopener noreferrer" aria-label={t("aud.t2.who")}>
-          <span class="v-avatar" data-mono="NR" style="--v-h: 265"></span>
+      <figure class={VOICE_FIG}>
+        <a class={AV_LINK} href="https://www.linkedin.com/in/natalliaremarchuk/" target="_blank" rel="noopener noreferrer" aria-label={t("aud.t2.who")}>
+          <span class={AV_INITIALS} data-mono="NR" style="--v-h: 265"></span>
         </a>
-        <blockquote set:html={t("aud.t2.q")}></blockquote>
-        <figcaption>
-          <a class="v-who-link" href="https://www.linkedin.com/in/natalliaremarchuk/" target="_blank" rel="noopener noreferrer" set:html={t("aud.t2.who")}></a>
-          <span set:html={t("aud.t2.role")}></span>
+        <blockquote class={BLOCKQUOTE} set:html={t("aud.t2.q")}></blockquote>
+        <figcaption class={FIGCAP}>
+          <a class={WHO_LINK} href="https://www.linkedin.com/in/natalliaremarchuk/" target="_blank" rel="noopener noreferrer" set:html={t("aud.t2.who")}></a>
+          <span class={ROLE_SPAN} set:html={t("aud.t2.role")}></span>
         </figcaption>
       </figure>
     </div>
 
-    <div class="aud-foot reveal">
-      <span class="mono-label"><i></i> <span set:html={t("aud.req.lab")}></span></span>
-      <p set:html={t("aud.req.p")}></p>
+    <div class="reveal mt-6 py-4 px-6 border border-dashed border-line-soft rounded-2 flex items-center gap-4 bg-bg max-[760px]:flex-col max-[760px]:items-start">
+      <span class="mono-label shrink-0 inline-flex items-center gap-1.5"><i class="inline-block w-1.5 h-1.5 bg-warn rounded-full"></i> <span set:html={t("aud.req.lab")}></span></span>
+      <p class="m-0 text-sm text-text-dim" set:html={t("aud.req.p")}></p>
     </div>
   </div>
 </section>
