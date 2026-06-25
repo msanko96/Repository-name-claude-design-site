@@ -4,11 +4,11 @@ import Logo from "./Logo.astro";
 const { lang } = Astro.props as { lang: Lang };
 const t = useTranslations(lang);
 ---
-<footer class="footer">
-  <div class="container footer-inner">
-    <div class="foot-brand">
-      <Logo />
+<footer class="border-t border-line-soft px-0 py-8">
+  <div class="container flex justify-between items-center gap-6 flex-wrap">
+    <div class="flex items-center">
+      <Logo class="h-5 opacity-65" />
     </div>
-    <div class="foot-build mono-label" set:html={t("foot.build")}></div>
+    <div class="mono-label" set:html={t("foot.build")}></div>
   </div>
 </footer>
