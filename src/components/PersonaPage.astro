@@ -10,8 +10,6 @@ const t = useTranslations(lang);
 
 const home = lang === "en" ? "/en/" : "/";
 const altPath = lang === "en" ? `/${persona}` : `/en/${persona}`;
-// Each persona form posts to its own endpoint (its own Procesio webhook).
-const formEndpoint = persona === "freelancer" ? "/api/freelancer" : "/api/waitlist";
 const titleKey = "entry.page.title";
 
 // Persona toggle destinations (current locale).
@@ -19,7 +17,7 @@ const toFreelancer = lang === "en" ? "/en/freelancer" : "/freelancer";
 const toAgency = lang === "en" ? "/en/agency" : "/agency";
 ---
 <Base lang={lang} titleKey={titleKey}>
-  <Header lang={lang} navLinks={false} brandHref={home} demoHref="#apply" langHref={altPath} personaActive={persona} freelancerHref={toFreelancer} agencyHref={toAgency} />
+  <Header lang={lang} navLinks={false} brandHref={home} demo={false} langHref={altPath} personaActive={persona} freelancerHref={toFreelancer} agencyHref={toAgency} />
 
   <main id="top" class="persona-page">
     <!-- HERO -->
@@ -35,7 +33,6 @@ const toAgency = lang === "en" ? "/en/agency" : "/agency";
           </div>
           <h1 class="h1 pp-title" set:html={c.title}></h1>
           <p class="pp-sub" set:html={c.sub}></p>
-          <a href="#apply" class="btn pp-cta"><span>{c.cta}</span> <span class="dot"></span></a>
         </div>
 
         <div class="pp-hero-viz reveal" style="transition-delay:120ms">
@@ -125,44 +122,10 @@ const toAgency = lang === "en" ? "/en/agency" : "/agency";
               <li><span class="pp-check">✓</span> {f}</li>
             ))}
           </ul>
-          <a href="#apply" class="btn pp-btn-wide"><span>{c.price.cta}</span> <span class="dot"></span></a>
         </div>
       </div>
     </section>
 
-    <!-- APPLY FORM -->
-    <section id="apply" class="pp-apply">
-      <div class="container pp-apply-inner reveal">
-        <h2 class="pp-apply-title">{c.form.heading}</h2>
-        <p class="pp-apply-sub">{c.form.sub}</p>
-        <form
-          class="pp-form"
-          id="persona-form"
-          data-endpoint={formEndpoint}
-          novalidate
-        >
-          {c.form.fields.map((f) => (
-            <input
-              class="pp-input"
-              name={f.name}
-              type={f.type}
-              placeholder={f.placeholder}
-              required={f.required}
-            />
-          ))}
-          <button
-            class="btn pp-btn-wide pp-submit"
-            type="submit"
-            data-label-default={c.form.submit}
-            data-label-loading={c.form.loading}
-            data-label-done={c.form.done}
-            data-label-error={c.form.error}
-          >
-            <span class="pp-submit-label">{c.form.submit}</span> <span class="dot"></span>
-          </button>
-        </form>
-      </div>
-    </section>
   </main>
 
   <style>
@@ -189,9 +152,6 @@ const toAgency = lang === "en" ? "/en/agency" : "/agency";
     /* Sizing comes from the global .h1 token so it matches the agency hero exactly. */
     .pp-title { margin: 22px 0 0; color: var(--text); }
     .pp-sub { margin: 22px 0 0; max-width: 46ch; color: var(--text-dim); font-size: clamp(16px, 1.2vw, 19px); line-height: 1.6; }
-    /* Buttons reuse the global .btn — these just position/stretch it. */
-    .pp-cta { margin-top: 30px; }
-    .pp-btn-wide { width: 100%; justify-content: center; }
 
     /* ---- Hero viz cards ---- */
     .pp-hero-viz { display: flex; flex-direction: column; gap: 16px; }
@@ -240,18 +200,6 @@ const toAgency = lang === "en" ? "/en/agency" : "/agency";
     .pp-price-features { list-style: none; margin: 0 0 26px; padding: 0; display: flex; flex-direction: column; gap: 13px; }
     .pp-price-features li { display: flex; align-items: flex-start; gap: 10px; color: var(--text-dim); font-size: 15px; }
     .pp-check { color: var(--pp-good); font-weight: 700; }
-
-    /* ---- Apply form ---- */
-    .pp-apply { padding: clamp(40px, 7vh, 90px) 0 clamp(60px, 10vh, 120px); }
-    .pp-apply-inner { max-width: 860px; text-align: center; }
-    .pp-apply-title { font-size: clamp(30px, 4vw, 46px); font-weight: 700; color: var(--text); margin: 0; }
-    .pp-apply-sub { margin: 14px auto 34px; color: var(--text-dim); max-width: 54ch; line-height: 1.55; }
-    .pp-form { display: flex; flex-direction: column; gap: 12px; text-align: left; }
-    .pp-input { width: 100%; height: 52px; padding: 0 18px; background: var(--bg-elev); border: 1px solid var(--line); border-radius: var(--r-2); color: var(--text); font: inherit; transition: border-color 0.18s ease; }
-    .pp-input::placeholder { color: var(--text-mute); }
-    .pp-input:focus { outline: none; border-color: var(--accent); }
-    .pp-submit { margin-top: 6px; border: 0; cursor: pointer; }
-    .pp-submit[disabled] { opacity: 0.7; cursor: default; }
 
     @media (max-width: 900px) {
       .pp-hero-grid { grid-template-columns: 1fr; }
