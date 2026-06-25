@@ -2,6 +2,11 @@
 import { useTranslations, type Lang } from "../i18n/utils";
 const { lang } = Astro.props as { lang: Lang };
 const t = useTranslations(lang);
+
+// .why-list li (+ ✕/✓ marker via ::before, was .why-before/.why-list.ok scoping).
+const WHY_LI = "py-2 border-b border-dashed border-line-soft last:border-0";
+const WHY_LI_BAD = `${WHY_LI} before:content-['✕_'] before:text-bad before:font-mono`;
+const WHY_LI_OK = `${WHY_LI} before:content-['✓_'] before:text-accent before:font-mono`;
 ---
 <section id="why" data-screen-label="04 Why">
   <div class="container">
@@ -10,26 +15,26 @@ const t = useTranslations(lang);
       <h2 class="h2" set:html={t("why.title")}></h2>
     </div>
 
-    <div class="why-split reveal">
-      <div class="why-side why-before">
-        <div class="mono-label side-label" set:html={t("why.before.lab")}></div>
+    <div class="reveal grid grid-cols-[1fr_60px_1fr] max-[760px]:grid-cols-1 gap-0 items-stretch border border-line-soft rounded-3 overflow-hidden bg-bg-elev">
+      <div class="relative p-8 bg-bg-elev">
+        <div class="mono-label block mb-4" set:html={t("why.before.lab")}></div>
         <div class="chaos-stage" aria-hidden="true"></div>
-        <ul class="why-list">
-          <li set:html={t("why.b1")}></li>
-          <li set:html={t("why.b2")}></li>
-          <li set:html={t("why.b3")}></li>
-          <li set:html={t("why.b4")}></li>
+        <ul class="list-none p-0 m-0 text-sm text-text-dim">
+          <li class={WHY_LI_BAD} set:html={t("why.b1")}></li>
+          <li class={WHY_LI_BAD} set:html={t("why.b2")}></li>
+          <li class={WHY_LI_BAD} set:html={t("why.b3")}></li>
+          <li class={WHY_LI_BAD} set:html={t("why.b4")}></li>
         </ul>
       </div>
-      <div class="why-arrow mono">→</div>
-      <div class="why-side why-after">
-        <div class="mono-label side-label" set:html={t("why.after.lab")}></div>
+      <div class="mono grid place-items-center text-text-mute text-[22px] border-x border-dashed border-line-soft max-[760px]:rotate-90 max-[760px]:border-0 max-[760px]:py-5">→</div>
+      <div class="relative p-8 bg-bg-elev">
+        <div class="mono-label block mb-4" set:html={t("why.after.lab")}></div>
         <div class="order-stage" aria-hidden="true"></div>
-        <ul class="why-list ok">
-          <li set:html={t("why.a1")}></li>
-          <li set:html={t("why.a2")}></li>
-          <li set:html={t("why.a3")}></li>
-          <li set:html={t("why.a4")}></li>
+        <ul class="list-none p-0 m-0 text-sm text-text-dim">
+          <li class={WHY_LI_OK} set:html={t("why.a1")}></li>
+          <li class={WHY_LI_OK} set:html={t("why.a2")}></li>
+          <li class={WHY_LI_OK} set:html={t("why.a3")}></li>
+          <li class={WHY_LI_OK} set:html={t("why.a4")}></li>
         </ul>
       </div>
     </div>
