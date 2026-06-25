@@ -4,25 +4,8 @@ const { lang, href: hrefProp } = Astro.props as { lang: Lang; href?: string };
 const href = hrefProp ?? altLangPath(lang);
 const label = lang === "en" ? "RU" : "EN";
 ---
-<a class="lang-switch mono-label" href={href} aria-label={`Switch language to ${label}`}>{label}</a>
-
-<style>
-  .lang-switch {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 34px;
-    height: 34px;
-    padding: 0 9px;
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    color: var(--text-dim);
-    text-decoration: none;
-    letter-spacing: 0.04em;
-    transition: color 0.18s ease, border-color 0.18s ease;
-  }
-  .lang-switch:hover {
-    color: var(--text);
-    border-color: var(--line-strong, var(--accent));
-  }
-</style>
+<a
+  class="mono-label inline-flex items-center justify-center min-w-[34px] h-[34px] px-[9px] border border-line rounded-2 no-underline text-text-dim tracking-[0.04em] hover:text-text hover:border-[var(--line-strong,var(--accent))] [transition:color_0.18s_ease,border-color_0.18s_ease]"
+  href={href}
+  aria-label={`Switch language to ${label}`}
+>{label}</a>

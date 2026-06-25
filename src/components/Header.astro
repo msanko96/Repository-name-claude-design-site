@@ -35,6 +35,13 @@ const {
 const t = useTranslations(lang);
 
 const showPersona = !!(personaActive && freelancerHref && agencyHref);
+
+// Segmented freelancer / agency toggle option styles (was the scoped .persona-opt).
+const PERSONA_OPT =
+  "font-mono text-[11px] max-[520px]:text-[10px] tracking-[0.04em] uppercase px-[13px] py-[7px] max-[520px]:px-[11px] max-[520px]:py-[6px] rounded-pill whitespace-nowrap transition-[color,background,box-shadow] duration-[var(--dur-fast)]";
+const PERSONA_OPT_IDLE = "text-text-mute hover:text-text";
+const PERSONA_OPT_ACTIVE =
+  "text-text bg-bg-elev shadow-[0_1px_2px_color-mix(in_oklch,var(--text)_12%,transparent)]";
 ---
 <header class="nav">
   <div class="container nav-inner">
@@ -54,16 +61,20 @@ const showPersona = !!(personaActive && freelancerHref && agencyHref);
 
     <div class="nav-right">
       {showPersona && (
-        <div class="persona-toggle" role="group" aria-label="Freelancer or agency">
+        <div
+          class="inline-flex items-center gap-0.5 p-[3px] rounded-pill border border-line-soft bg-[color-mix(in_oklch,var(--text)_5%,transparent)] max-[520px]:mr-auto"
+          role="group"
+          aria-label="Freelancer or agency"
+        >
           <a
             href={freelancerHref}
-            class:list={["persona-opt", { "is-active": personaActive === "freelancer" }]}
+            class:list={[PERSONA_OPT, personaActive === "freelancer" ? PERSONA_OPT_ACTIVE : PERSONA_OPT_IDLE]}
             aria-current={personaActive === "freelancer" ? "page" : undefined}
             set:html={t("nav.persona.freelancer")}
           ></a>
           <a
             href={agencyHref}
-            class:list={["persona-opt", { "is-active": personaActive === "agency" }]}
+            class:list={[PERSONA_OPT, personaActive === "agency" ? PERSONA_OPT_ACTIVE : PERSONA_OPT_IDLE]}
             aria-current={personaActive === "agency" ? "page" : undefined}
             set:html={t("nav.persona.agency")}
           ></a>
@@ -79,39 +90,3 @@ const showPersona = !!(personaActive && freelancerHref && agencyHref);
     </div>
   </div>
 </header>
-
-<style>
-  /* Segmented freelancer / agency toggle — sits inline with the header controls. */
-  .persona-toggle {
-    display: inline-flex;
-    align-items: center;
-    gap: 2px;
-    padding: 3px;
-    border-radius: var(--r-pill);
-    background: color-mix(in oklch, var(--text) 5%, transparent);
-    border: 1px solid var(--line-soft);
-  }
-  .persona-opt {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    padding: 7px 13px;
-    border-radius: var(--r-pill);
-    color: var(--text-mute);
-    white-space: nowrap;
-    transition: color var(--dur-fast), background var(--dur-fast), box-shadow var(--dur-fast);
-  }
-  .persona-opt:hover { color: var(--text); }
-  .persona-opt.is-active {
-    color: var(--text);
-    background: var(--bg-elev);
-    box-shadow: 0 1px 2px color-mix(in oklch, var(--text) 12%, transparent);
-  }
-
-  /* Phones: tighten the toggle a touch, and push theme+lang to the right edge. */
-  @media (max-width: 520px) {
-    .persona-opt { padding: 6px 11px; font-size: 10px; }
-    .persona-toggle { margin-right: auto; }
-  }
-</style>
