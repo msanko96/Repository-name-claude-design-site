@@ -1,6 +1,7 @@
 ---
-import "../styles/tokens.css";
-import "../styles/components.css";
+// global.css imports tokens.css + components.css into the `legacy` cascade
+// layer (see that file), so they no longer need to be imported here directly.
+import "../styles/global.css";
 import { useTranslations, type Lang } from "../i18n/utils";
 
 interface Props {

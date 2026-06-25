@@ -1,0 +1,64 @@
+/*
+  Cascade layer order. Tailwind's own import declares `theme, base, components,
+  utilities`; we insert a `legacy` layer between base and components so that:
+    - legacy CSS (tokens.css + components.css) overrides Tailwind's preflight
+      reset (keeps the current design intact during migration), but
+    - Tailwind utilities (highest layer) override legacy CSS, so utilities added
+      to component markup actually take effect.
+  Unlayered CSS beats ALL layers, so every legacy rule must live in a layer.
+*/
+@layer theme, base, legacy, components, utilities;
+
+@import "tailwindcss";
+@import "./tokens.css" layer(legacy);
+@import "./components.css" layer(legacy);
+
+/*
+  Bridge the existing design tokens (defined in tokens.css, swapped at runtime
+  via [data-theme] / [data-accent]) into Tailwind's theme namespaces. Using
+  `@theme inline` means the generated utilities reference the live CSS variables,
+  so dark/light/accent switching keeps working with no JS changes.
+
+  Spacing is intentionally NOT remapped: the old --s-* scale (4,8,12,16,24,32,
+  48,64,96,128,160) lines up with Tailwind's native 4px scale, so use p-6, gap-8,
+  py-32, etc. directly.
+*/
+@theme inline {
+  /* Colors */
+  --color-bg: var(--bg);
+  --color-bg-elev: var(--bg-elev);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-line-soft: var(--line-soft);
+  --color-text: var(--text);
+  --color-text-dim: var(--text-dim);
+  --color-text-mute: var(--text-mute);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-dim: var(--accent-dim);
+  --color-accent-glow: var(--accent-glow);
+  --color-warn: var(--warn);
+  --color-bad: var(--bad);
+  --color-fv-green: var(--fv-green);
+  --color-fv-yellow: var(--fv-yellow);
+  --color-fv-red: var(--fv-red);
+
+  /* Radius */
+  --radius-1: var(--r-1);
+  --radius-2: var(--r-2);
+  --radius-3: var(--r-3);
+  --radius-4: var(--r-4);
+  --radius-pill: var(--r-pill);
+
+  /* Type */
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  /* Motion */
+  --ease-out: var(--ease-out);
+  --ease-in-out: var(--ease-in-out);
+  --duration-fast: var(--dur-fast);
+  --duration-med: var(--dur-med);
+  --duration-slow: var(--dur-slow);
+}
