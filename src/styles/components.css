@@ -112,6 +112,10 @@
 
 .hero-title {
   margin: var(--s-5) 0 var(--s-5);
+}
+/* Same headline wrap width on the landing hero and the persona pages. */
+.hero-title,
+.pp-title {
   max-width: 16ch;
 }
 .hero-title em.acc,

@@ -48,11 +48,11 @@ const FREELANCER: Record<Lang, PersonaContent> = {
     benefits: [
       { icon: "🎯", title: "Скоринг под твой стек", desc: "Видишь только вакансии, которые реально стоит ответа." },
       { icon: "⚡", title: "Уведомление за секунды", desc: "Telegram-уведомление как только появилась подходящая вакансия." },
-      { icon: "✍️", title: "Черновик уже готов", desc: "Cover letter под твою нишу. Редактируешь детали — не пишешь с нуля." },
+      { icon: "✍️", title: "Черновик уже готов", desc: "Cover letter под твою нишу. Редактируешь детали - не пишешь с нуля." },
     ],
     price: {
       label: "Фрилансер",
-      tagline: "Меньше ручной работы — больше откликов туда, где это имеет смысл.",
+      tagline: "Меньше ручной работы - больше откликов туда, где это имеет смысл.",
       amount: "€20",
       per: "/месяц",
       note: "ежемесячная подписка · отмена в любой момент",
@@ -67,7 +67,7 @@ const FREELANCER: Record<Lang, PersonaContent> = {
     },
     form: {
       heading: "Оставь заявку",
-      sub: "Напишем, как настроить BEX под твой стек — обычно это занимает 10 минут.",
+      sub: "Напишем, как настроить BEX под твой стек - обычно это занимает 10 минут.",
       fields: [
         { name: "name", placeholder: "Имя", type: "text", required: false },
         { name: "telegram", placeholder: "Ссылка на Telegram", type: "text", required: false },
@@ -89,11 +89,11 @@ const FREELANCER: Record<Lang, PersonaContent> = {
     benefits: [
       { icon: "🎯", title: "Scoring for your stack", desc: "See only the jobs actually worth replying to." },
       { icon: "⚡", title: "Alerts in seconds", desc: "A Telegram alert the moment a matching job is posted." },
-      { icon: "✍️", title: "Draft already written", desc: "A cover letter for your niche. You edit the details — not write from scratch." },
+      { icon: "✍️", title: "Draft already written", desc: "A cover letter for your niche. You edit the details - not write from scratch." },
     ],
     price: {
       label: "Freelancer",
-      tagline: "Less manual work — more proposals where they actually matter.",
+      tagline: "Less manual work - more proposals where they actually matter.",
       amount: "€20",
       per: "/month",
       note: "monthly subscription · cancel anytime",
@@ -108,7 +108,7 @@ const FREELANCER: Record<Lang, PersonaContent> = {
     },
     form: {
       heading: "Leave a request",
-      sub: "We'll show how to set BEX up for your stack — usually takes 10 minutes.",
+      sub: "We'll show how to set BEX up for your stack - usually takes 10 minutes.",
       fields: [
         { name: "name", placeholder: "Name", type: "text", required: false },
         { name: "telegram", placeholder: "Telegram link", type: "text", required: false },
@@ -123,7 +123,7 @@ const FREELANCER: Record<Lang, PersonaContent> = {
   },
 };
 
-// ⚠️ DRAFT — adjust agency copy, price and form fields once finalized.
+// ⚠️ DRAFT - adjust agency copy, price and form fields once finalized.
 const AGENCY: Record<Lang, PersonaContent> = {
   ru: {
     pill: "Для агентств на Upwork",
@@ -156,7 +156,7 @@ const AGENCY: Record<Lang, PersonaContent> = {
     },
     form: {
       heading: "Оставь заявку",
-      sub: "Покажем, как BEX закрывает лидогенерацию для команды — демо за 20 минут.",
+      sub: "Покажем, как BEX закрывает лидогенерацию для команды - демо за 20 минут.",
       fields: [
         { name: "name", placeholder: "Имя", type: "text", required: true },
         { name: "company", placeholder: "Название агентства", type: "text", required: false },
@@ -202,7 +202,7 @@ const AGENCY: Record<Lang, PersonaContent> = {
     },
     form: {
       heading: "Leave a request",
-      sub: "We'll show how BEX runs lead-gen for a team — a 20-minute demo.",
+      sub: "We'll show how BEX runs lead-gen for a team - a 20-minute demo.",
       fields: [
         { name: "name", placeholder: "Name", type: "text", required: true },
         { name: "company", placeholder: "Agency name", type: "text", required: false },

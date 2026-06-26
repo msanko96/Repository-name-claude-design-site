@@ -5,7 +5,7 @@ export type Lang = "ru" | "en";
 type Entry = { en: string; ru?: string };
 
 export const T: Record<string, Entry> = {
-    // f4.chip.low / f4.chip.high are redefined later (Low / High) — keep those.
+    // f4.chip.low / f4.chip.high are redefined later (Low / High) - keep those.
     "f4.chip.mid":  { en: "mid",  ru: "mid"  },
     "f4.chip.won":  { en: "won",  ru: "won"  },
 
@@ -23,8 +23,8 @@ export const T: Record<string, Entry> = {
 
     // --- Page meta ---
     "page.title": {
-      en: "BEX — System for attracting projects on Upwork",
-      ru: "BEX — Система привлечения проектов на Upwork"
+      en: "BEX - System for attracting projects on Upwork",
+      ru: "BEX - Система привлечения проектов на Upwork"
     },
 
     // --- Header ---
@@ -47,8 +47,8 @@ export const T: Record<string, Entry> = {
       ru: "Система для<br/>привлечения <em class=\"acc\">проектов</em>"
     },
     "hero.sub": {
-      en: "BEX is a platform that accelerates lead generation on Upwork — scoring, filtering and drafting proposals so your team reviews only the jobs worth replying to.",
-      ru: "BEX — это платформа, которая ускоряет лидогенерацию на Upwork: оценивает, фильтрует и генерирует отклики, чтобы ваша команда работала только с действительно стоящими проектами."
+      en: "BEX is a platform that accelerates lead generation on Upwork - scoring, filtering and drafting proposals so your team reviews only the jobs worth replying to.",
+      ru: "BEX - это платформа, которая ускоряет лидогенерацию на Upwork: оценивает, фильтрует и генерирует отклики, чтобы ваша команда работала только с действительно стоящими проектами."
     },
     "hero.cta.demo": { en: "Get a demo",      ru: "Посмотреть демо" },
     "hero.cta.how":  { en: "See how it works", ru: "Посмотреть как это работает" },
@@ -80,20 +80,20 @@ export const T: Record<string, Entry> = {
     "trust.s1.label": { en: "years of experience in lead generation", ru: "лет опыта в лидогенерации" },
     "trust.s2.label": { en: "earned by our clients",                  ru: "заработано нашими клиентами" },
     "trust.s3.label": { en: "proposals sent on Upwork",               ru: "откликов отправлено на Upwork" },
-    "trust.s4.label": { en: "countries — clients all over the world", ru: "стран — клиенты по всему миру" },
+    "trust.s4.label": { en: "countries - clients all over the world", ru: "стран - клиенты по всему миру" },
     "trust.desc": {
       en: "Since 2008 we've generated leads on Upwork and know how to get a steady stream of relevant projects across niches. Now we've packaged this expertise into a powerful automation platform.",
       ru: "С 2008 года мы работаем с Upwork: сначала выстроили стабильный поток проектов и лидов для себя, а затем начали помогать другим компаниям. Этот опыт лёг в основу нашей автоматизированной платформы."
     },
     "trust.voices.head": { en: "// agencies and teams that run Upwork through BEX", ru: "// отзывы агентств и команд, которые работают с Upwork через BEX" },
     "trust.v1.q": {
-      en: "We stopped refreshing the feed at 3am. BEX scores jobs faster than a human can read them — same first-reply advantage, without a night shift.",
+      en: "We stopped refreshing the feed at 3am. BEX scores jobs faster than a human can read them - same first-reply advantage, without a night shift.",
       ru: "Благодаря гибким фильтрам мы быстрее находим подходящие проекты и не тратим время на нерелевантные заявки."
     },
     "trust.v1.who":  { en: "Pavel Lappo", ru: "Pavel Lappo" },
     "trust.v1.role": { en: "Lead-gen manager", ru: "Руководитель по лидогенерации" },
     "trust.v2.q": {
-      en: "Scoring built on 50k real proposals isn't a gimmick. Our reply rate jumped from 6% to 18% in the first month — and we stopped wasting Connects on junk.",
+      en: "Scoring built on 50k real proposals isn't a gimmick. Our reply rate jumped from 6% to 18% in the first month - and we stopped wasting Connects on junk.",
       ru: "Мы ведём несколько Upwork-направлений одновременно, и раньше было сложно держать всё под контролем. С BEX стало гораздо проще отслеживать проекты, распределять заявки и понимать, что реально приносит результат."
     },
     "trust.v2.who":  { en: "Pavel Lautsevich", ru: "Pavel Lautsevich" },
@@ -115,8 +115,8 @@ export const T: Record<string, Entry> = {
     // f.01 Scoring
     "f1.title": { en: "Custom Job Scoring & Filtering", ru: "Умная оценка и фильтрация проектов" },
     "f1.lead": {
-      en: "A scoring system built on 15+ years of lead-gen and 50,000+ real proposals. Our algorithms evaluate projects against actual agency results — so you only review jobs worth your time.",
-      ru: "Система скоринга на основе 15+ лет опыта и 50 000+ реальных откликов. Оценивает проекты по реальным результатам — вы видите только те, на которые стоит откликаться."
+      en: "A scoring system built on 15+ years of lead-gen and 50,000+ real proposals. Our algorithms evaluate projects against actual agency results - so you only review jobs worth your time.",
+      ru: "Система скоринга на основе 15+ лет опыта и 50 000+ реальных откликов. Оценивает проекты по реальным результатам - вы видите только те, на которые стоит откликаться."
     },
     "f1.viz.head":   { en: "// job_scoring · live", ru: "// скоринг · live" },
     "f1.viz.headR":  { en: "4 / 278 today",         ru: "4 / 278 сегодня" },
@@ -143,20 +143,20 @@ export const T: Record<string, Entry> = {
 
     "f1.fd.inputs": { en: "// inputs the model reads", ru: "// что учитывает модель" },
     "f1.fd.li1":    {
-      en: "<b>budget shape</b> — fixed vs hourly, rate band, total payout history",
-      ru: "<b>бюджет</b> — фикс или почасовая, диапазон ставок, история выплат"
+      en: "<b>budget shape</b> - fixed vs hourly, rate band, total payout history",
+      ru: "<b>бюджет</b> - фикс или почасовая, диапазон ставок, история выплат"
     },
     "f1.fd.li2":    {
-      en: "<b>client signal</b> — hire rate, $ spent, repeat-hire ratio, verified pay",
-      ru: "<b>сигнал клиента</b> — hire rate, потраченный бюджет, повторные наймы, подтверждённые платежи"
+      en: "<b>client signal</b> - hire rate, $ spent, repeat-hire ratio, verified pay",
+      ru: "<b>сигнал клиента</b> - hire rate, потраченный бюджет, повторные наймы, подтверждённые платежи"
     },
     "f1.fd.li3":    {
-      en: "<b>posting text</b> — tech stack match, scope clarity, red-flag phrases",
-      ru: "<b>текст вакансии</b> — подходит ли стек, насколько всё понятно, есть ли «красные флаги»"
+      en: "<b>posting text</b> - tech stack match, scope clarity, red-flag phrases",
+      ru: "<b>текст вакансии</b> - подходит ли стек, насколько всё понятно, есть ли «красные флаги»"
     },
     "f1.fd.li4":    {
-      en: "<b>your profile fit</b> — niche, past wins, response speed",
-      ru: "<b>профиль</b> — совпадение по нише, опыт и скорость отклика"
+      en: "<b>your profile fit</b> - niche, past wins, response speed",
+      ru: "<b>профиль</b> - совпадение по нише, опыт и скорость отклика"
     },
     "f1.fd.action": { en: "// scoring in action", ru: "// скоринг в действии" },
     "f1.fd.skip":   { en: "skip",     ru: "пропустить" },
@@ -175,7 +175,7 @@ export const T: Record<string, Entry> = {
     // f.02 Notifications
     "f2.title": { en: "Email Notification Center", ru: "Центр email-уведомлений" },
     "f2.lead": {
-      en: "Speed beats everything on Upwork. Stop refreshing the feed — get an email the moment a high-scoring job matching your preferences is posted, and apply while it's still fresh.",
+      en: "Speed beats everything on Upwork. Stop refreshing the feed - get an email the moment a high-scoring job matching your preferences is posted, and apply while it's still fresh.",
       ru: "Скорость решает. Получайте уведомления о лучших проектах и откликайтесь сразу, без постоянного обновления ленты."
     },
     "f2.viz.head":  { en: "// notifications · 4 new", ru: "// уведомления · 4 новых" },
@@ -183,13 +183,13 @@ export const T: Record<string, Entry> = {
     "f2.today":     { en: "today", ru: "сегодня" },
     "f2.yesterday": { en: "yesterday", ru: "вчера" },
     "f2.n1.subj": { en: "New match · score 94",          ru: "Новое совпадение · скор 94" },
-    "f2.n1.desc": { en: "High-fit job posted — <a>Senior React engineer, SaaS analytics</a>", ru: "Опубликован подходящий проект — <a>Senior React engineer, SaaS analytics</a>" },
+    "f2.n1.desc": { en: "High-fit job posted - <a>Senior React engineer, SaaS analytics</a>", ru: "Опубликован подходящий проект - <a>Senior React engineer, SaaS analytics</a>" },
     "f2.n2.subj": { en: "Proposal successfully sent",     ru: "Отклик успешно отправлен" },
-    "f2.n2.desc": { en: "Proposal submitted for <a>Senior React Developer — B2B SaaS Dashboard</a>", ru: "Отклик отправлен на <a>Senior React Developer — B2B SaaS Dashboard</a>" },
+    "f2.n2.desc": { en: "Proposal submitted for <a>Senior React Developer - B2B SaaS Dashboard</a>", ru: "Отклик отправлен на <a>Senior React Developer - B2B SaaS Dashboard</a>" },
     "f2.n3.subj": { en: "Bot error · session expired",    ru: "Ошибка бота · сессия истекла" },
-    "f2.n3.desc": { en: "Automation paused — re-authenticate your Upwork account", ru: "Автоматизация на паузе — пройдите авторизацию заново" },
+    "f2.n3.desc": { en: "Automation paused - re-authenticate your Upwork account", ru: "Автоматизация на паузе - пройдите авторизацию заново" },
     "f2.n4.subj": { en: "Sending failed · job not found", ru: "Не удалось отправить · вакансия не найдена" },
-    "f2.n4.desc": { en: "Listing no longer exists — <a>UX Designer for Mobile App Redesign</a>", ru: "Объявление удалено — <a>UX Designer for Mobile App Redesign</a>" },
+    "f2.n4.desc": { en: "Listing no longer exists - <a>UX Designer for Mobile App Redesign</a>", ru: "Объявление удалено - <a>UX Designer for Mobile App Redesign</a>" },
 
     "f2.fd.how":   { en: "// how it works", ru: "// как это работает" },
     "f2.fd.s1":    { en: "<b>New job posted</b> on Upwork matching your filters",     ru: "<b>Появился проект</b> на Upwork по вашим фильтрам" },
@@ -206,15 +206,15 @@ export const T: Record<string, Entry> = {
     "f2.fd.wh":       { en: "Webhook",  ru: "Webhook" },
     "f2.fd.whD":      { en: "route into your own CRM", ru: "в вашу CRM" },
     "f2.fd.note": {
-      en: "Median time-to-apply drops from <b>47 min</b> to <b>4 min</b> — speed is the single biggest predictor of replies on Upwork.",
-      ru: "Медианное время до отклика падает с <b>47 мин</b> до <b>4 мин</b> — скорость сильнее всего влияет на ответы на Upwork."
+      en: "Median time-to-apply drops from <b>47 min</b> to <b>4 min</b> - speed is the single biggest predictor of replies on Upwork.",
+      ru: "Медианное время до отклика падает с <b>47 мин</b> до <b>4 мин</b> - скорость сильнее всего влияет на ответы на Upwork."
     },
 
     // f.03 Cover letters
     "f3.title": { en: "Partly Automated Cover Letters", ru: "Частично автоматизированные отклики" },
     "f3.lead": {
       en: "Work with proven templates and smart automation that drafts personalized proposals from your experience. Keep cover-letter quality high while dramatically cutting the time to apply.",
-      ru: "Система помогает быстро собрать персонализированный отклик на основе вашего опыта. Вы полностью контролируете результат — редактируете и отправляете сами."
+      ru: "Система помогает быстро собрать персонализированный отклик на основе вашего опыта. Вы полностью контролируете результат - редактируете и отправляете сами."
     },
     "f3.viz.head": { en: "cover letter", ru: "сопроводительное" },
     "f3.viz.gen":  { en: "Generate",     ru: "Сгенерировать" },
@@ -237,16 +237,16 @@ export const T: Record<string, Entry> = {
     "f3.fd.t5": { en: "3 clarifying Qs",     ru: "3 уточняющих вопроса" },
     "f3.fd.t6": { en: "call-to-action",      ru: "call-to-action" },
     "f3.fd.note": {
-      en: "You stay in the loop — the system drafts, <b>you edit & send</b>. Replies are yours, not a bot's.",
-      ru: "Вы остаётесь в процессе — система черновит, <b>вы правите и отправляете</b>. Ответы ваши, не ботские."
+      en: "You stay in the loop - the system drafts, <b>you edit & send</b>. Replies are yours, not a bot's.",
+      ru: "Вы остаётесь в процессе - система черновит, <b>вы правите и отправляете</b>. Ответы ваши, не ботские."
     },
 
     // f.04 CRM
     "f4.title": { en: "Built-in CRM & Message Center",  ru: "Встроенный CRM и центр сообщений" },
     "f4.soon":  { en: "Soon", ru: "Скоро" },
     "f4.lead": {
-      en: "One central dashboard for every lead — status, chat history, next steps. Manage communication right inside the platform, without spreadsheets or tab-juggling.",
-      ru: "Вся работа с лидами собрана в одном месте — от первого контакта до следующих шагов."
+      en: "One central dashboard for every lead - status, chat history, next steps. Manage communication right inside the platform, without spreadsheets or tab-juggling.",
+      ru: "Вся работа с лидами собрана в одном месте - от первого контакта до следующих шагов."
     },
     "f4.viz.head":  { en: "// pipeline", ru: "// воронка" },
     "f4.viz.headR": { en: "$84k closed", ru: "$84k закрыто" },
@@ -265,11 +265,11 @@ export const T: Record<string, Entry> = {
     "f4.team":      { en: "Izdat Team", ru: "Команда Izdat" },
 
     "f4.fd.stages": { en: "// pipeline stages", ru: "// стадии воронки" },
-    "f4.fd.s1": { en: "<b>new</b> — matched & scored, awaiting proposal", ru: "<b>new</b> — совпало и оценено, ждёт отклика" },
-    "f4.fd.s2": { en: "<b>replied</b> — proposal sent, awaiting client",  ru: "<b>replied</b> — отклик отправлен, ждём клиента" },
-    "f4.fd.s3": { en: "<b>call</b> — intro call scheduled or completed",  ru: "<b>call</b> — созвон назначен или прошёл" },
-    "f4.fd.s4": { en: "<b>contract</b> — offer sent, in negotiation",     ru: "<b>contract</b> — оффер отправлен, переговоры" },
-    "f4.fd.s5": { en: "<b>won</b> — signed & active",                     ru: "<b>won</b> — подписали и в работе" },
+    "f4.fd.s1": { en: "<b>new</b> - matched & scored, awaiting proposal", ru: "<b>new</b> - совпало и оценено, ждёт отклика" },
+    "f4.fd.s2": { en: "<b>replied</b> - proposal sent, awaiting client",  ru: "<b>replied</b> - отклик отправлен, ждём клиента" },
+    "f4.fd.s3": { en: "<b>call</b> - intro call scheduled or completed",  ru: "<b>call</b> - созвон назначен или прошёл" },
+    "f4.fd.s4": { en: "<b>contract</b> - offer sent, in negotiation",     ru: "<b>contract</b> - оффер отправлен, переговоры" },
+    "f4.fd.s5": { en: "<b>won</b> - signed & active",                     ru: "<b>won</b> - подписали и в работе" },
     "f4.fd.one": { en: "// what you get in one place", ru: "// что вы получаете в одном месте" },
     "f4.fd.inbox":   { en: "Unified inbox", ru: "Единый inbox" },
     "f4.fd.inboxD":  { en: "every Upwork thread, searchable", ru: "все треды Upwork, с поиском" },
@@ -280,25 +280,25 @@ export const T: Record<string, Entry> = {
     "f4.fd.tags":    { en: "Win/loss tags", ru: "Win/loss теги" },
     "f4.fd.tagsD":   { en: "feeds back into the scoring model", ru: "уходят обратно в модель скоринга" },
     "f4.fd.note": {
-      en: "<b>Shipping Q2</b> — early-access list open. Message us to join.",
-      ru: "<b>Релиз во II квартале</b> — открыт early-access. Напишите нам, чтобы попасть."
+      en: "<b>Shipping Q2</b> - early-access list open. Message us to join.",
+      ru: "<b>Релиз во II квартале</b> - открыт early-access. Напишите нам, чтобы попасть."
     },
 
     // 03 Inside
     "in.idx":   { en: "03 / Inside the platform", ru: "03 / Внутри платформы" },
     "in.title": {
-      en: "Every job, <em class=\"acc\">pre-scored</em> —<br/>with the proposal already drafted",
-      ru: "Каждый проект уже <em class=\"acc\">оценен</em> —<br/>и отклик к нему подготовлен"
+      en: "Every job, <em class=\"acc\">pre-scored</em> -<br/>with the proposal already drafted",
+      ru: "Каждый проект уже <em class=\"acc\">оценен</em> -<br/>и отклик к нему подготовлен"
     },
     "in.A.lab": { en: "A · Signal at a glance", ru: "A · Основная информация сразу" },
     "in.A.p":   {
-      en: "Payment verified, hire rate, total spent, reviews — the signal columns that used to take 30 seconds to read, now sit above the fold.",
+      en: "Payment verified, hire rate, total spent, reviews - the signal columns that used to take 30 seconds to read, now sit above the fold.",
       ru: "Всё, что важно для оценки проекта, видно сразу."
     },
     "in.B.lab": { en: "B · Proposals, ranked", ru: "B · Скоринг откликов" },
     "in.B.p":   {
-      en: "BEX surfaces which of your team members has the best match for the job — with a clear score per offer.",
-      ru: "Выбираете, кто из команды лучше всего подходит под проект — и отправляете наиболее релевантный отклик."
+      en: "BEX surfaces which of your team members has the best match for the job - with a clear score per offer.",
+      ru: "Выбираете, кто из команды лучше всего подходит под проект - и отправляете наиболее релевантный отклик."
     },
     "in.C.lab": { en: "C · Draft in one click", ru: "C · Черновик в один клик" },
     "in.C.p":   {
@@ -307,13 +307,13 @@ export const T: Record<string, Entry> = {
     },
     "in.D.lab": { en: "D · Publish without leaving", ru: "D · Публикация без переключения" },
     "in.D.p":   {
-      en: "Duration, price, Connects — everything the Upwork response form needs, inside one focused window.",
-      ru: "Длительность, цена, Connects — всё, что требует форма Upwork, в одном окне."
+      en: "Duration, price, Connects - everything the Upwork response form needs, inside one focused window.",
+      ru: "Длительность, цена, Connects - всё, что требует форма Upwork, в одном окне."
     },
 
     // ui-mock
     "um.title.price": { en: "[$250]", ru: "[$250]" },
-    "um.title.text":  { en: "NetSuite auto-sync deletes all tags — Expensify", ru: "NetSuite auto-sync удаляет теги — Expensify" },
+    "um.title.text":  { en: "NetSuite auto-sync deletes all tags - Expensify", ru: "NetSuite auto-sync удаляет теги - Expensify" },
     "um.cat":         { en: "Mobile Development", ru: "Мобильная разработка" },
     "um.posted":      { en: "📅 Posted 04.03.2026, 15:39", ru: "📅 Опубликовано 04.03.2026, 15:39" },
     "um.us":          { en: "United States", ru: "США" },
@@ -339,13 +339,13 @@ export const T: Record<string, Entry> = {
     "um.o3.tag":      { en: "Mobile Development",     ru: "Мобильная разработка" },
     "um.other":       { en: "› Other offers",         ru: "› Другие отклики" },
     "um.replyAs":     { en: "REPLY AS", ru: "ОТВЕЧАЕТ" },
-    "um.replyOpt":    { en: "Sergey Galuza — IZDAT Agency (210 connects)", ru: "Сергей Галуза — IZDAT Agency (210 connects)" },
+    "um.replyOpt":    { en: "Sergey Galuza - IZDAT Agency (210 connects)", ru: "Сергей Галуза - IZDAT Agency (210 connects)" },
     "um.cover":       { en: "COVER LETTER", ru: "СОПРОВОДИТЕЛЬНОЕ" },
     "um.gen":         { en: "Generate", ru: "Сгенерировать" },
     "um.tpl":         { en: "› template: saas_integration.md", ru: "› шаблон: saas_integration.md" },
     "um.cover.body": {
-      en: "Hi — I reviewed your posting about the <em>NetSuite ↔ Expensify auto-sync</em> issue. We shipped a similar integration for a fintech last quarter (2-week fix, $1.8k). Quick note on the likely root cause...",
-      ru: "Здравствуйте! Посмотрел ваш проект про проблему <em>NetSuite ↔ Expensify auto-sync</em>. В прошлом квартале мы делали похожую интеграцию для финтеха (2 недели, $1,8k). Коротко — вероятная причина..."
+      en: "Hi - I reviewed your posting about the <em>NetSuite ↔ Expensify auto-sync</em> issue. We shipped a similar integration for a fintech last quarter (2-week fix, $1.8k). Quick note on the likely root cause...",
+      ru: "Здравствуйте! Посмотрел ваш проект про проблему <em>NetSuite ↔ Expensify auto-sync</em>. В прошлом квартале мы делали похожую интеграцию для финтеха (2 недели, $1,8k). Коротко - вероятная причина..."
     },
     "um.duration":    { en: "DURATION", ru: "СРОК" },
     "um.dur.opt":     { en: "1 to 3 months", ru: "1–3 месяца" },
@@ -406,7 +406,7 @@ export const T: Record<string, Entry> = {
     "aud.p3.role": { en: "Independent Studio", ru: "Independent Studio" },
     "aud.p3.size": { en: "webflow · design · niche dev", ru: "webflow · design · niche dev" },
     "aud.p3.q": {
-      en: "I can't be first to reply on my own — and on Upwork that's everything. I need a tool that just says «this one's yours, write back».",
+      en: "I can't be first to reply on my own - and on Upwork that's everything. I need a tool that just says «this one's yours, write back».",
       ru: "Когда команда маленькая, невозможно постоянно сидеть в ленте Upwork. Нужен инструмент, который сам показывает релевантные проекты и помогает отвечать быстрее других."
     },
     "aud.p3.n1": { en: "scoring tuned to your stack", ru: "скоринг проектов под ваш стек" },
@@ -417,14 +417,14 @@ export const T: Record<string, Entry> = {
     "aud.t1.who":  { en: "Yana Kishko", ru: "Yana Kishko" },
     "aud.t1.role": { en: "Head of Production", ru: "Руководитель продакшена" },
     "aud.t1.q": {
-      en: "I can't be first to reply on my own — and on Upwork that's everything. I need a tool that just says «this one's yours, write back».",
+      en: "I can't be first to reply on my own - and on Upwork that's everything. I need a tool that just says «this one's yours, write back».",
       ru: "Когда команда маленькая, невозможно постоянно сидеть в ленте Upwork. Нужен инструмент, который сам показывает релевантные проекты и помогает отвечать быстрее других."
     },
     "aud.t2.who":  { en: "Natallia Remarchuk", ru: "Natallia Remarchuk" },
     "aud.t2.role": { en: "Freelancer", ru: "Фрилансер" },
     "aud.t2.q": {
-      en: "I'm a freelancer. The platform made applying to relevant projects much quicker for me — with BEX I do it far faster.",
-      ru: "Я фрилансер. Платформа упростила для меня время на отклик на релевантный проект. С bex я это делаю намного быстрее."
+      en: "I'm a freelancer. The platform made applying to relevant projects much quicker for me - with BEX I do it far faster.",
+      ru: "Я фрилансер. Платформа упростила для меня время на отклик на релевантный проект. С BEX я это делаю намного быстрее."
     },
     "aud.req.lab": { en: "requirement", ru: "требование" },
     "aud.req.p": {
@@ -439,8 +439,8 @@ export const T: Record<string, Entry> = {
       ru: "Хотите построить <em class=\"acc\">стабильный канал продаж</em> через Upwork?"
     },
     "cta.lead": {
-      en: "Leave a request — we'll show a demo of the platform and walk you through a real funnel in under 20 minutes.",
-      ru: "Оставьте заявку — покажем, как это работает, на реальном примере."
+      en: "Leave a request - we'll show a demo of the platform and walk you through a real funnel in under 20 minutes.",
+      ru: "Оставьте заявку - покажем, как это работает, на реальном примере."
     },
     "cta.email.ph": { en: "you@company.com", ru: "you@company.com" },
     "cta.btn":         { en: "Request a demo", ru: "Запросить демо" },
@@ -449,7 +449,7 @@ export const T: Record<string, Entry> = {
     "cta.btn.error":   { en: "Try again",      ru: "Повторить" },
 
     // Footer
-    "foot.brand":   { en: "BEX/01 — system for attracting projects", ru: "BEX/01 — система привлечения проектов" },
+    "foot.brand":   { en: "BEX/01 - system for attracting projects", ru: "BEX/01 - система привлечения проектов" },
     "foot.privacy": { en: "Privacy", ru: "Конфиденциальность" },
     "foot.terms":   { en: "Terms",   ru: "Условия" },
     "foot.build":   { en: "build 2026.04 · cool-blue", ru: "сборка 2026.04 · cool-blue" },
@@ -465,8 +465,8 @@ export const T: Record<string, Entry> = {
     "entry.agency":         { en: "Agency",            ru: "Агентство" },
     "entry.agency.hint":    { en: "Go to the platform", ru: "Перейти на платформу" },
     "entry.page.title": {
-      en: "BEX — Choose how you work",
-      ru: "BEX — Выберите, как вы работаете"
+      en: "BEX - Choose how you work",
+      ru: "BEX - Выберите, как вы работаете"
     },
 
     // --- Persona page hero viz (scoring + notification cards) ---
@@ -477,32 +477,35 @@ export const T: Record<string, Entry> = {
     "pp.viz.row3.meta":   { en: "$500 · fixed · 🇨🇦 · 1d ago",   ru: "$500 · фикс · 🇨🇦 · 1д назад" },
     "pp.viz.notifLabel":  { en: "Notifications",       ru: "Уведомления" },
     "pp.viz.notifBadge":  { en: "2 new",               ru: "2 новых" },
-    "pp.viz.notifTitle":  { en: "Cover letter draft ready", ru: "Черновик отклика готов" }
+    "pp.viz.notifTitle":  { en: "Cover letter draft ready", ru: "Черновик отклика готов" },
+
+    // --- Freelancer onboarding demo CTA ---
+    "pp.onboard.cta":     { en: "Start onboarding", ru: "Начать онбординг" }
   };
 
-// Keys that always render the EN value regardless of locale — these are
+// Keys that always render the EN value regardless of locale - these are
 // pieces of the *platform UI* shown in mockups that must stay English.
 export const KEEP_EN = new Set<string>([
-    // f.01 — job listing cards (real Upwork postings)
+    // f.01 - job listing cards (real Upwork postings)
     "f1.viz.head","f1.viz.headR",
     "f1.row1.title","f1.row2.title","f1.row3.title","f1.row4.title",
     "f1.r1.price","f1.r2.price","f1.r3.price","f1.r4.price",
     "f1.ago.3h","f1.ago.2h","f1.ago.1d","f1.ago.2d",
     "f1.geo.au","f1.geo.us","f1.geo.uk","f1.geo.ca",
     "f1.prop.7","f1.prop.4","f1.prop.8","f1.prop.22",
-    // f.02 — notifications
+    // f.02 - notifications
     "f2.viz.head","f2.viz.headR","f2.today","f2.yesterday",
     "f2.n1.subj","f2.n1.desc","f2.n2.subj","f2.n2.desc",
     "f2.n3.subj","f2.n3.desc","f2.n4.subj","f2.n4.desc",
-    // f.03 — cover-letter editor chrome
+    // f.03 - cover-letter editor chrome
     "f3.viz.head","f3.viz.gen","f3.viz.tpl","f3.viz.unsaved",
-    // f.04 — CRM pipeline board
+    // f.04 - CRM pipeline board
     "f4.viz.head","f4.viz.headR",
     "f4.col.mql","f4.col.won","f4.col.qual","f4.col.sql",
     "f4.chip.low","f4.chip.med","f4.chip.high",
     "f4.chip.inv","f4.chip.prop",
     "f4.card1.t","f4.card2.t","f4.team",
-    // 03 Inside the platform — the ui-mock
+    // 03 Inside the platform - the ui-mock
     "um.title.text","um.cat","um.posted",
     "um.us","um.member","um.reviews",
     "um.payLab","um.payVer","um.phoneLab","um.phoneVer",

@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import Header from "./Header.astro";
+import DemoOnboarding from "./DemoOnboarding.tsx";
 import { getPersona, type Persona } from "../content/personas";
 import { useTranslations, type Lang } from "../i18n/utils";
 
@@ -28,10 +29,10 @@ const toAgency = lang === "en" ? "/en/agency" : "/agency";
         <div class="reveal">
           <div class="hero-meta mono-label">
             <span set:html={t("hero.meta.engine")}></span>
-            <span class="sep">—</span>
+            <span class="sep">-</span>
             <span class="live"><i></i><span set:html={t("hero.meta.live")}></span></span>
           </div>
-          <h1 class="h1 mt-[22px] text-text" set:html={c.title}></h1>
+          <h1 class="h1 pp-title mt-[22px] text-text" set:html={c.title}></h1>
           <p class="mt-[22px] max-w-[46ch] text-text-dim text-[clamp(16px,1.2vw,19px)] leading-[1.6]" set:html={c.sub}></p>
         </div>
 
@@ -122,6 +123,9 @@ const toAgency = lang === "en" ? "/en/agency" : "/agency";
               <li class="flex items-start gap-[10px] text-text-dim text-[15px]"><span class="text-[var(--pp-good)] font-bold">✓</span> {f}</li>
             ))}
           </ul>
+          {persona === "freelancer" && (
+            <DemoOnboarding client:visible lang={lang} ctaLabel={t("pp.onboard.cta")} />
+          )}
         </div>
       </div>
     </section>
