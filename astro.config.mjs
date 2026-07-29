@@ -6,11 +6,11 @@ import react from "@astrojs/react";
 
 import tailwindcss from "@tailwindcss/vite";
 
-// Static site with RU as the default locale (served at /) and EN at /en.
+// Static site with EN as the default locale (served at /) and RU at /ru.
 export default defineConfig({
   i18n: {
-    locales: ["ru", "en"],
-    defaultLocale: "ru",
+    locales: ["en", "ru"],
+    defaultLocale: "en",
     routing: {
       prefixDefaultLocale: false,
     },

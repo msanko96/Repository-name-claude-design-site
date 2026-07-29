@@ -51,7 +51,7 @@ const DICT = {
       spent: [{ v: "1000", label: "$1 000+" }, { v: "5000", label: "$5 000+" }, { v: "10000", label: "$10 000+" }, { v: "any", label: "Любая" }],
     },
     s4: { h: "Исключите страны", sub: "Уберите локации клиентов, которые обычно тратят ваши Connects впустую", summaryHead: "Выбрано стран: ", empty: "Пока ничего не выбрано" },
-    s5: { h: "Описание профиля", sub: "Вставьте текущее описание вашего профиля с Upwork - на его основе бот будет генерировать cover letters", label: "Описание профиля с Upwork", ph: "Senior React developer with 6+ years building SaaS dashboards and design systems…", toggle: "Присылать письма о новых подходящих проектах" },
+    s5: { h: "Описание профиля", sub: "Вставьте текущее описание вашего профиля с Upwork - на его основе бот будет генерировать cover letters", label: "Описание профиля с Upwork", ph: "Senior React developer with 6+ years building SaaS dashboards and design systems…", toggle: "Присылать письма о новых подходящих проектах", emailLabel: "Email", emailPh: "you@example.com" },
     success: { h: "Готово! Настройка завершена", sub: "Ответчик включён. Мы начнём находить подходящие проекты и готовить отклики прямо сейчас." },
     next: "Далее", finish: "Завершить и включить ответчик",
   },
@@ -72,7 +72,7 @@ const DICT = {
       spent: [{ v: "1000", label: "$1,000+" }, { v: "5000", label: "$5,000+" }, { v: "10000", label: "$10,000+" }, { v: "any", label: "Any" }],
     },
     s4: { h: "Exclude countries", sub: "Remove client locations that usually waste your Connects", summaryHead: "Countries selected: ", empty: "Nothing selected yet" },
-    s5: { h: "Profile description", sub: "Paste your current Upwork profile description - the bot will use it to generate cover letters", label: "Upwork profile description", ph: "Senior React developer with 6+ years building SaaS dashboards and design systems…", toggle: "Email me about new matching projects" },
+    s5: { h: "Profile description", sub: "Paste your current Upwork profile description - the bot will use it to generate cover letters", label: "Upwork profile description", ph: "Senior React developer with 6+ years building SaaS dashboards and design systems…", toggle: "Email me about new matching projects", emailLabel: "Email", emailPh: "you@example.com" },
     success: { h: "Done! Setup complete", sub: "The responder is on. We'll start finding matching projects and preparing proposals right now." },
     next: "Next", finish: "Finish and enable the responder",
   },
@@ -165,12 +165,13 @@ const DemoOnboarding = ({ lang = "ru", ctaLabel }: Props) => {
   const [filters, setFilters] = useState<{ payment: string; rating: string; spent: string }>({ payment: "", rating: "", spent: "" });
   const [countries, setCountries] = useState<string[]>([]);
   const [profileDesc, setProfileDesc] = useState("");
+  const [email, setEmail] = useState("");
   const [notifyEmail, setNotifyEmail] = useState(false);
 
   const openModal = () => {
     setStep(1); setFinished(false); setNiche(null); setKeywords([]); setKwInput("");
     setMinHourly(""); setMinFixed(""); setFilters({ payment: "", rating: "", spent: "" });
-    setCountries([]); setProfileDesc(""); setNotifyEmail(false);
+    setCountries([]); setProfileDesc(""); setEmail(""); setNotifyEmail(false);
     setOpen(true);
   };
   const closeModal = () => setOpen(false);
@@ -207,7 +208,8 @@ const DemoOnboarding = ({ lang = "ru", ctaLabel }: Props) => {
   const toggleCountry = (c: string) =>
     setCountries((cs) => (cs.includes(c) ? cs.filter((x) => x !== c) : [...cs, c]));
 
-  const canNext = !(step === TOTAL && profileDesc.trim().length === 0);
+  const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+  const canNext = !(step === TOTAL && (profileDesc.trim().length === 0 || !emailValid));
   const next = () => {
     if (finished) { closeModal(); return; }
     if (step < TOTAL) setStep((s) => s + 1);
@@ -338,6 +340,10 @@ const DemoOnboarding = ({ lang = "ru", ctaLabel }: Props) => {
             <div className={cls.field}>
               <label className={cls.fieldLabel}>{L.s5.label}</label>
               <textarea className={`${cls.input} ${cls.textarea}`} rows={6} placeholder={L.s5.ph} value={profileDesc} onChange={(e) => setProfileDesc(e.target.value)} />
+            </div>
+            <div className={cls.field}>
+              <label className={cls.fieldLabel}>{L.s5.emailLabel}</label>
+              <input className={cls.input} type="email" inputMode="email" placeholder={L.s5.emailPh} value={email} onChange={(e) => setEmail(e.target.value)} />
             </div>
             <div className={cls.toggle} onClick={() => setNotifyEmail((v) => !v)}>
               <span className={`${cls.trackBase} ${notifyEmail ? cls.trackOn : cls.trackOff}`} />

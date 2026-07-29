@@ -9,13 +9,13 @@ const { lang, persona } = Astro.props as { lang: Lang; persona: Persona };
 const c = getPersona(persona, lang);
 const t = useTranslations(lang);
 
-const home = lang === "en" ? "/en/" : "/";
-const altPath = lang === "en" ? `/${persona}` : `/en/${persona}`;
+const home = lang === "ru" ? "/ru/" : "/";
+const altPath = lang === "ru" ? `/${persona}` : `/ru/${persona}`;
 const titleKey = "entry.page.title";
 
 // Persona toggle destinations (current locale).
-const toFreelancer = lang === "en" ? "/en/freelancer" : "/freelancer";
-const toAgency = lang === "en" ? "/en/agency" : "/agency";
+const toFreelancer = lang === "ru" ? "/ru/freelancer" : "/freelancer";
+const toAgency = lang === "ru" ? "/ru/agency" : "/agency";
 ---
 <Base lang={lang} titleKey={titleKey}>
   <Header lang={lang} navLinks={false} brandHref={home} demo={false} langHref={altPath} personaActive={persona} freelancerHref={toFreelancer} agencyHref={toAgency} />

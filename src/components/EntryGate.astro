@@ -7,11 +7,11 @@ const { lang } = Astro.props as { lang: Lang };
 const t = useTranslations(lang);
 
 // Logo → marketing landing (/agency); demo button → its CTA.
-const siteLanding = lang === "en" ? "/en/agency" : "/agency";
-const demoHref = lang === "en" ? "/en/agency#cta" : "/agency#cta";
+const siteLanding = lang === "ru" ? "/ru/agency" : "/agency";
+const demoHref = lang === "ru" ? "/ru/agency#cta" : "/agency#cta";
 
 // Card destinations: freelancer → persona page, agency → marketing landing.
-const freelancerHref = lang === "en" ? "/en/freelancer" : "/freelancer";
+const freelancerHref = lang === "ru" ? "/ru/freelancer" : "/freelancer";
 const agencyHref = siteLanding;
 const agencyExternal = /^https?:\/\//.test(agencyHref);
 

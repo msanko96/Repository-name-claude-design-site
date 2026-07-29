@@ -1,5 +1,5 @@
 // Content for the persona landing pages (/freelancer, /agency).
-// RU + EN. Kept local for now (fast to iterate); can move to Directus later.
+// RU + EN. Kept local (fast to iterate).
 import type { Lang } from "../i18n/utils";
 
 export type Persona = "freelancer" | "agency";
