@@ -1,0 +1,98 @@
+# Build & publish the leadly.deals landing.
+#
+# The site is served by nginx in the ATRVD cluster (Helm chart `landings` in the
+# infra repo, ArgoCD application `leadly-prod`) rather than by Netlify:
+#
+#   1. `astro build` emits static files into dist/
+#   2. the archive plus latest.txt go to MinIO (bucket "artifacts", prefix "leadly")
+#   3. POST /admin/reload makes the pod that serves the request pull the archive
+#      and swap the nginx document root without restarting. That pod also writes
+#      the version into the `leadly-prod-version` ConfigMap, which the other
+#      replicas watch — so a single call converges all of them.
+#
+# Runs on a GitHub-hosted runner: this repository is outside the org that owns
+# the self-hosted runners, and both MinIO and the reload endpoint are reachable
+# over the public internet.
+#
+# Required repository secrets:
+#   MINIO_ACCESS_KEY / MINIO_SECRET_KEY — MinIO service account used by landings
+#   RELOAD_API_KEY                      — must match RELOAD_API_KEY of the pod
+#                                         (SOPS: charts/landings/secrets-leadly-prod.yaml)
+name: Build & publish
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  SITE_URL: https://leadly.deals
+  ARCHIVE_PREFIX: leadly-web
+  MINIO_ENDPOINT: minio.atrvd.com
+  MINIO_BUCKET: artifacts
+  MINIO_PATH: leadly
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      # VERSION = YYYYMMDD.<short-sha> — sorts chronologically and points back
+      # at the commit it was built from.
+      - name: Compute VERSION
+        run: echo "VERSION=$(date -u +%Y%m%d).$(git rev-parse --short HEAD)" >> "$GITHUB_ENV"
+
+      - name: Install mc (non-root, into RUNNER_TEMP)
+        run: |
+          curl -sSLo "${RUNNER_TEMP}/mc" https://dl.min.io/client/mc/release/linux-amd64/mc
+          chmod +x "${RUNNER_TEMP}/mc"
+          echo "${RUNNER_TEMP}" >> "$GITHUB_PATH"
+
+      # Pack the contents of dist/, not the directory itself: the pod extracts
+      # the archive directly into the nginx document root, without --strip-components.
+      - name: Package site
+        run: |
+          ARCHIVE="${ARCHIVE_PREFIX}-${VERSION}.tar.gz"
+          tar -czf "$ARCHIVE" -C dist .
+          echo "ARCHIVE=$ARCHIVE" >> "$GITHUB_ENV"
+
+      # latest.txt is the fallback the init container reads when the version
+      # ConfigMap is empty — for example on a fresh pod.
+      - name: Upload archive + latest.txt to MinIO
+        env:
+          MINIO_ACCESS_KEY: ${{ secrets.MINIO_ACCESS_KEY }}
+          MINIO_SECRET_KEY: ${{ secrets.MINIO_SECRET_KEY }}
+        run: |
+          mc alias set atrvd "https://${MINIO_ENDPOINT}" "$MINIO_ACCESS_KEY" "$MINIO_SECRET_KEY"
+          mc cp "$ARCHIVE" "atrvd/${MINIO_BUCKET}/${MINIO_PATH}/"
+          printf '%s' "${VERSION}" > latest.txt
+          mc cp latest.txt "atrvd/${MINIO_BUCKET}/${MINIO_PATH}/latest.txt"
+
+      # The reload server reads the key from the JSON body; an X-Api-Key header
+      # is ignored and the request comes back 401. Build the body with jq so a
+      # key containing quotes or backslashes cannot break the JSON.
+      - name: Trigger hot-reload
+        env:
+          RELOAD_API_KEY: ${{ secrets.RELOAD_API_KEY }}
+        run: |
+          BODY=$(jq -nc --arg v "$VERSION" --arg k "$RELOAD_API_KEY" \
+            '{version: $v, apiKey: $k}')
+          HTTP_CODE=$(curl -sS -o reload.out -w "%{http_code}" \
+            -X POST "${SITE_URL}/admin/reload" \
+            -H "Content-Type: application/json" \
+            -d "$BODY")
+          echo "HTTP ${HTTP_CODE}"
+          cat reload.out
+          test "$HTTP_CODE" = "200"
