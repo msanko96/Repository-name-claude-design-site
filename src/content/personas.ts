@@ -75,7 +75,10 @@ const FREELANCER: Record<Lang, PersonaContent> = {
         { name: "name", placeholder: "Имя", type: "text", required: false },
         { name: "telegram", placeholder: "Ссылка на Telegram", type: "text", required: false },
         { name: "email", placeholder: "Email", type: "email", required: true },
-        { name: "upwork", placeholder: "Ссылка на профиль Upwork", type: "text", required: false },
+        // Field names are the webhook payload keys: the form posts straight to
+        // the Procesio webhook through the nginx proxy, with no server-side
+        // renaming step in between.
+        { name: "upwork_profile", placeholder: "Ссылка на профиль Upwork", type: "text", required: false },
       ],
       submit: "Отправить",
       loading: "Отправляем…",
@@ -119,7 +122,7 @@ const FREELANCER: Record<Lang, PersonaContent> = {
         { name: "name", placeholder: "Name", type: "text", required: false },
         { name: "telegram", placeholder: "Telegram link", type: "text", required: false },
         { name: "email", placeholder: "Email", type: "email", required: true },
-        { name: "upwork", placeholder: "Upwork profile link", type: "text", required: false },
+        { name: "upwork_profile", placeholder: "Upwork profile link", type: "text", required: false },
       ],
       submit: "Submit",
       loading: "Sending…",
