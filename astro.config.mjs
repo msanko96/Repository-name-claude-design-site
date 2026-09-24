@@ -14,4 +14,13 @@ export default defineConfig({
   },
 
   adapter: netlify(),
+
+  // Keep classic `@media (max-width: …)` syntax in minified CSS: the default
+  // target rewrites it to range syntax (`width <= …`), which Safari < 16.4
+  // ignores. These are the minimum versions oklch() already requires.
+  vite: {
+    build: {
+      cssTarget: ["safari15.4", "chrome111", "firefox113"],
+    },
+  },
 });
