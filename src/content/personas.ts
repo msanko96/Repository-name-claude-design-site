@@ -23,6 +23,8 @@ export interface PersonaContent {
     tagline: string;
     amount: string;
     per: string;
+    /** Prefix for the hero price plate ("Only for" + amount + per); omit to hide the plate. */
+    heroLabel?: string;
     note: string;
     features: string[];
     cta: string;
@@ -55,6 +57,7 @@ const FREELANCER: Record<Lang, PersonaContent> = {
       tagline: "Меньше ручной работы — больше откликов туда, где это имеет смысл.",
       amount: "€20",
       per: "/месяц",
+      heroLabel: "Всего за",
       note: "ежемесячная подписка · отмена в любой момент",
       features: [
         "5 фильтров вакансий",
@@ -87,7 +90,7 @@ const FREELANCER: Record<Lang, PersonaContent> = {
     pill: "For freelancers on Upwork",
     title: 'Never miss the right projects <em class="acc">on Upwork</em>',
     sub: "BEX watches the Upwork feed, filters jobs for your stack and pings you the moment something <b>worth it</b> shows up.",
-    cta: "Try it",
+    cta: "Launching soon. Join the waitlist",
     benefitsEyebrow: "What you get",
     benefits: [
       { icon: "🎯", title: "Scoring for your stack", desc: "See only the jobs actually worth replying to." },
@@ -99,6 +102,7 @@ const FREELANCER: Record<Lang, PersonaContent> = {
       tagline: "Less manual work — more proposals where they actually matter.",
       amount: "€20",
       per: "/month",
+      heroLabel: "Only for",
       note: "monthly subscription · cancel anytime",
       features: [
         "5 job filters",

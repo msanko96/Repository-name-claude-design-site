@@ -24,6 +24,11 @@
   /* Layout */
   --page-max: 1440px;
   --gutter: clamp(20px, 4vw, 56px);
+  /* Top padding shared by the page heroes (agency .hero, persona .pp-hero). */
+  --hero-pad-top: calc(var(--s-9) + 8px);
+}
+@media (max-width: 560px) {
+  :root { --hero-pad-top: calc(var(--s-7) + 20px); }
 }
 
 /* DARK — default */

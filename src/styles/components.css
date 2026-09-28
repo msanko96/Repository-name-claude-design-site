@@ -81,7 +81,7 @@
 /* ---------- HERO ---------- */
 .hero {
   position: relative;
-  padding: calc(var(--s-10) + 20px) 0 var(--s-10);
+  padding: var(--hero-pad-top) 0 var(--s-10);
   overflow: hidden;
   border-top: 0;
 }

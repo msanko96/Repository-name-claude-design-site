@@ -460,7 +460,7 @@ export const T: Record<string, Entry> = {
       en: "System for attracting projects on Upwork",
       ru: "Система по привлечению проектов на Upwork"
     },
-    "entry.freelancer":     { en: "I'm a freelancer", ru: "Я фрилансер" },
+    "entry.freelancer":     { en: "Launching soon", ru: "Я фрилансер" },
     "entry.freelancer.hint":{ en: "Explore the site",  ru: "Узнать о продукте" },
     "entry.agency":         { en: "Agency",            ru: "Агентство" },
     "entry.agency.hint":    { en: "Go to the platform", ru: "Перейти на платформу" },
