@@ -143,7 +143,7 @@ const toAgency = lang === "en" ? "/en/agency" : "/agency";
     <section id="apply" class="pp-apply">
       <div class="container pp-apply-inner reveal">
         <h2 class="pp-apply-title">{c.form.heading}</h2>
-        <p class="pp-apply-sub">{c.form.sub}</p>
+        <p class="pp-apply-sub" set:html={c.form.sub}></p>
         <form
           class="pp-form"
           id="persona-form"
@@ -167,7 +167,7 @@ const toAgency = lang === "en" ? "/en/agency" : "/agency";
             data-label-done={c.form.done}
             data-label-error={c.form.error}
           >
-            <span class="pp-submit-label">{c.form.submit}</span> <span class="dot"></span>
+            <span class="pp-submit-label"></span>{c.form.submit}<span class="dot"></span>
           </button>
         </form>
       </div>
