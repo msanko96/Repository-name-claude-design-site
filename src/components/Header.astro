@@ -33,7 +33,7 @@ const t = useTranslations(lang);
 
 const showPersona = !!(personaActive && freelancerHref && agencyHref);
 ---
-<header class="nav">
+<header class:list={["nav", { "nav--persona": showPersona }]}>
   <div class="container nav-inner">
     <a class="brand" href={brandHref} aria-label="BENCH">
       <Logo />
@@ -110,7 +110,8 @@ const showPersona = !!(personaActive && freelancerHref && agencyHref);
 
   /* Phones: tighten the toggle a touch, and push theme+lang to the right edge. */
   @media (max-width: 520px) {
-    .persona-opt { padding: 6px 11px; font-size: 10px; }
-    .persona-toggle { margin-right: auto; }
+    .persona-opt { padding: 6px 11px; font-size: 10px; flex-grow: 1; text-align: center }
+    .persona-toggle { position: absolute; bottom: -28px; left: 10px; right: 10px; margin-right: auto; justify-content: center }
+    .nav--persona { padding-bottom: 36px; }
   }
 </style>

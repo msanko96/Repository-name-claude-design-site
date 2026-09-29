@@ -14,6 +14,7 @@ const demoHref = lang === "en" ? "/en/agency#cta" : "/agency#cta";
 const freelancerHref = lang === "en" ? "/en/freelancer" : "/freelancer";
 const agencyHref = siteLanding;
 const agencyExternal = /^https?:\/\//.test(agencyHref);
+const freelancerSoon = t("entry.freelancer.soon");
 ---
 <Base lang={lang} titleKey="entry.page.title">
   <Header
@@ -47,6 +48,7 @@ const agencyExternal = /^https?:\/\//.test(agencyHref);
 
         <div class="gate-cards">
           <a class="gate-card" href={freelancerHref}>
+            {freelancerSoon && <span class="gate-card-soon badge" set:html={freelancerSoon}></span>}
             <span class="gate-ico" aria-hidden="true">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="8" r="3.4"/>
@@ -79,9 +81,19 @@ const agencyExternal = /^https?:\/\//.test(agencyHref);
   </main>
 
   <style>
+    /* Header + gate fill exactly one screen, whatever the header height
+       (it wraps to two rows on phones): body becomes a column and the gate
+       takes the rest. svh = viewport with the browser bars shown, so the
+       height doesn't jump as they collapse. */
+    :global(body:has(.gate-page)) {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      min-height: 100svh;
+    }
     .gate-page {
       position: relative;
-      min-height: calc(100vh - 72px);
+      flex: 1 0 auto;
       display: flex;
       align-items: center;
       overflow: hidden;
@@ -109,8 +121,7 @@ const agencyExternal = /^https?:\/\//.test(agencyHref);
     }
     .gate-title {
       margin: 0;
-      font-family: var(--font-sans);
-      font-weight: 600;
+      font-weight: 500;
       font-size: clamp(64px, 12vw, 132px);
       /* Tighter than 1 so eyebrow / subtitle sit close to the glyphs,
          not to the empty line box around them. */
@@ -159,6 +170,7 @@ const agencyExternal = /^https?:\/\//.test(agencyHref);
       gap: var(--s-6);
     }
     .gate-card {
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -224,6 +236,16 @@ const agencyExternal = /^https?:\/\//.test(agencyHref);
       font-weight: 600;
       line-height: 1.2;
     }
+    /* "Launching soon" pill sitting on the card's top border (out of the
+       flow, so the icon / title stay aligned with the agency card). */
+    .gate-card-soon {
+      position: absolute;
+      top: 0;
+      left: 16px;
+      transform: translateY(-50%);
+      background: color-mix(in oklch, var(--accent) 14%, var(--bg));
+      white-space: nowrap;
+    }
     /* Pulled up against the card gap so title + hint read as one unit
        (icon → title keeps the full gap). */
     .gate-card-hint {
@@ -235,6 +257,7 @@ const agencyExternal = /^https?:\/\//.test(agencyHref);
     /* Phones: keep the two cards side by side with the connector lines,
        just scaled down to fit. */
     @media (max-width: 560px) {
+      .gate { padding-top: 12px }
       .gate-sub { font-size: 11px; letter-spacing: 0.06em; }
       .gate-tree { padding: 0 12px; }
       .gate-cards { gap: 10px; }
@@ -250,6 +273,7 @@ const agencyExternal = /^https?:\/\//.test(agencyHref);
       .gate-ico svg { width: 24px; height: 24px; }
       .gate-card-title { font-size: 16px; }
       .gate-card-hint { margin-top: -4px; font-size: 11px; letter-spacing: 0.04em; }
+      .gate-card-soon { left: 50%; transform: translate(-50%, -50%); font-size: 9px; padding: 2px 7px; }
     }
   </style>
 </Base>

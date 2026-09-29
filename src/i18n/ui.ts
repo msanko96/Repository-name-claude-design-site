@@ -460,8 +460,10 @@ export const T: Record<string, Entry> = {
       en: "System for attracting projects on Upwork",
       ru: "Система по привлечению проектов на Upwork"
     },
-    "entry.freelancer":     { en: "Launching soon", ru: "Я фрилансер" },
+    "entry.freelancer":     { en: "I’m a Freelancer", ru: "Я фрилансер" },
     "entry.freelancer.hint":{ en: "Explore the site",  ru: "Узнать о продукте" },
+    // Launch badge on the freelancer card; empty RU = no badge on the RU page.
+    "entry.freelancer.soon":{ en: "Launching soon",    ru: "Скоро запуск" },
     "entry.agency":         { en: "Agency",            ru: "Агентство" },
     "entry.agency.hint":    { en: "Go to the platform", ru: "Перейти на платформу" },
     "entry.page.title": {

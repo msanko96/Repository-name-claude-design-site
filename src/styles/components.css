@@ -70,8 +70,9 @@
   .nav-links { display: none; }
   .nav-spacer { display: none; }
   .nav-inner {
+      position: relative;
     display: flex;
-    flex-wrap: wrap;
+    /*flex-wrap: wrap;*/
     justify-content: space-between;
     align-items: center;
     gap: 12px;
