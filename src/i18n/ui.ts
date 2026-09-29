@@ -288,7 +288,7 @@ export const T: Record<string, Entry> = {
     "in.idx":   { en: "03 / Inside the platform", ru: "03 / Внутри платформы" },
     "in.title": {
       en: "Every job, <em class=\"acc\">pre-scored</em>,<br/>with the proposal already drafted",
-      ru: "Каждый проект уже <em class=\"acc\">оценен</em> —<br/>и отклик к нему подготовлен"
+      ru: "Каждый проект уже <em class=\"acc\">оценен</em>&nbsp;— и&nbsp;отклик к&nbsp;нему подготовлен"
     },
     "in.A.lab": { en: "A · Signal at a glance", ru: "A · Основная информация сразу" },
     "in.A.p":   {

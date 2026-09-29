@@ -713,6 +713,33 @@
     updateActive();
   }
 
+  // ---------- Header nav: highlight the link whose section is in view ----------
+  const navTargets = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'))
+    .map(a => [a, document.getElementById(a.getAttribute("href").slice(1))])
+    .filter(([, section]) => section);
+  if (navTargets.length) {
+    function updateNav() {
+      // "current" = the section crossing a line ~35% down the viewport
+      // (just below the sticky header, where the reader's eye is)
+      const line = window.innerHeight * 0.35;
+      navTargets.forEach(([a, section]) => {
+        const r = section.getBoundingClientRect();
+        const on = r.top <= line && r.bottom > line;
+        a.classList.toggle("is-active", on);
+        if (on) a.setAttribute("aria-current", "location");
+        else a.removeAttribute("aria-current");
+      });
+    }
+    let navRaf = null;
+    function onNavScroll() {
+      if (navRaf) return;
+      navRaf = requestAnimationFrame(() => { navRaf = null; updateNav(); });
+    }
+    window.addEventListener("scroll", onNavScroll, { passive: true });
+    window.addEventListener("resize", onNavScroll);
+    updateNav();
+  }
+
   // ---------- Persona form (/freelancer, /agency) ----------
   const personaForm = document.getElementById("persona-form");
   if (personaForm) {

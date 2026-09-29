@@ -43,12 +43,16 @@ export interface PersonaContent {
 const FREELANCER: Record<Lang, PersonaContent> = {
   ru: {
     pill: "Для фрилансеров на Upwork",
-    title: 'Не упускай нужные проекты <em class="acc">на Upwork</em>',
+    title: 'Не упускай нужные проекты <em class="acc">на&nbsp;Upwork</em>',
     sub: "BEX следит за лентой Upwork, фильтрует вакансии под твой стек и присылает уведомление, когда появляется что-то <b>стоящее</b>.",
     cta: "Попробовать",
     benefitsEyebrow: "Что ты получаешь",
     benefits: [
-      { icon: "🎯", title: "Скоринг под твой стек", desc: "Видишь только вакансии, на которые реально стоит ответить." },
+      {
+        icon: "🎯",
+        title: "Скоринг под твой стек",
+        desc: "Видишь только вакансии, на которые реально стоит ответить.",
+      },
       {
         icon: "⚡",
         title: "Уведомление за секунды",
