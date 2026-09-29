@@ -35,6 +35,7 @@ const toAgency = lang === "en" ? "/en/agency" : "/agency";
           </div>
           <h1 class="h1 pp-title" set:html={c.title}></h1>
           <p class="pp-sub" set:html={c.sub}></p>
+          {c.ctaBadge && <p class="pp-cta-soon">{c.ctaBadge}</p>}
           <div class="pp-hero-actions">
             <a href="#apply" class="btn"><span>{c.cta}</span> <span class="dot"></span></a>
             {c.price.heroLabel && (
@@ -203,7 +204,17 @@ const toAgency = lang === "en" ? "/en/agency" : "/agency";
     .pp-title { margin: 22px 0 0; color: var(--text); }
     .pp-sub { margin: 22px 0 0; max-width: 46ch; color: var(--text-dim); font-size: clamp(16px, 1.2vw, 19px); line-height: 1.6; }
     /* Buttons reuse the global .btn — these just position/stretch it. */
-    .pp-hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 30px; }
+    .pp-hero-actions { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 30px; margin-bottom: 24px }
+    /* Launch-status line above the hero CTA (freelancer page). */
+    .pp-cta-soon {
+      white-space: nowrap;
+      color: var(--accent-2);
+      font-weight: 500;
+      margin-bottom: 12px;
+      margin-top: 24px;
+      font-size: 16px;
+    }
+    .pp-cta-soon + .pp-hero-actions { margin-top: 0 }
     .pp-price-tag {
       display: inline-flex; align-items: baseline; gap: 3px;
       padding: 0 20px; line-height: 46px; height: 48px;
@@ -291,6 +302,7 @@ const toAgency = lang === "en" ? "/en/agency" : "/agency";
       .pp-row-title { white-space: normal; }
       .pp-bar { grid-column: 1; align-self: center; }
       .pp-pct { grid-column: 2; }
+      .pp-hero-actions { margin-bottom: 0 }
     }
   </style>
 </Base>

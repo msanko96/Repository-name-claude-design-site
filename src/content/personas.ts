@@ -16,6 +16,7 @@ export interface PersonaContent {
   title: string; // may contain inline HTML (<em class="acc">…</em>)
   sub: string; // may contain inline HTML
   cta: string;
+  ctaBadge?: string;
   benefitsEyebrow: string;
   benefits: { icon: string; title: string; desc: string }[];
   price: {
@@ -46,6 +47,7 @@ const FREELANCER: Record<Lang, PersonaContent> = {
     title: 'Не упускай нужные проекты <em class="acc">на&nbsp;Upwork</em>',
     sub: "BEX следит за лентой Upwork, фильтрует вакансии под твой стек и присылает уведомление, когда появляется что-то <b>стоящее</b>.",
     cta: "Попробовать",
+    ctaBadge: "Скоро запуск",
     benefitsEyebrow: "Что ты получаешь",
     benefits: [
       {
@@ -102,7 +104,8 @@ const FREELANCER: Record<Lang, PersonaContent> = {
     pill: "For freelancers on Upwork",
     title: 'Never miss the right projects <em class="acc">on Upwork</em>',
     sub: "BEX watches the Upwork feed, filters jobs for your stack and pings you the moment something <b>worth it</b> shows up.",
-    cta: "Launching soon. Join the waitlist",
+    cta: "Join the waitlist",
+    ctaBadge: "Launching soon",
     benefitsEyebrow: "What you get",
     benefits: [
       { icon: "🎯", title: "Scoring for your stack", desc: "See only the jobs actually worth replying to." },
