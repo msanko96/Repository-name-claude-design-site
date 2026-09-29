@@ -222,6 +222,11 @@ const toAgency = lang === "en" ? "/en/agency" : "/agency";
       box-shadow: inset 0 0 0 1px var(--accent-dim);
       background: color-mix(in oklch, var(--accent-glow) 14%, transparent);
     }
+    /* Light theme: solid (barely tinted) white plate so the grid doesn't show through. */
+    :global(:root[data-theme="light"]) .pp-price-tag {
+      background: color-mix(in oklch, var(--accent) 4%, #fff);
+      box-shadow: inset 0 0 0 1px var(--accent-dim), 0 10px 28px -18px rgb(15 23 42 / 0.2);
+    }
     .pp-price-tag-label { margin-right: 5px; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-dim); }
     .pp-price-tag-num { font-size: 20px; font-weight: 600; color: var(--text); }
     .pp-price-tag-per { font-size: 14px; color: var(--text); }
