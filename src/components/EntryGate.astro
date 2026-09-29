@@ -12,8 +12,7 @@ const demoHref = lang === "en" ? "/en/agency#cta" : "/agency#cta";
 
 // Card destinations: freelancer → persona page, agency → marketing landing.
 const freelancerHref = lang === "en" ? "/en/freelancer" : "/freelancer";
-const agencyHref = siteLanding;
-const agencyExternal = /^https?:\/\//.test(agencyHref);
+const agencyExternal = /^https?:\/\//.test(siteLanding);
 const freelancerSoon = t("entry.freelancer.soon");
 ---
 <Base lang={lang} titleKey="entry.page.title">
@@ -61,7 +60,7 @@ const freelancerSoon = t("entry.freelancer.soon");
 
           <a
             class="gate-card"
-            href={agencyHref}
+            href={siteLanding}
             rel={agencyExternal ? "noopener noreferrer" : undefined}
           >
             <span class="gate-ico" aria-hidden="true">

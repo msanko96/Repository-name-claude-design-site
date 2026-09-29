@@ -151,13 +151,17 @@ const toAgency = lang === "en" ? "/en/agency" : "/agency";
           novalidate
         >
           {c.form.fields.map((f) => (
-            <input
-              class="pp-input"
-              name={f.name}
-              type={f.type}
-              placeholder={f.placeholder}
-              required={f.required}
-            />
+            <>
+              <label class="sr-only" for={`pp-${f.name}`}>{f.placeholder}</label>
+              <input
+                class="pp-input"
+                id={`pp-${f.name}`}
+                name={f.name}
+                type={f.type}
+                placeholder={f.placeholder}
+                required={f.required}
+              />
+            </>
           ))}
           <button
             class="btn pp-btn-wide pp-submit"
@@ -263,7 +267,7 @@ const toAgency = lang === "en" ? "/en/agency" : "/agency";
     /* ---- Apply form ---- */
     .pp-apply { padding: clamp(40px, 7vh, 90px) 0 clamp(60px, 10vh, 120px); }
     .pp-apply-inner { max-width: 860px; text-align: center; }
-    .pp-apply-title { font-size: clamp(30px, 4vw, 46px); font-weight: 600; color: var(--text); margin: 0; }
+    .pp-apply-title { font-size: clamp(30px, 4vw, 46px); font-weight: 500; color: var(--text); margin: 0; letter-spacing: -.2px; }
     .pp-apply-sub { margin: 14px auto 34px; color: var(--text-dim); max-width: 54ch; line-height: 1.55; }
     .pp-form { display: flex; flex-direction: column; gap: 12px; text-align: left; }
     .pp-input { width: 100%; height: 52px; padding: 0 18px; background: var(--bg-elev); border: 1px solid var(--line); border-radius: var(--r-2); color: var(--text); font: inherit; transition: border-color 0.18s ease; }
