@@ -28,7 +28,7 @@ export const T: Record<string, Entry> = {
     },
 
     // --- Header ---
-    "nav.experts":  { en: "Built by Experts", ru: "Команда экспертов" },
+    "nav.experts":  { en: "Built by experts", ru: "Команда экспертов" },
     "nav.features": { en: "Features",         ru: "Возможности" },
     "nav.why":      { en: "Why BEX",          ru: "Зачем BEX" },
     "nav.who":      { en: "Who",              ru: "Для кого" },
@@ -113,7 +113,7 @@ export const T: Record<string, Entry> = {
     },
 
     // f.01 Scoring
-    "f1.title": { en: "Custom Job Scoring & Filtering", ru: "Умная оценка и фильтрация проектов" },
+    "f1.title": { en: "Custom job scoring & filtering", ru: "Умная оценка и фильтрация проектов" },
     "f1.lead": {
       en: "A scoring system built on 15+ years of lead-gen and 50,000+ real proposals. Our algorithms evaluate projects against actual agency results, so you only review jobs worth your time.",
       ru: "Система скоринга на основе 15+ лет опыта и 50 000+ реальных откликов. Оценивает проекты по реальным результатам — вы видите только те, на которые стоит откликаться."
@@ -173,7 +173,7 @@ export const T: Record<string, Entry> = {
     "f1.fd.p5": { en: "client spend ≥ $",  ru: "клиент потратил ≥ $" },
 
     // f.02 Notifications
-    "f2.title": { en: "Email Notification Center", ru: "Центр email-уведомлений" },
+    "f2.title": { en: "Email notification center", ru: "Центр email-уведомлений" },
     "f2.lead": {
       en: "Speed beats everything on Upwork. Stop refreshing the feed and get an email the moment a high-scoring job matching your preferences is posted, and apply while it's still fresh.",
       ru: "Скорость решает. Получайте уведомления о лучших проектах и откликайтесь сразу, без постоянного обновления ленты."
@@ -211,7 +211,7 @@ export const T: Record<string, Entry> = {
     },
 
     // f.03 Cover letters
-    "f3.title": { en: "Partly Automated Cover Letters", ru: "Частично автоматизированные отклики" },
+    "f3.title": { en: "Partly automated cover letters", ru: "Частично автоматизированные отклики" },
     "f3.lead": {
       en: "Work with proven templates and smart automation that drafts personalized proposals from your experience. Keep cover-letter quality high while dramatically cutting the time to apply.",
       ru: "Система помогает быстро собрать персонализированный отклик на основе вашего опыта. Вы полностью контролируете результат — редактируете и отправляете сами."
@@ -242,7 +242,7 @@ export const T: Record<string, Entry> = {
     },
 
     // f.04 CRM
-    "f4.title": { en: "Built-in CRM & Message Center",  ru: "Встроенный CRM и центр сообщений" },
+    "f4.title": { en: "Built-in CRM & message center",  ru: "Встроенный CRM и центр сообщений" },
     "f4.soon":  { en: "Soon", ru: "Скоро" },
     "f4.lead": {
       en: "One central dashboard for every lead: status, chat history, next steps. Manage communication right inside the platform, without spreadsheets or tab-juggling.",
@@ -280,7 +280,7 @@ export const T: Record<string, Entry> = {
     "f4.fd.tags":    { en: "Win/loss tags", ru: "Win/loss теги" },
     "f4.fd.tagsD":   { en: "feeds back into the scoring model", ru: "уходят обратно в модель скоринга" },
     "f4.fd.note": {
-      en: "<b>Shipping Q2</b>: early-access list open. Message us to join.",
+      en: "<b>Shipping in Q2.</b> The early-access list is open. Message us to join.",
       ru: "<b>Релиз во II квартале</b> — открыт early-access. Напишите нам, чтобы попасть."
     },
 
@@ -292,7 +292,7 @@ export const T: Record<string, Entry> = {
     },
     "in.A.lab": { en: "A · Signal at a glance", ru: "A · Основная информация сразу" },
     "in.A.p":   {
-      en: "Payment verified, hire rate, total spent, reviews: the signal columns that used to take 30 seconds to read now sit above the fold.",
+      en: "Payment status, hire rate, total spent and reviews now sit above the fold. Sizing up a client used to take 30 seconds of reading.",
       ru: "Всё, что важно для оценки проекта, видно сразу."
     },
     "in.B.lab": { en: "B · Proposals, ranked", ru: "B · Скоринг откликов" },
@@ -307,7 +307,7 @@ export const T: Record<string, Entry> = {
     },
     "in.D.lab": { en: "D · Publish without leaving", ru: "D · Публикация без переключения" },
     "in.D.p":   {
-      en: "Duration, price, Connects: everything the Upwork response form needs, inside one focused window.",
+      en: "Set duration, price and Connects in the same window. That's everything the Upwork proposal form asks for.",
       ru: "Длительность, цена, Connects — всё, что требует форма Upwork, в одном окне."
     },
 
@@ -452,7 +452,7 @@ export const T: Record<string, Entry> = {
     "foot.brand":   { en: "BEX/01 · system for attracting projects", ru: "BEX/01 — система привлечения проектов" },
     "foot.privacy": { en: "Privacy", ru: "Конфиденциальность" },
     "foot.terms":   { en: "Terms",   ru: "Условия" },
-    "foot.build":   { en: "build 2026.04 · cool-blue", ru: "сборка 2026.04 · cool-blue" },
+    "foot.build":   { en: "2026", ru: "2026" },
 
     // --- Entry / gateway page (/start) ---
     "entry.meta":  { en: "00 / Entry", ru: "00 / Вход" },

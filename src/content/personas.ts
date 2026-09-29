@@ -200,7 +200,7 @@ const AGENCY: Record<Lang, PersonaContent> = {
   en: {
     pill: "For agencies on Upwork",
     title: 'Turn Upwork into a <em class="acc">steady sales channel</em>',
-    sub: "BEX runs lead-gen for your team: scores jobs, routes them between specialists and keeps every thread in one place.",
+    sub: "BEX runs lead-gen for your team. It scores jobs, routes them to the right specialists and keeps every thread in one place.",
     cta: "Get a demo",
     benefitsEyebrow: "What the team gets",
     benefits: [
