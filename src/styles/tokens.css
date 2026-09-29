@@ -54,7 +54,7 @@
   --grad-hero: radial-gradient(ellipse 60% 45% at 25% 20%, rgba(37,99,235,0.35), transparent 60%),
                radial-gradient(ellipse 50% 35% at 80% 80%, rgba(96,165,250,0.22), transparent 60%);
 
-  --grid-line: oklch(0.34 0.018 240 / 0.48);
+  --grid-line: oklch(0.28 0.018 240 / 0.48);
   --noise-op: 0.06;
   color-scheme: dark;
 }

@@ -85,7 +85,7 @@ const FREELANCER: Record<Lang, PersonaContent> = {
     },
     form: {
       heading: "Оставь заявку",
-      sub: "Напишем, как настроить BEX под твой стек — обычно это занимает 10 минут.",
+      sub: "Напишем, как настроить BEX под твой стек — обычно это занимает 10&nbsp;минут.",
       fields: [
         { name: "name", placeholder: "Имя", type: "text", required: false },
         { name: "telegram", placeholder: "Ссылка на Telegram", type: "text", required: false },
