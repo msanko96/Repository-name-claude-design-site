@@ -1,0 +1,17 @@
+# Build output / generated
+dist/
+.astro/
+.netlify/
+package-lock.json
+
+# Static assets and local Directus data
+public/
+directus/backups/
+
+# CSS is written in a compact one-rule-per-line style that Prettier would
+# always expand. <style>/<script> blocks inside .astro files are skipped for
+# the same reason via embeddedLanguageFormatting: "off" in .prettierrc.json.
+*.css
+
+# Hand-aligned translation table (columns padded with spaces).
+src/i18n/ui.ts

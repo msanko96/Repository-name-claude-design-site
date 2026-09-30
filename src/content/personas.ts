@@ -16,6 +16,7 @@ export interface PersonaContent {
   title: string; // may contain inline HTML (<em class="acc">…</em>)
   sub: string; // may contain inline HTML
   cta: string;
+  ctaBadge?: string;
   benefitsEyebrow: string;
   benefits: { icon: string; title: string; desc: string }[];
   price: {
@@ -23,6 +24,8 @@ export interface PersonaContent {
     tagline: string;
     amount: string;
     per: string;
+    /** Prefix for the hero price plate ("Only for" + amount + per); omit to hide the plate. */
+    heroLabel?: string;
     note: string;
     features: string[];
     cta: string;
@@ -41,20 +44,34 @@ export interface PersonaContent {
 const FREELANCER: Record<Lang, PersonaContent> = {
   ru: {
     pill: "Для фрилансеров на Upwork",
-    title: 'Не упускай нужные проекты <em class="acc">на Upwork</em>',
+    title: 'Не упускай нужные проекты <em class="acc">на&nbsp;Upwork</em>',
     sub: "BEX следит за лентой Upwork, фильтрует вакансии под твой стек и присылает уведомление, когда появляется что-то <b>стоящее</b>.",
     cta: "Попробовать",
+    ctaBadge: "Скоро запуск",
     benefitsEyebrow: "Что ты получаешь",
     benefits: [
-      { icon: "🎯", title: "Скоринг под твой стек", desc: "Видишь только вакансии, которые реально стоит ответа." },
-      { icon: "⚡", title: "Уведомление за секунды", desc: "Telegram-уведомление как только появилась подходящая вакансия." },
-      { icon: "✍️", title: "Черновик уже готов", desc: "Cover letter под твою нишу. Редактируешь детали — не пишешь с нуля." },
+      {
+        icon: "🎯",
+        title: "Скоринг под твой стек",
+        desc: "Видишь только вакансии, на которые реально стоит ответить.",
+      },
+      {
+        icon: "⚡",
+        title: "Уведомление за секунды",
+        desc: "Уведомление в Telegram, как только появляется подходящая вакансия.",
+      },
+      {
+        icon: "✍️",
+        title: "Черновик уже готов",
+        desc: "Cover letter под твою нишу. Редактируешь детали — не пишешь с нуля.",
+      },
     ],
     price: {
       label: "Фрилансер",
       tagline: "Меньше ручной работы — больше откликов туда, где это имеет смысл.",
       amount: "€20",
       per: "/месяц",
+      heroLabel: "Всего за",
       note: "ежемесячная подписка · отмена в любой момент",
       features: [
         "5 фильтров вакансий",
@@ -70,7 +87,7 @@ const FREELANCER: Record<Lang, PersonaContent> = {
     },
     form: {
       heading: "Оставь заявку",
-      sub: "Напишем, как настроить BEX под твой стек — обычно это занимает 10 минут.",
+      sub: "Напишем, как настроить BEX под твой стек — обычно это занимает 10&nbsp;минут.",
       fields: [
         { name: "name", placeholder: "Имя", type: "text", required: false },
         { name: "telegram", placeholder: "Ссылка на Telegram", type: "text", required: false },
@@ -87,18 +104,24 @@ const FREELANCER: Record<Lang, PersonaContent> = {
     pill: "For freelancers on Upwork",
     title: 'Never miss the right projects <em class="acc">on Upwork</em>',
     sub: "BEX watches the Upwork feed, filters jobs for your stack and pings you the moment something <b>worth it</b> shows up.",
-    cta: "Try it",
+    cta: "Join the waitlist",
+    ctaBadge: "Launching soon",
     benefitsEyebrow: "What you get",
     benefits: [
       { icon: "🎯", title: "Scoring for your stack", desc: "See only the jobs actually worth replying to." },
       { icon: "⚡", title: "Alerts in seconds", desc: "A Telegram alert the moment a matching job is posted." },
-      { icon: "✍️", title: "Draft already written", desc: "A cover letter for your niche. You edit the details — not write from scratch." },
+      {
+        icon: "✍️",
+        title: "Draft already written",
+        desc: "A cover letter for your niche. You edit the details instead of writing from scratch.",
+      },
     ],
     price: {
       label: "Freelancer",
-      tagline: "Less manual work — more proposals where they actually matter.",
+      tagline: "Less manual work, more proposals where they actually matter.",
       amount: "€20",
       per: "/month",
+      heroLabel: "Only for",
       note: "monthly subscription · cancel anytime",
       features: [
         "5 job filters",
@@ -114,7 +137,7 @@ const FREELANCER: Record<Lang, PersonaContent> = {
     },
     form: {
       heading: "Leave a request",
-      sub: "We'll show how to set BEX up for your stack — usually takes 10 minutes.",
+      sub: "We'll show how to set BEX up for your stack. It usually takes 10&nbsp;minutes.",
       fields: [
         { name: "name", placeholder: "Name", type: "text", required: false },
         { name: "telegram", placeholder: "Telegram link", type: "text", required: false },
@@ -180,7 +203,7 @@ const AGENCY: Record<Lang, PersonaContent> = {
   en: {
     pill: "For agencies on Upwork",
     title: 'Turn Upwork into a <em class="acc">steady sales channel</em>',
-    sub: "BEX runs lead-gen for your team: scores jobs, routes them between specialists and keeps every thread in one place.",
+    sub: "BEX runs lead-gen for your team. It scores jobs, routes them to the right specialists and keeps every thread in one place.",
     cta: "Get a demo",
     benefitsEyebrow: "What the team gets",
     benefits: [
@@ -208,7 +231,7 @@ const AGENCY: Record<Lang, PersonaContent> = {
     },
     form: {
       heading: "Leave a request",
-      sub: "We'll show how BEX runs lead-gen for a team — a 20-minute demo.",
+      sub: "We'll show how BEX runs lead-gen for a team in a 20-minute demo.",
       fields: [
         { name: "name", placeholder: "Name", type: "text", required: true },
         { name: "company", placeholder: "Agency name", type: "text", required: false },

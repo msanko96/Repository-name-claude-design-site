@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "private": true,
   "engines": {
-    "node": "^18.17.1 || ^20.3.0 || >=22.0.0"
+    "node": ">=22.12.0"
   },
   "scripts": {
     "dev": "astro dev",
@@ -12,6 +12,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "directus:up": "docker compose --env-file directus/.env -f directus/docker-compose.yml up -d",
     "directus:down": "docker compose --env-file directus/.env -f directus/docker-compose.yml down",
     "directus:logs": "docker compose --env-file directus/.env -f directus/docker-compose.yml logs -f directus",
@@ -20,9 +22,11 @@
     "directus:restore": "docker compose --env-file directus/.env -f directus/docker-compose.yml exec -T database psql -U directus -d directus < directus/backups/directus.sql"
   },
   "devDependencies": {
-    "astro": "^5.18.2"
+    "astro": "^7.3.5",
+    "prettier": "^3.9.9",
+    "prettier-plugin-astro": "^1.1.0"
   },
   "dependencies": {
-    "@astrojs/netlify": "^6.6.5"
+    "@astrojs/netlify": "^8.2.6"
   }
 }

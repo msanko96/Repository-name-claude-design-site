@@ -227,7 +227,7 @@
           { t: "", br: true },
           { t: "I reviewed your posting for the " },
           { t: "React dashboard for analytics SaaS", cls: "t" },
-          { t: " — we shipped a similar build for a fintech last quarter (2-week MVP, $12k).", br: true },
+          { t: ". We shipped a similar build for a fintech last quarter (2-week MVP, $12k).", br: true },
           { t: "", br: true },
           { t: "A few quick thoughts on your requirements: we'd start with the auth + billing skeleton, then wire up the " },
           { t: "charting layer", cls: "t" },
@@ -236,7 +236,7 @@
         ],
         type: [
           "Happy to share a similar shipped project on a quick call.",
-          "Best, Maya — Lead engineer at Northline.",
+          "Best, Maya, lead engineer at Northline.",
         ],
       },
       ru: {
@@ -333,11 +333,11 @@
       if (stage.childElementCount) return;
       // 5 messy "tabs/windows" scattered, each a different Upwork view
       const tabs = [
-        { t: "upwork.com — find work",     x: 4,  y: 6,   r: -3, n: 3,  miss: true  },
-        { t: "telegram — leads channel",   x: 38, y: 28,  r: 2,  n: 12, miss: false },
-        { t: "notion — clients pipeline",  x: 8,  y: 64,  r: -2, n: 0,  miss: false },
-        { t: "upwork.com — saved jobs",    x: 46, y: 96,  r: 4,  n: 7,  miss: true  },
-        { t: "vpn — switching node…",      x: 22, y: 130, r: -4, n: 0,  miss: false, err: true },
+        { t: "upwork.com · find work",     x: 4,  y: 6,   r: -3, n: 3,  miss: true  },
+        { t: "telegram · leads channel",   x: 38, y: 28,  r: 2,  n: 12, miss: false },
+        { t: "notion · clients pipeline",  x: 8,  y: 64,  r: -2, n: 0,  miss: false },
+        { t: "upwork.com · saved jobs",    x: 46, y: 96,  r: 4,  n: 7,  miss: true  },
+        { t: "vpn · switching node…",      x: 22, y: 130, r: -4, n: 0,  miss: false, err: true },
       ];
       tabs.forEach((tab, i) => {
         const w = document.createElement("div");
@@ -386,7 +386,7 @@
       win.innerHTML = `
         <div class="order-bar">
           <span class="chaos-dots"><i></i><i></i><i></i></span>
-          <span class="order-title">bex.app — inbox</span>
+          <span class="order-title">bex.app · inbox</span>
           <span class="order-pill">sorted by score</span>
         </div>
         <div class="order-body">
@@ -425,7 +425,7 @@
   if (fvFeed && fvSignal && fvNoise) {
     const feedJobs = [
       { age: "3 min ago",   title: "CRM Development for Dog Trainers",           flag: "🇨🇦", price: "$30–55",  score: 69 },
-      { age: "5 min ago",   title: "Front End Developer — Fashion E‑Commerce",   flag: "🇨🇦", price: "$15–35",  score: 49 },
+      { age: "5 min ago",   title: "Front End Developer for Fashion E‑Commerce",   flag: "🇨🇦", price: "$15–35",  score: 49 },
       { age: "15 min ago",  title: "HubSpot Integration & Dashboard Build",       flag: "🇺🇸", price: "$5",      score: 72 },
       { age: "27 min ago",  title: "Full Stack Developer | React & Node.js",      flag: "🇷🇸", price: "$10,000", score: 98 },
       { age: "31 min ago",  title: "Custom Slack and HubSpot App",                flag: "🇨🇦", price: "$15–35",  score: 66 },
@@ -711,6 +711,33 @@
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     updateActive();
+  }
+
+  // ---------- Header nav: highlight the link whose section is in view ----------
+  const navTargets = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'))
+    .map(a => [a, document.getElementById(a.getAttribute("href").slice(1))])
+    .filter(([, section]) => section);
+  if (navTargets.length) {
+    function updateNav() {
+      // "current" = the section crossing a line ~35% down the viewport
+      // (just below the sticky header, where the reader's eye is)
+      const line = window.innerHeight * 0.35;
+      navTargets.forEach(([a, section]) => {
+        const r = section.getBoundingClientRect();
+        const on = r.top <= line && r.bottom > line;
+        a.classList.toggle("is-active", on);
+        if (on) a.setAttribute("aria-current", "location");
+        else a.removeAttribute("aria-current");
+      });
+    }
+    let navRaf = null;
+    function onNavScroll() {
+      if (navRaf) return;
+      navRaf = requestAnimationFrame(() => { navRaf = null; updateNav(); });
+    }
+    window.addEventListener("scroll", onNavScroll, { passive: true });
+    window.addEventListener("resize", onNavScroll);
+    updateNav();
   }
 
   // ---------- Persona form (/freelancer, /agency) ----------

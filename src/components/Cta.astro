@@ -10,6 +10,7 @@ const t = useTranslations(lang);
     <h2 class="h2 cta-title" set:html={t("cta.title")}></h2>
     <p class="lead" set:html={t("cta.lead")}></p>
     <form class="cta-form" id="cta-form" novalidate>
+      <label class="sr-only" for="cta-email">Email</label>
       <input
         id="cta-email"
         name="email"

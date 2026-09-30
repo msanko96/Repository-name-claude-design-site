@@ -12,8 +12,8 @@ const demoHref = lang === "en" ? "/en/agency#cta" : "/agency#cta";
 
 // Card destinations: freelancer → persona page, agency → marketing landing.
 const freelancerHref = lang === "en" ? "/en/freelancer" : "/freelancer";
-const agencyHref = siteLanding;
-const agencyExternal = /^https?:\/\//.test(agencyHref);
+const agencyExternal = /^https?:\/\//.test(siteLanding);
+const freelancerSoon = t("entry.freelancer.soon");
 ---
 <Base lang={lang} titleKey="entry.page.title">
   <Header
@@ -34,12 +34,20 @@ const agencyExternal = /^https?:\/\//.test(agencyHref);
       <div class="gate-tree">
         <span class="gate-node" aria-hidden="true"></span>
         <svg class="gate-branches" viewBox="0 0 100 64" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M50 0 C50 42 25 22 25 64" fill="none" stroke="var(--line-soft)" stroke-width="1" vector-effect="non-scaling-stroke" />
-          <path d="M50 0 C50 42 75 22 75 64" fill="none" stroke="var(--line-soft)" stroke-width="1" vector-effect="non-scaling-stroke" />
+          <defs>
+            <!-- Accent at the node, fading into the regular line colour at the cards. -->
+            <linearGradient id="gate-branch-grad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="64">
+              <stop offset="0" style="stop-color: var(--accent); stop-opacity: 0.55" />
+              <stop offset="1" style="stop-color: var(--line)" />
+            </linearGradient>
+          </defs>
+          <path class="gate-branch gate-branch-l" d="M50 0 C50 42 24 22 24 64" fill="none" stroke="url(#gate-branch-grad)" stroke-width="1.5" vector-effect="non-scaling-stroke" />
+          <path class="gate-branch gate-branch-r" d="M50 0 C50 42 76 22 76 64" fill="none" stroke="url(#gate-branch-grad)" stroke-width="1.5" vector-effect="non-scaling-stroke" />
         </svg>
 
         <div class="gate-cards">
           <a class="gate-card" href={freelancerHref}>
+            {freelancerSoon && <span class="gate-card-soon badge" set:html={freelancerSoon}></span>}
             <span class="gate-ico" aria-hidden="true">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="8" r="3.4"/>
@@ -47,12 +55,12 @@ const agencyExternal = /^https?:\/\//.test(agencyHref);
               </svg>
             </span>
             <span class="gate-card-title" set:html={t("entry.freelancer")}></span>
-            <span class="gate-card-hint mono-label" set:html={t("entry.freelancer.hint")}></span>
+            <span class="gate-card-hint" set:html={t("entry.freelancer.hint")}></span>
           </a>
 
           <a
             class="gate-card"
-            href={agencyHref}
+            href={siteLanding}
             rel={agencyExternal ? "noopener noreferrer" : undefined}
           >
             <span class="gate-ico" aria-hidden="true">
@@ -64,7 +72,7 @@ const agencyExternal = /^https?:\/\//.test(agencyHref);
               </svg>
             </span>
             <span class="gate-card-title" set:html={t("entry.agency")}></span>
-            <span class="gate-card-hint mono-label" set:html={t("entry.agency.hint")}></span>
+            <span class="gate-card-hint" set:html={t("entry.agency.hint")}></span>
           </a>
         </div>
       </div>
@@ -72,9 +80,19 @@ const agencyExternal = /^https?:\/\//.test(agencyHref);
   </main>
 
   <style>
+    /* Header + gate fill exactly one screen, whatever the header height
+       (it wraps to two rows on phones): body becomes a column and the gate
+       takes the rest. svh = viewport with the browser bars shown, so the
+       height doesn't jump as they collapse. */
+    :global(body:has(.gate-page)) {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      min-height: 100svh;
+    }
     .gate-page {
       position: relative;
-      min-height: calc(100vh - 72px);
+      flex: 1 0 auto;
       display: flex;
       align-items: center;
       overflow: hidden;
@@ -89,8 +107,8 @@ const agencyExternal = /^https?:\/\//.test(agencyHref);
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      color: var(--accent);
-      margin-bottom: var(--s-6);
+      color: var(--accent-text);
+      margin-bottom: var(--s-4);
     }
     .gate-eyebrow i {
       width: 7px;
@@ -102,22 +120,26 @@ const agencyExternal = /^https?:\/\//.test(agencyHref);
     }
     .gate-title {
       margin: 0;
-      font-family: var(--font-sans);
-      font-weight: 700;
-      font-size: clamp(72px, 13vw, 160px);
-      line-height: 1;
-      letter-spacing: -0.045em;
+      font-weight: 500;
+      font-size: clamp(64px, 12vw, 132px);
+      /* Tighter than 1 so eyebrow / subtitle sit close to the glyphs,
+         not to the empty line box around them. */
+      line-height: 0.9;
+      letter-spacing: -0.025em;
       color: var(--text);
     }
     .gate-sub {
-      margin: var(--s-4) auto 0;
-      color: var(--text-mute);
+      margin: var(--s-3) auto 0;
+      font-size: 12px;
+      color: var(--text-dim);
       letter-spacing: 0.12em;
     }
+    /* Brand block (eyebrow + title + subtitle) is kept tight; this gap is the
+       only larger one and separates it from the choice block below. */
     .gate-tree {
       position: relative;
-      max-width: 560px;
-      margin: clamp(36px, 6vh, 80px) auto 0;
+      max-width: 680px;
+      margin: clamp(28px, 4.5vh, 48px) auto 0;
     }
     .gate-node {
       display: block;
@@ -133,63 +155,124 @@ const agencyExternal = /^https?:\/\//.test(agencyHref);
     .gate-branches {
       display: block;
       width: 100%;
-      height: 60px;
+      height: 48px;
       margin-top: -2px;
+    }
+    /* Hovering / focusing a card lights up the branch leading to it. */
+    .gate-tree:has(.gate-card:first-child:hover, .gate-card:first-child:focus-visible) .gate-branch-l,
+    .gate-tree:has(.gate-card:last-child:hover, .gate-card:last-child:focus-visible) .gate-branch-r {
+      stroke: var(--accent);
     }
     .gate-cards {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: var(--s-4);
+      gap: var(--s-6);
     }
     .gate-card {
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: var(--s-3);
-      min-height: 156px;
-      padding: var(--s-7) var(--s-5);
-      background: var(--bg-elev);
-      border: 1px solid var(--line);
+      gap: 16px;
+      min-height: 200px;
+      padding: 40px var(--s-6);
+      background: color-mix(in oklch, var(--surface) 48%, transparent);
+      border: 1px solid color-mix(in oklch, var(--accent) 22%, var(--line));
       border-radius: var(--r-3);
       color: var(--text);
       text-decoration: none;
-      transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+      transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
     }
-    .gate-card:hover {
+    .gate-card:hover,
+    .gate-card:focus-visible {
       border-color: var(--accent);
       transform: translateY(-3px);
-      background: color-mix(in oklch, var(--accent-glow) 8%, var(--bg-elev));
+      background: color-mix(in oklch, var(--accent-glow) 10%, var(--surface));
+      box-shadow: 0 18px 40px -16px var(--accent-glow);
     }
+    .gate-card:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+    /* Light theme: white cards lifted off the page instead of grey tiles. */
+    :global(:root[data-theme="light"]) .gate-card {
+      background: rgb(255 255 255 / 0.4);
+      border-color: color-mix(in oklch, var(--accent) 14%, var(--line));
+      box-shadow: 0 1px 2px rgb(15 23 42 / 0.04), 0 10px 28px -18px rgb(15 23 42 / 0.2);
+    }
+    :global(:root[data-theme="light"]) .gate-card:hover,
+    :global(:root[data-theme="light"]) .gate-card:focus-visible {
+      border-color: var(--accent);
+      background: color-mix(in oklch, var(--accent-glow) 6%, #fff);
+      box-shadow: 0 18px 40px -16px var(--accent-glow);
+    }
+    /* Neutral grey icon tile at rest; turns accent blue with the card on
+       hover / focus (lighter --accent-2 in the dark theme so it reads). */
     .gate-ico {
+      display: inline-grid;
+      place-items: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
       color: var(--text-dim);
-      transition: color 0.2s ease;
+      background: var(--surface-2);
+      transition: background 0.2s ease, color 0.2s ease;
     }
-    .gate-card:hover .gate-ico {
+    .gate-ico svg { width: 30px; height: 30px; }
+    .gate-card:hover .gate-ico,
+    .gate-card:focus-visible .gate-ico {
+      color: var(--accent-2, var(--accent));
+      background: color-mix(in oklch, var(--accent) 22%, var(--surface));
+    }
+    :global(:root[data-theme="light"]) .gate-card:hover .gate-ico,
+    :global(:root[data-theme="light"]) .gate-card:focus-visible .gate-ico {
       color: var(--accent);
+      background: color-mix(in oklch, var(--accent) 10%, #fff);
     }
     .gate-card-title {
-      font-size: 17px;
+      font-size: 24px;
       font-weight: 600;
+      line-height: 1.2;
     }
+    /* "Launching soon" pill sitting on the card's top border (out of the
+       flow, so the icon / title stay aligned with the agency card). */
+    .gate-card-soon {
+      position: absolute;
+      top: 0;
+      left: 16px;
+      transform: translateY(-50%);
+      background: color-mix(in oklch, var(--accent) 14%, var(--bg));
+      white-space: nowrap;
+    }
+    /* Pulled up against the card gap so title + hint read as one unit
+       (icon → title keeps the full gap). */
     .gate-card-hint {
+      margin-top: -8px;
+      font-size: 14px;
       color: var(--text-mute);
-      letter-spacing: 0.08em;
+      letter-spacing: 0.04em;
     }
     /* Phones: keep the two cards side by side with the connector lines,
        just scaled down to fit. */
     @media (max-width: 560px) {
+      .gate { padding-top: 12px }
+      .gate-sub { font-size: 11px; letter-spacing: 0.06em; }
       .gate-tree { padding: 0 12px; }
       .gate-cards { gap: 10px; }
-      .gate-branches { height: 40px; }
+      .gate-branches { height: 32px; }
+      /* Top-aligned so icons and titles line up even when a hint wraps. */
       .gate-card {
+        justify-content: flex-start;
         min-height: 0;
-        padding: 16px 10px;
-        gap: 8px;
+        padding: 24px 12px;
+        gap: 10px;
       }
-      .gate-ico svg { width: 22px; height: 22px; }
-      .gate-card-title { font-size: 14px; }
-      .gate-card-hint { font-size: 10px; letter-spacing: 0.04em; }
+      .gate-ico { width: 44px; height: 44px; border-radius: 12px; }
+      .gate-ico svg { width: 24px; height: 24px; }
+      .gate-card-title { font-size: 16px; }
+      .gate-card-hint { margin-top: -4px; font-size: 11px; letter-spacing: 0.04em; }
+      .gate-card-soon { left: 50%; transform: translate(-50%, -50%); font-size: 9px; padding: 2px 7px; }
     }
   </style>
 </Base>
