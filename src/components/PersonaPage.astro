@@ -36,7 +36,7 @@ const toAgency = lang === "ru" ? "/ru/agency" : "/agency";
           <p class="mt-[22px] max-w-[46ch] text-text-dim text-[clamp(16px,1.2vw,19px)] leading-[1.6]" set:html={c.sub}></p>
           {c.ctaBadge && <p class="whitespace-nowrap text-[var(--accent-2,var(--accent))] font-medium mt-6 text-[16px]">{c.ctaBadge}</p>}
           {c.price.heroLabel && (
-            <div class="inline-flex items-baseline gap-[3px] px-5 h-12 leading-[46px] mt-3 rounded-pill shadow-[inset_0_0_0_1px_var(--accent-dim)] bg-[color-mix(in_oklch,var(--accent-glow)_14%,transparent)]">
+            <div class="pp-price-tag inline-flex items-baseline gap-[3px] px-5 h-12 leading-[46px] mt-3 rounded-pill shadow-[inset_0_0_0_1px_var(--accent-dim)] bg-[color-mix(in_oklch,var(--accent-glow)_14%,transparent)]">
               <span class="mr-[5px] font-mono text-[13px] tracking-[0.04em] uppercase text-text-dim">{c.price.heroLabel}</span>
               <span class="text-[20px] font-semibold text-text">{c.price.amount}</span>
               <span class="text-[14px] text-text">{c.price.per}</span>
@@ -140,4 +140,11 @@ const toAgency = lang === "ru" ? "/ru/agency" : "/agency";
 
   </main>
 
+  <style>
+    /* Light theme: solid (barely tinted) white plate so the hero grid doesn't show through. */
+    :global(:root[data-theme="light"]) .pp-price-tag {
+      background: color-mix(in oklch, var(--accent) 4%, #fff);
+      box-shadow: inset 0 0 0 1px var(--accent-dim), 0 10px 28px -18px rgb(15 23 42 / 0.2);
+    }
+  </style>
 </Base>

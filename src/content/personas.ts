@@ -4,18 +4,10 @@ import type { Lang } from "../i18n/utils";
 
 export type Persona = "freelancer" | "agency";
 
-export interface FormField {
-  name: string;
-  placeholder: string;
-  type: "text" | "email" | "url";
-  required: boolean;
-}
-
 export interface PersonaContent {
   pill: string;
   title: string; // may contain inline HTML (<em class="acc">…</em>)
   sub: string; // may contain inline HTML
-  cta: string;
   ctaBadge?: string;
   benefitsEyebrow: string;
   benefits: { icon: string; title: string; desc: string }[];
@@ -28,16 +20,6 @@ export interface PersonaContent {
     heroLabel?: string;
     note: string;
     features: string[];
-    cta: string;
-  };
-  form: {
-    heading: string;
-    sub: string;
-    fields: FormField[];
-    submit: string;
-    loading: string;
-    done: string;
-    error: string;
   };
 }
 
@@ -46,7 +28,6 @@ const FREELANCER: Record<Lang, PersonaContent> = {
     pill: "Для фрилансеров на Upwork",
     title: 'Не упускай нужные проекты <em class="acc">на&nbsp;Upwork</em>',
     sub: "BEX следит за лентой Upwork, фильтрует вакансии под твой стек и присылает уведомление, когда появляется что-то <b>стоящее</b>.",
-    cta: "Попробовать",
     ctaBadge: "Скоро запуск",
     benefitsEyebrow: "Что ты получаешь",
     benefits: [
@@ -80,28 +61,12 @@ const FREELANCER: Record<Lang, PersonaContent> = {
         "Готовый cover letter в течение 10 секунд после генерации",
         "Быстрая поддержка",
       ],
-      cta: "Попробовать",
-    },
-    form: {
-      heading: "Оставь заявку",
-      sub: "Напишем, как настроить BEX под твой стек — обычно это занимает 10&nbsp;минут.",
-      fields: [
-        { name: "name", placeholder: "Имя", type: "text", required: false },
-        { name: "telegram", placeholder: "Ссылка на Telegram", type: "text", required: false },
-        { name: "email", placeholder: "Email", type: "email", required: true },
-        { name: "upwork", placeholder: "Ссылка на профиль Upwork", type: "text", required: false },
-      ],
-      submit: "Отправить",
-      loading: "Отправляем…",
-      done: "Заявка отправлена ✓",
-      error: "Повторить",
     },
   },
   en: {
     pill: "For freelancers on Upwork",
     title: 'Never miss the right projects <em class="acc">on Upwork</em>',
     sub: "BEX watches the Upwork feed, filters jobs for your stack and pings you the moment something <b>worth it</b> shows up.",
-    cta: "Join the waitlist",
     ctaBadge: "Launching soon",
     benefitsEyebrow: "What you get",
     benefits: [
@@ -127,21 +92,6 @@ const FREELANCER: Record<Lang, PersonaContent> = {
         "Cover letter ready within 10 seconds of generation",
         "Fast support",
       ],
-      cta: "Try it",
-    },
-    form: {
-      heading: "Leave a request",
-      sub: "We'll show how to set BEX up for your stack. It usually takes 10&nbsp;minutes.",
-      fields: [
-        { name: "name", placeholder: "Name", type: "text", required: false },
-        { name: "telegram", placeholder: "Telegram link", type: "text", required: false },
-        { name: "email", placeholder: "Email", type: "email", required: true },
-        { name: "upwork", placeholder: "Upwork profile link", type: "text", required: false },
-      ],
-      submit: "Submit",
-      loading: "Sending…",
-      done: "Request sent ✓",
-      error: "Try again",
     },
   },
 };
@@ -152,7 +102,6 @@ const AGENCY: Record<Lang, PersonaContent> = {
     pill: "Для агентств на Upwork",
     title: 'Преврати Upwork в <em class="acc">стабильный канал</em> продаж',
     sub: "BEX ведёт лидогенерацию за команду: оценивает вакансии, распределяет их между специалистами и собирает все отклики в одном месте.",
-    cta: "Получить демо",
     benefitsEyebrow: "Что получает команда",
     benefits: [
       { icon: "🎯", title: "Скоринг под ниши команды", desc: "Поток только релевантных вакансий под ваши направления." },
@@ -175,30 +124,12 @@ const AGENCY: Record<Lang, PersonaContent> = {
         "Приоритетная поддержка",
         "Онбординг команды",
       ],
-      cta: "Получить демо",
-    },
-    form: {
-      heading: "Оставь заявку",
-      sub: "Покажем, как BEX закрывает лидогенерацию для команды - демо за 20 минут.",
-      fields: [
-        { name: "name", placeholder: "Имя", type: "text", required: true },
-        { name: "company", placeholder: "Название агентства", type: "text", required: false },
-        { name: "website", placeholder: "Сайт или профиль на Upwork", type: "text", required: false },
-        { name: "telegram", placeholder: "Ссылка на Telegram", type: "text", required: false },
-        { name: "email", placeholder: "Email", type: "email", required: true },
-        { name: "team_size", placeholder: "Размер команды", type: "text", required: false },
-      ],
-      submit: "Отправить",
-      loading: "Отправляем…",
-      done: "Заявка отправлена ✓",
-      error: "Повторить",
     },
   },
   en: {
     pill: "For agencies on Upwork",
     title: 'Turn Upwork into a <em class="acc">steady sales channel</em>',
     sub: "BEX runs lead-gen for your team. It scores jobs, routes them to the right specialists and keeps every thread in one place.",
-    cta: "Get a demo",
     benefitsEyebrow: "What the team gets",
     benefits: [
       { icon: "🎯", title: "Scoring for your niches", desc: "A feed of only relevant jobs for your team's focus." },
@@ -221,23 +152,6 @@ const AGENCY: Record<Lang, PersonaContent> = {
         "Priority support",
         "Team onboarding",
       ],
-      cta: "Get a demo",
-    },
-    form: {
-      heading: "Leave a request",
-      sub: "We'll show how BEX runs lead-gen for a team in a 20-minute demo.",
-      fields: [
-        { name: "name", placeholder: "Name", type: "text", required: true },
-        { name: "company", placeholder: "Agency name", type: "text", required: false },
-        { name: "website", placeholder: "Website or Upwork profile", type: "text", required: false },
-        { name: "telegram", placeholder: "Telegram link", type: "text", required: false },
-        { name: "email", placeholder: "Email", type: "email", required: true },
-        { name: "team_size", placeholder: "Team size", type: "text", required: false },
-      ],
-      submit: "Submit",
-      loading: "Sending…",
-      done: "Request sent ✓",
-      error: "Try again",
     },
   },
 };

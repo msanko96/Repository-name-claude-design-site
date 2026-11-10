@@ -80,60 +80,6 @@ const freelancerSoon = t("entry.freelancer.soon");
   </main>
 
   <style>
-    /* Header + gate fill exactly one screen, whatever the header height
-       (it wraps to two rows on phones): body becomes a column and the gate
-       takes the rest. svh = viewport with the browser bars shown, so the
-       height doesn't jump as they collapse. */
-    :global(body:has(.gate-page)) {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      min-height: 100svh;
-    }
-    .gate-page {
-      position: relative;
-      flex: 1 0 auto;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-    }
-    .gate {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      padding: clamp(40px, 8vh, 110px) 0;
-    }
-    .gate-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--accent-text);
-      margin-bottom: var(--s-4);
-    }
-    .gate-eyebrow i {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 10px var(--accent);
-      animation: pulse 1.6s infinite;
-    }
-    .gate-title {
-      margin: 0;
-      font-weight: 500;
-      font-size: clamp(64px, 12vw, 132px);
-      /* Tighter than 1 so eyebrow / subtitle sit close to the glyphs,
-         not to the empty line box around them. */
-      line-height: 0.9;
-      letter-spacing: -0.025em;
-      color: var(--text);
-    }
-    .gate-sub {
-      margin: var(--s-3) auto 0;
-      font-size: 12px;
-      color: var(--text-dim);
-      letter-spacing: 0.12em;
-    }
     /* Brand block (eyebrow + title + subtitle) is kept tight; this gap is the
        only larger one and separates it from the choice block below. */
     .gate-tree {
@@ -256,8 +202,6 @@ const freelancerSoon = t("entry.freelancer.soon");
     /* Phones: keep the two cards side by side with the connector lines,
        just scaled down to fit. */
     @media (max-width: 560px) {
-      .gate { padding-top: 12px }
-      .gate-sub { font-size: 11px; letter-spacing: 0.06em; }
       .gate-tree { padding: 0 12px; }
       .gate-cards { gap: 10px; }
       .gate-branches { height: 32px; }
