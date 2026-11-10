@@ -2,39 +2,89 @@
 import { useTranslations, type Lang } from "../i18n/utils";
 const { lang } = Astro.props as { lang: Lang };
 const t = useTranslations(lang);
+
+// "Who is this for" copy. Structured marketing content with lists, kept local
+// per-locale (same pattern as personas.ts) rather than as flat ui.ts keys.
+interface Offer {
+  h: string;
+  intro: string;
+  lead: string;
+  items: string[];
+}
+const COPY: Record<Lang, { bex: Offer; leadly: Offer }> = {
+  ru: {
+    bex: {
+      h: "BEX Platform",
+      intro:
+        "Для компаний, которые хотят самостоятельно развивать продажи на Upwork и контролировать процесс привлечения клиентов.",
+      lead: "Платформа подойдет тем, кто:",
+      items: [
+        "уже работает или планирует выйти на Upwork;",
+        "хочет автоматизировать поиск проектов и обработку заявок;",
+        "предпочитает самостоятельно управлять командой и процессами;",
+        "стремится увеличить количество релевантных лидов без роста операционной нагрузки.",
+      ],
+    },
+    leadly: {
+      h: "Leadly Agency",
+      intro:
+        "Для компаний, которым нужен результат без необходимости выстраивать собственный процесс лидогенерации.",
+      lead: "Агентство подойдет тем, кто:",
+      items: [
+        "не хочет нанимать и обучать lead generation специалистов;",
+        "хочет передать поиск проектов на Upwork и работу с заявками экспертам;",
+        "ценит персональный подход вместо универсальной автоматизации;",
+      ],
+    },
+  },
+  en: {
+    bex: {
+      h: "BEX Platform",
+      intro:
+        "For companies that want to grow their Upwork sales on their own and stay in control of client acquisition.",
+      lead: "The platform is a fit for those who:",
+      items: [
+        "already work on Upwork or plan to start;",
+        "want to automate project discovery and proposal handling;",
+        "prefer to manage their team and processes themselves;",
+        "aim to grow relevant leads without adding operational load.",
+      ],
+    },
+    leadly: {
+      h: "Leadly Agency",
+      intro:
+        "For companies that want results without building their own lead-generation process.",
+      lead: "The agency is a fit for those who:",
+      items: [
+        "don't want to hire and train lead-generation specialists;",
+        "want to hand off Upwork project search and proposal work to experts;",
+        "value a personal approach over one-size-fits-all automation;",
+      ],
+    },
+  },
+};
+const c = COPY[lang];
+const offers = [c.bex, c.leadly];
 ---
 <section id="audience" data-screen-label="05 Audience">
   <div class="container">
     <div class="section-head reveal">
       <div class="section-index" set:html={t("aud.idx")}></div>
-      <h2 class="h2" set:html={t("aud.title")}></h2>
-    </div>
-    <div class="voice-grid reveal">
-      <figure class="voice">
-        <a class="v-avatar-link" href="https://www.linkedin.com/in/yanakishko/" target="_blank" rel="noopener noreferrer" aria-label={t("aud.t1.who")}>
-          <img class="v-avatar v-photo" alt="" loading="lazy" src="/voices/yana-kishko.jpg" />
-        </a>
-        <blockquote set:html={t("aud.t1.q")}></blockquote>
-        <figcaption>
-          <a class="v-who-link" href="https://www.linkedin.com/in/yanakishko/" target="_blank" rel="noopener noreferrer" set:html={t("aud.t1.who")}></a>
-          <span set:html={t("aud.t1.role")}></span>
-        </figcaption>
-      </figure>
-      <figure class="voice">
-        <a class="v-avatar-link" href="https://www.linkedin.com/in/natalliaremarchuk/" target="_blank" rel="noopener noreferrer" aria-label={t("aud.t2.who")}>
-          <span class="v-avatar" data-mono="NR" style="--v-h: 265"></span>
-        </a>
-        <blockquote set:html={t("aud.t2.q")}></blockquote>
-        <figcaption>
-          <a class="v-who-link" href="https://www.linkedin.com/in/natalliaremarchuk/" target="_blank" rel="noopener noreferrer" set:html={t("aud.t2.who")}></a>
-          <span set:html={t("aud.t2.role")}></span>
-        </figcaption>
-      </figure>
     </div>
 
-    <div class="aud-foot reveal">
-      <span class="mono-label"><i></i> <span set:html={t("aud.req.lab")}></span></span>
-      <p set:html={t("aud.req.p")}></p>
+    <div class="reveal grid grid-cols-2 max-[900px]:grid-cols-1 gap-12 max-[900px]:gap-10">
+      {offers.map((o) => (
+        <div>
+          <h3 class="h3">{o.h}</h3>
+          <p class="lead mt-4">{o.intro}</p>
+          <p class="mt-6 text-text-dim text-[15px]">{o.lead}</p>
+          <ul class="mt-3 flex flex-col gap-2 list-disc pl-5">
+            {o.items.map((it) => (
+              <li class="pl-1 text-text-dim text-[15px] leading-[1.55] marker:text-accent">{it}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
     </div>
   </div>
 </section>

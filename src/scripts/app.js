@@ -1,4 +1,4 @@
-/* BEX — app.js */
+/* BEX - app.js */
 (function () {
   const root = document.documentElement;
   const LS_THEME = "bex-theme";
@@ -227,7 +227,7 @@
           { t: "", br: true },
           { t: "I reviewed your posting for the " },
           { t: "React dashboard for analytics SaaS", cls: "t" },
-          { t: " — we shipped a similar build for a fintech last quarter (2-week MVP, $12k).", br: true },
+          { t: ". We shipped a similar build for a fintech last quarter (2-week MVP, $12k).", br: true },
           { t: "", br: true },
           { t: "A few quick thoughts on your requirements: we'd start with the auth + billing skeleton, then wire up the " },
           { t: "charting layer", cls: "t" },
@@ -236,16 +236,16 @@
         ],
         type: [
           "Happy to share a similar shipped project on a quick call.",
-          "Best, Maya — Lead engineer at Northline.",
+          "Best, Maya, lead engineer at Northline.",
         ],
       },
       ru: {
         pre: [
           { t: "Здравствуйте, Алекс!", cls: "t", br: true },
           { t: "", br: true },
-          { t: "Посмотрел ваш проект — " },
+          { t: "Посмотрел ваш проект - " },
           { t: "React-дашборд для аналитики SaaS", cls: "t" },
-          { t: " — в прошлом квартале мы отгрузили похожий для финтеха (2-недельный MVP, $12k).", br: true },
+          { t: " - в прошлом квартале мы отгрузили похожий для финтеха (2-недельный MVP, $12k).", br: true },
           { t: "", br: true },
           { t: "Пара мыслей по требованиям: начнём со скелета auth + биллинга, потом подключим " },
           { t: "графический слой", cls: "t" },
@@ -254,7 +254,7 @@
         ],
         type: [
           "Готов на коротком созвоне показать похожий запущенный проект.",
-          "С уважением, Майя — ведущий инженер, Northline.",
+          "С уважением, Майя - ведущий инженер, Northline.",
         ],
       },
     };
@@ -317,7 +317,7 @@
       renderStatic();
     }
 
-    // Static by default; on hover — loop
+    // Static by default; on hover - loop
     renderStatic();
     if (state.motion !== "off" && card) {
       card.addEventListener("mouseenter", startLoop);
@@ -327,17 +327,17 @@
     }
   }
 
-  // ---------- Why: chaos vs order — concrete UI metaphors ----------
+  // ---------- Why: chaos vs order - concrete UI metaphors ----------
   function drawChaos() {
     document.querySelectorAll(".chaos-stage").forEach(stage => {
       if (stage.childElementCount) return;
       // 5 messy "tabs/windows" scattered, each a different Upwork view
       const tabs = [
-        { t: "upwork.com — find work",     x: 4,  y: 6,   r: -3, n: 3,  miss: true  },
-        { t: "telegram — leads channel",   x: 38, y: 28,  r: 2,  n: 12, miss: false },
-        { t: "notion — clients pipeline",  x: 8,  y: 64,  r: -2, n: 0,  miss: false },
-        { t: "upwork.com — saved jobs",    x: 46, y: 96,  r: 4,  n: 7,  miss: true  },
-        { t: "vpn — switching node…",      x: 22, y: 130, r: -4, n: 0,  miss: false, err: true },
+        { t: "upwork.com · find work",     x: 4,  y: 6,   r: -3, n: 3,  miss: true  },
+        { t: "telegram · leads channel",   x: 38, y: 28,  r: 2,  n: 12, miss: false },
+        { t: "notion · clients pipeline",  x: 8,  y: 64,  r: -2, n: 0,  miss: false },
+        { t: "upwork.com · saved jobs",    x: 46, y: 96,  r: 4,  n: 7,  miss: true  },
+        { t: "vpn · switching node…",      x: 22, y: 130, r: -4, n: 0,  miss: false, err: true },
       ];
       tabs.forEach((tab, i) => {
         const w = document.createElement("div");
@@ -386,7 +386,7 @@
       win.innerHTML = `
         <div class="order-bar">
           <span class="chaos-dots"><i></i><i></i><i></i></span>
-          <span class="order-title">bex.app — inbox</span>
+          <span class="order-title">bex.app · inbox</span>
           <span class="order-pill">sorted by score</span>
         </div>
         <div class="order-body">
@@ -425,7 +425,7 @@
   if (fvFeed && fvSignal && fvNoise) {
     const feedJobs = [
       { age: "3 min ago",   title: "CRM Development for Dog Trainers",           flag: "🇨🇦", price: "$30–55",  score: 69 },
-      { age: "5 min ago",   title: "Front End Developer — Fashion E‑Commerce",   flag: "🇨🇦", price: "$15–35",  score: 49 },
+      { age: "5 min ago",   title: "Front End Developer for Fashion E‑Commerce",   flag: "🇨🇦", price: "$15–35",  score: 49 },
       { age: "15 min ago",  title: "HubSpot Integration & Dashboard Build",       flag: "🇺🇸", price: "$5",      score: 72 },
       { age: "27 min ago",  title: "Full Stack Developer | React & Node.js",      flag: "🇷🇸", price: "$10,000", score: 98 },
       { age: "31 min ago",  title: "Custom Slack and HubSpot App",                flag: "🇨🇦", price: "$15–35",  score: 66 },
@@ -504,7 +504,7 @@
         const t = Math.min(elapsed / job.dur, 1);
 
         if (t >= 1) {
-          // card fully exited — NOW add to column (appears just as card disappears)
+          // card fully exited - NOW add to column (appears just as card disappears)
           if (!job.verdictApplied) { job.verdictApplied = true; }
           job.drop(); // always call drop at end, regardless of earlier state
           if (!job.nextScheduled) {
@@ -541,11 +541,11 @@
               top.appendChild(span);
             }
             job.onFilterApplied = true;
-            // NOTE: drop() is NOT called here — it fires at t=1 when card fully exits
+            // NOTE: drop() is NOT called here - it fires at t=1 when card fully exits
           }
 
         } else {
-          // Phase C — slide into column, NO fade (stays fully visible)
+          // Phase C - slide into column, NO fade (stays fully visible)
           const p = (t - 0.64) / 0.36;
           const eased = Math.pow(p, 1.5); // ease-in
           y = filterY;
@@ -589,7 +589,7 @@
         item.className = "fv-list-item" + (pass ? " fv-item-from-right" : " fv-item-from-left");
         item.innerHTML = cardMarkup(j, pass ? "match" : "noise");
         target.prepend(item);
-        // keep max 5 items, no timeout removal — items stay until pushed out
+        // keep max 5 items, no timeout removal - items stay until pushed out
         while (target.children.length > 5) target.lastElementChild.remove();
       };
       const dur = 3400 + Math.random() * 200; // ~3.4s total
@@ -713,51 +713,31 @@
     updateActive();
   }
 
-  // ---------- Persona form (/freelancer, /agency) ----------
-  const personaForm = document.getElementById("persona-form");
-  if (personaForm) {
-    const submitBtn = personaForm.querySelector(".pp-submit");
-    const btnLabel = personaForm.querySelector(".pp-submit-label");
-    const emailInput = personaForm.querySelector('input[name="email"]');
-    const label = (name) => (submitBtn && submitBtn.dataset[name]) || "";
-
-    let busy = false;
-    personaForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      if (busy) return;
-      if (!personaForm.checkValidity()) {
-        personaForm.reportValidity();
-        return;
-      }
-      const payload = {};
-      personaForm.querySelectorAll("input[name]").forEach((el) => {
-        payload[el.name] = el.value.trim();
+  // ---------- Header nav: highlight the link whose section is in view ----------
+  const navTargets = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'))
+    .map(a => [a, document.getElementById(a.getAttribute("href").slice(1))])
+    .filter(([, section]) => section);
+  if (navTargets.length) {
+    function updateNav() {
+      // "current" = the section crossing a line ~35% down the viewport
+      // (just below the sticky header, where the reader's eye is)
+      const line = window.innerHeight * 0.35;
+      navTargets.forEach(([a, section]) => {
+        const r = section.getBoundingClientRect();
+        const on = r.top <= line && r.bottom > line;
+        a.classList.toggle("is-active", on);
+        if (on) a.setAttribute("aria-current", "location");
+        else a.removeAttribute("aria-current");
       });
-      const endpoint = personaForm.dataset.endpoint || "/api/waitlist";
-
-      busy = true;
-      submitBtn.disabled = true;
-      if (btnLabel) btnLabel.textContent = label("labelLoading");
-      try {
-        const res = await fetch(endpoint, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-        if (!res.ok) throw new Error("Request failed");
-        if (btnLabel) btnLabel.textContent = label("labelDone");
-        personaForm.querySelectorAll("input").forEach((el) => (el.value = ""));
-      } catch (err) {
-        if (btnLabel) btnLabel.textContent = label("labelError");
-        setTimeout(() => {
-          if (btnLabel) btnLabel.textContent = label("labelDefault");
-          submitBtn.disabled = false;
-          busy = false;
-        }, 2500);
-        return;
-      }
-      submitBtn.disabled = false;
-      busy = false;
-    });
+    }
+    let navRaf = null;
+    function onNavScroll() {
+      if (navRaf) return;
+      navRaf = requestAnimationFrame(() => { navRaf = null; updateNav(); });
+    }
+    window.addEventListener("scroll", onNavScroll, { passive: true });
+    window.addEventListener("resize", onNavScroll);
+    updateNav();
   }
+
 })();
