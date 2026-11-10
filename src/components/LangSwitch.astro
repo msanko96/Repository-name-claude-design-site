@@ -4,8 +4,9 @@ const { lang, href: hrefProp } = Astro.props as { lang: Lang; href?: string };
 const href = hrefProp ?? altLangPath(lang);
 const label = lang === "en" ? "RU" : "EN";
 ---
+{/* Same 40×40 / 8px box as the theme toggle (.icon-btn in components.css). */}
 <a
-  class="mono-label inline-flex items-center justify-center min-w-[34px] h-[34px] px-[9px] border border-line rounded-2 no-underline text-text-dim tracking-[0.04em] hover:text-text hover:border-[var(--line-strong,var(--accent))] [transition:color_0.18s_ease,border-color_0.18s_ease]"
+  class="mono-label inline-flex items-center justify-center w-10 h-10 border border-line rounded-[8px] no-underline text-text-dim tracking-[0.04em] hover:text-text hover:border-[var(--text)] [transition:color_0.18s_ease,border-color_0.18s_ease]"
   href={href}
   aria-label={`Switch language to ${label}`}
 >{label}</a>

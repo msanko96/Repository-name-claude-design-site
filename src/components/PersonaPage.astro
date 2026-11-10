@@ -34,6 +34,14 @@ const toAgency = lang === "ru" ? "/ru/agency" : "/agency";
           </div>
           <h1 class="h1 pp-title mt-[22px] text-text" set:html={c.title}></h1>
           <p class="mt-[22px] max-w-[46ch] text-text-dim text-[clamp(16px,1.2vw,19px)] leading-[1.6]" set:html={c.sub}></p>
+          {c.ctaBadge && <p class="whitespace-nowrap text-[var(--accent-2,var(--accent))] font-medium mt-6 text-[16px]">{c.ctaBadge}</p>}
+          {c.price.heroLabel && (
+            <div class="inline-flex items-baseline gap-[3px] px-5 h-12 leading-[46px] mt-3 rounded-pill shadow-[inset_0_0_0_1px_var(--accent-dim)] bg-[color-mix(in_oklch,var(--accent-glow)_14%,transparent)]">
+              <span class="mr-[5px] font-mono text-[13px] tracking-[0.04em] uppercase text-text-dim">{c.price.heroLabel}</span>
+              <span class="text-[20px] font-semibold text-text">{c.price.amount}</span>
+              <span class="text-[14px] text-text">{c.price.per}</span>
+            </div>
+          )}
         </div>
 
         <div class="reveal flex flex-col gap-4" style="transition-delay:120ms">
