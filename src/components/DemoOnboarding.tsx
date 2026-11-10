@@ -53,7 +53,7 @@ const DICT = {
     s4: { h: "Исключите страны", sub: "Уберите локации клиентов, которые обычно тратят ваши Connects впустую", summaryHead: "Выбрано стран: ", empty: "Пока ничего не выбрано" },
     s5: { h: "Описание профиля", sub: "Вставьте текущее описание вашего профиля с Upwork - на его основе бот будет генерировать cover letters", label: "Описание профиля с Upwork", ph: "Senior React developer with 6+ years building SaaS dashboards and design systems…", toggle: "Присылать письма о новых подходящих проектах", emailLabel: "Email", emailPh: "you@example.com" },
     success: { h: "Готово! Настройка завершена", sub: "Ответчик включён. Мы начнём находить подходящие проекты и готовить отклики прямо сейчас." },
-    next: "Далее", finish: "Завершить и включить ответчик",
+    next: "Далее", finish: "Завершить и включить ответчик", pay: "Оплатить €20/мес",
   },
   en: {
     setup: "Demo setup", close: "Close", step: "STEP", of: "OF 5", back: "Back",
@@ -74,9 +74,14 @@ const DICT = {
     s4: { h: "Exclude countries", sub: "Remove client locations that usually waste your Connects", summaryHead: "Countries selected: ", empty: "Nothing selected yet" },
     s5: { h: "Profile description", sub: "Paste your current Upwork profile description - the bot will use it to generate cover letters", label: "Upwork profile description", ph: "Senior React developer with 6+ years building SaaS dashboards and design systems…", toggle: "Email me about new matching projects", emailLabel: "Email", emailPh: "you@example.com" },
     success: { h: "Done! Setup complete", sub: "The responder is on. We'll start finding matching projects and preparing proposals right now." },
-    next: "Next", finish: "Finish and enable the responder",
+    next: "Next", finish: "Finish and enable the responder", pay: "Pay €20/mo",
   },
 };
+
+// Stripe Payment Link (subscription checkout hosted by Stripe). Set
+// PUBLIC_STRIPE_PAYMENT_LINK in .env; without it the demo keeps the old
+// "finish" flow, so the onboarding still works with no Stripe configured.
+const STRIPE_PAYMENT_LINK: string | undefined = import.meta.env.PUBLIC_STRIPE_PAYMENT_LINK;
 
 // ---- Tailwind class strings (same tokens as the rest of the site) ----
 const cls = {
@@ -212,14 +217,22 @@ const DemoOnboarding = ({ lang = "ru", ctaLabel }: Props) => {
   const canNext = !(step === TOTAL && (profileDesc.trim().length === 0 || !emailValid));
   const next = () => {
     if (finished) { closeModal(); return; }
-    if (step < TOTAL) setStep((s) => s + 1);
-    else setFinished(true);
+    if (step < TOTAL) { setStep((s) => s + 1); return; }
+    if (STRIPE_PAYMENT_LINK) {
+      // Hand off to Stripe Checkout; prefill the email collected on step 5.
+      const url = new URL(STRIPE_PAYMENT_LINK);
+      if (emailValid) url.searchParams.set("prefilled_email", email.trim());
+      if (lang === "ru") url.searchParams.set("locale", "ru");
+      window.location.assign(url.toString());
+      return;
+    }
+    setFinished(true);
   };
   const back = () => { if (step > 1) setStep((s) => s - 1); };
 
   const progress = finished ? 100 : (step / TOTAL) * 100;
   const stepName = finished ? L.doneName : L.stepNames[step - 1];
-  const nextLabel = finished ? L.close : step === TOTAL ? L.finish : L.next;
+  const nextLabel = finished ? L.close : step === TOTAL ? (STRIPE_PAYMENT_LINK ? L.pay : L.finish) : L.next;
   const backVisible = !finished && step > 1;
 
   const renderStep = () => {
