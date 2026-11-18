@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /*
   5-step onboarding demo, as a React island (no <script>, state via hooks).
@@ -54,6 +54,7 @@ const DICT = {
     s5: { h: "Описание профиля", sub: "Вставьте текущее описание вашего профиля с Upwork - на его основе бот будет генерировать cover letters", label: "Описание профиля с Upwork", ph: "Senior React developer with 6+ years building SaaS dashboards and design systems…", toggle: "Присылать письма о новых подходящих проектах", emailLabel: "Email", emailPh: "you@example.com" },
     success: { h: "Готово! Настройка завершена", sub: "Ответчик включён. Мы начнём находить подходящие проекты и готовить отклики прямо сейчас." },
     next: "Далее", finish: "Завершить и включить ответчик", pay: "Оплатить €20/мес",
+    saving: "Сохраняем…", saveError: "Не удалось сохранить настройки. Попробуйте ещё раз.",
   },
   en: {
     setup: "Demo setup", close: "Close", step: "STEP", of: "OF 5", back: "Back",
@@ -75,6 +76,7 @@ const DICT = {
     s5: { h: "Profile description", sub: "Paste your current Upwork profile description - the bot will use it to generate cover letters", label: "Upwork profile description", ph: "Senior React developer with 6+ years building SaaS dashboards and design systems…", toggle: "Email me about new matching projects", emailLabel: "Email", emailPh: "you@example.com" },
     success: { h: "Done! Setup complete", sub: "The responder is on. We'll start finding matching projects and preparing proposals right now." },
     next: "Next", finish: "Finish and enable the responder", pay: "Pay €20/mo",
+    saving: "Saving…", saveError: "Couldn't save your settings. Please try again.",
   },
 };
 
@@ -82,6 +84,19 @@ const DICT = {
 // PUBLIC_STRIPE_PAYMENT_LINK in .env; without it the demo keeps the old
 // "finish" flow, so the onboarding still works with no Stripe configured.
 const STRIPE_PAYMENT_LINK: string | undefined = import.meta.env.PUBLIC_STRIPE_PAYMENT_LINK;
+
+// Platform endpoint that stores the onboarding settings as a draft before payment
+// (BEX-2234). Its id goes to Stripe as client_reference_id; after payment the
+// platform builds the freelancer's Default Offer from the draft. Without it the
+// Payment Link still works, but the settings are not carried over.
+const ONBOARDING_DRAFT_URL: string | undefined = import.meta.env.PUBLIC_ONBOARDING_DRAFT_URL;
+
+// Countries are stored by their English names - the platform's location
+// reference only knows those, whatever language the landing is in.
+const COUNTRIES_EN = DICT.en.countries;
+
+// Give up on the draft request after this long and show the retry message.
+const DRAFT_TIMEOUT_MS = 15_000;
 
 // ---- Tailwind class strings (same tokens as the rest of the site) ----
 const cls = {
@@ -172,14 +187,36 @@ const DemoOnboarding = ({ lang = "ru", ctaLabel }: Props) => {
   const [profileDesc, setProfileDesc] = useState("");
   const [email, setEmail] = useState("");
   const [notifyEmail, setNotifyEmail] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState(false);
+  // The draft request in flight; closing or reopening the modal aborts it, so a
+  // late answer can no longer send the visitor to Stripe.
+  const draftRequest = useRef<AbortController | null>(null);
+  const cancelDraftRequest = () => {
+    draftRequest.current?.abort();
+    draftRequest.current = null;
+  };
 
   const openModal = () => {
+    cancelDraftRequest();
     setStep(1); setFinished(false); setNiche(null); setKeywords([]); setKwInput("");
     setMinHourly(""); setMinFixed(""); setFilters({ payment: "", rating: "", spent: "" });
     setCountries([]); setProfileDesc(""); setEmail(""); setNotifyEmail(false);
+    setSaving(false); setSaveError(false);
     setOpen(true);
   };
-  const closeModal = () => setOpen(false);
+  const closeModal = () => { cancelDraftRequest(); setSaving(false); setOpen(false); };
+
+  // Back from Stripe Checkout: the browser may restore this page from bfcache
+  // with saving=true, which would leave the Pay button disabled for good.
+  useEffect(() => {
+    const onPageShow = (e: PageTransitionEvent) => { if (e.persisted) { cancelDraftRequest(); setSaving(false); } };
+    window.addEventListener("pageshow", onPageShow);
+    return () => window.removeEventListener("pageshow", onPageShow);
+  }, []);
+
+  // A stale "couldn't save" message goes away as soon as the visitor moves on.
+  useEffect(() => { setSaveError(false); }, [step, profileDesc, email]);
 
   // Body scroll lock + Escape-to-close while open.
   useEffect(() => {
@@ -214,25 +251,72 @@ const DemoOnboarding = ({ lang = "ru", ctaLabel }: Props) => {
     setCountries((cs) => (cs.includes(c) ? cs.filter((x) => x !== c) : [...cs, c]));
 
   const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
-  const canNext = !(step === TOTAL && (profileDesc.trim().length === 0 || !emailValid));
+  const canNext = !saving && !(step === TOTAL && (profileDesc.trim().length === 0 || !emailValid));
+
+  // Save the collected settings as a draft on the platform; resolves with its id.
+  const saveDraft = async (signal: AbortSignal): Promise<string> => {
+    const res = await fetch(ONBOARDING_DRAFT_URL as string, {
+      method: "POST",
+      signal,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: email.trim(),
+        lang,
+        settings: {
+          niche,
+          keywords,
+          minHourly,
+          minFixed,
+          filters,
+          excludedCountries: countries.map((c) => COUNTRIES_EN[L.countries.indexOf(c)] ?? c),
+          profileDescription: profileDesc,
+          notifyEmail,
+        },
+      }),
+    });
+    const data = await res.json().catch(() => null);
+    if (!res.ok || typeof data?.draftId !== "string") throw new Error("draft not saved");
+    return data.draftId;
+  };
+
+  const goToCheckout = async () => {
+    const url = new URL(STRIPE_PAYMENT_LINK as string);
+    if (ONBOARDING_DRAFT_URL) {
+      // No draft - no payment: after paying there would be nothing to restore.
+      cancelDraftRequest();
+      const controller = new AbortController();
+      draftRequest.current = controller;
+      const timer = setTimeout(() => controller.abort(), DRAFT_TIMEOUT_MS);
+      setSaving(true); setSaveError(false);
+      try {
+        url.searchParams.set("client_reference_id", await saveDraft(controller.signal));
+      } catch {
+        // Cancelled by closing/reopening the modal: nothing to report.
+        if (draftRequest.current === controller) { setSaving(false); setSaveError(true); draftRequest.current = null; }
+        return;
+      } finally {
+        clearTimeout(timer);
+      }
+      if (draftRequest.current !== controller) return;
+      draftRequest.current = null;
+    }
+    // Hand off to Stripe Checkout; prefill the email collected on step 5.
+    if (emailValid) url.searchParams.set("prefilled_email", email.trim());
+    if (lang === "ru") url.searchParams.set("locale", "ru");
+    window.location.assign(url.toString());
+  };
+
   const next = () => {
     if (finished) { closeModal(); return; }
     if (step < TOTAL) { setStep((s) => s + 1); return; }
-    if (STRIPE_PAYMENT_LINK) {
-      // Hand off to Stripe Checkout; prefill the email collected on step 5.
-      const url = new URL(STRIPE_PAYMENT_LINK);
-      if (emailValid) url.searchParams.set("prefilled_email", email.trim());
-      if (lang === "ru") url.searchParams.set("locale", "ru");
-      window.location.assign(url.toString());
-      return;
-    }
+    if (STRIPE_PAYMENT_LINK) { void goToCheckout(); return; }
     setFinished(true);
   };
-  const back = () => { if (step > 1) setStep((s) => s - 1); };
+  const back = () => { if (step > 1 && !saving) setStep((s) => s - 1); };
 
   const progress = finished ? 100 : (step / TOTAL) * 100;
   const stepName = finished ? L.doneName : L.stepNames[step - 1];
-  const nextLabel = finished ? L.close : step === TOTAL ? (STRIPE_PAYMENT_LINK ? L.pay : L.finish) : L.next;
+  const nextLabel = finished ? L.close : step === TOTAL ? (STRIPE_PAYMENT_LINK ? (saving ? L.saving : L.pay) : L.finish) : L.next;
   const backVisible = !finished && step > 1;
 
   const renderStep = () => {
@@ -285,11 +369,11 @@ const DemoOnboarding = ({ lang = "ru", ctaLabel }: Props) => {
             <div className={cls.row2}>
               <div className={cls.field}>
                 <label className={cls.fieldLabel}>{L.s2.hourly}</label>
-                <input className={cls.input} inputMode="numeric" placeholder="40" value={minHourly} onChange={(e) => setMinHourly(e.target.value)} />
+                <input className={cls.input} inputMode="numeric" placeholder="40" value={minHourly} onChange={(e) => setMinHourly(e.target.value.replace(/\D/g, ""))} />
               </div>
               <div className={cls.field}>
                 <label className={cls.fieldLabel}>{L.s2.fixed}</label>
-                <input className={cls.input} inputMode="numeric" placeholder="500" value={minFixed} onChange={(e) => setMinFixed(e.target.value)} />
+                <input className={cls.input} inputMode="numeric" placeholder="500" value={minFixed} onChange={(e) => setMinFixed(e.target.value.replace(/\D/g, ""))} />
               </div>
             </div>
             <div className={cls.info}>{L.s2.info}</div>
@@ -398,10 +482,13 @@ const DemoOnboarding = ({ lang = "ru", ctaLabel }: Props) => {
                   <p className={cls.successSub}>{L.success.sub}</p>
                 </div>
               ) : renderStep()}
+              {saveError && !finished && step === TOTAL && (
+                <p role="alert" className="text-[13px] text-fv-red mt-1 mb-0">{L.saveError}</p>
+              )}
             </div>
 
             <div className={cls.foot}>
-              <button type="button" className={`${cls.btnBase} ${cls.btnGhost}`} onClick={back} disabled={step === 1} style={{ visibility: backVisible ? "visible" : "hidden" }}>{L.back}</button>
+              <button type="button" className={`${cls.btnBase} ${cls.btnGhost}`} onClick={back} disabled={step === 1 || saving} style={{ visibility: backVisible ? "visible" : "hidden" }}>{L.back}</button>
               <button type="button" className={`${cls.btnBase} ${cls.btnPrimary}`} onClick={next} disabled={!canNext}>{nextLabel}</button>
             </div>
           </div>
