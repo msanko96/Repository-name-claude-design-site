@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /*
   5-step onboarding demo, as a React island (no <script>, state via hooks).
@@ -95,6 +95,9 @@ const ONBOARDING_DRAFT_URL: string | undefined = import.meta.env.PUBLIC_ONBOARDI
 // reference only knows those, whatever language the landing is in.
 const COUNTRIES_EN = DICT.en.countries;
 
+// Give up on the draft request after this long and show the retry message.
+const DRAFT_TIMEOUT_MS = 15_000;
+
 // ---- Tailwind class strings (same tokens as the rest of the site) ----
 const cls = {
   cta: "w-full h-[50px] rounded-pill bg-accent text-white font-semibold text-[15px] cursor-pointer transition-transform duration-150 hover:-translate-y-px",
@@ -186,15 +189,34 @@ const DemoOnboarding = ({ lang = "ru", ctaLabel }: Props) => {
   const [notifyEmail, setNotifyEmail] = useState(false);
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState(false);
+  // The draft request in flight; closing or reopening the modal aborts it, so a
+  // late answer can no longer send the visitor to Stripe.
+  const draftRequest = useRef<AbortController | null>(null);
+  const cancelDraftRequest = () => {
+    draftRequest.current?.abort();
+    draftRequest.current = null;
+  };
 
   const openModal = () => {
+    cancelDraftRequest();
     setStep(1); setFinished(false); setNiche(null); setKeywords([]); setKwInput("");
     setMinHourly(""); setMinFixed(""); setFilters({ payment: "", rating: "", spent: "" });
     setCountries([]); setProfileDesc(""); setEmail(""); setNotifyEmail(false);
     setSaving(false); setSaveError(false);
     setOpen(true);
   };
-  const closeModal = () => setOpen(false);
+  const closeModal = () => { cancelDraftRequest(); setSaving(false); setOpen(false); };
+
+  // Back from Stripe Checkout: the browser may restore this page from bfcache
+  // with saving=true, which would leave the Pay button disabled for good.
+  useEffect(() => {
+    const onPageShow = (e: PageTransitionEvent) => { if (e.persisted) { cancelDraftRequest(); setSaving(false); } };
+    window.addEventListener("pageshow", onPageShow);
+    return () => window.removeEventListener("pageshow", onPageShow);
+  }, []);
+
+  // A stale "couldn't save" message goes away as soon as the visitor moves on.
+  useEffect(() => { setSaveError(false); }, [step, profileDesc, email]);
 
   // Body scroll lock + Escape-to-close while open.
   useEffect(() => {
@@ -232,9 +254,10 @@ const DemoOnboarding = ({ lang = "ru", ctaLabel }: Props) => {
   const canNext = !saving && !(step === TOTAL && (profileDesc.trim().length === 0 || !emailValid));
 
   // Save the collected settings as a draft on the platform; resolves with its id.
-  const saveDraft = async (): Promise<string> => {
+  const saveDraft = async (signal: AbortSignal): Promise<string> => {
     const res = await fetch(ONBOARDING_DRAFT_URL as string, {
       method: "POST",
+      signal,
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         email: email.trim(),
@@ -260,13 +283,22 @@ const DemoOnboarding = ({ lang = "ru", ctaLabel }: Props) => {
     const url = new URL(STRIPE_PAYMENT_LINK as string);
     if (ONBOARDING_DRAFT_URL) {
       // No draft - no payment: after paying there would be nothing to restore.
+      cancelDraftRequest();
+      const controller = new AbortController();
+      draftRequest.current = controller;
+      const timer = setTimeout(() => controller.abort(), DRAFT_TIMEOUT_MS);
       setSaving(true); setSaveError(false);
       try {
-        url.searchParams.set("client_reference_id", await saveDraft());
+        url.searchParams.set("client_reference_id", await saveDraft(controller.signal));
       } catch {
-        setSaving(false); setSaveError(true);
+        // Cancelled by closing/reopening the modal: nothing to report.
+        if (draftRequest.current === controller) { setSaving(false); setSaveError(true); draftRequest.current = null; }
         return;
+      } finally {
+        clearTimeout(timer);
       }
+      if (draftRequest.current !== controller) return;
+      draftRequest.current = null;
     }
     // Hand off to Stripe Checkout; prefill the email collected on step 5.
     if (emailValid) url.searchParams.set("prefilled_email", email.trim());
@@ -280,7 +312,7 @@ const DemoOnboarding = ({ lang = "ru", ctaLabel }: Props) => {
     if (STRIPE_PAYMENT_LINK) { void goToCheckout(); return; }
     setFinished(true);
   };
-  const back = () => { if (step > 1) setStep((s) => s - 1); };
+  const back = () => { if (step > 1 && !saving) setStep((s) => s - 1); };
 
   const progress = finished ? 100 : (step / TOTAL) * 100;
   const stepName = finished ? L.doneName : L.stepNames[step - 1];
@@ -337,11 +369,11 @@ const DemoOnboarding = ({ lang = "ru", ctaLabel }: Props) => {
             <div className={cls.row2}>
               <div className={cls.field}>
                 <label className={cls.fieldLabel}>{L.s2.hourly}</label>
-                <input className={cls.input} inputMode="numeric" placeholder="40" value={minHourly} onChange={(e) => setMinHourly(e.target.value)} />
+                <input className={cls.input} inputMode="numeric" placeholder="40" value={minHourly} onChange={(e) => setMinHourly(e.target.value.replace(/\D/g, ""))} />
               </div>
               <div className={cls.field}>
                 <label className={cls.fieldLabel}>{L.s2.fixed}</label>
-                <input className={cls.input} inputMode="numeric" placeholder="500" value={minFixed} onChange={(e) => setMinFixed(e.target.value)} />
+                <input className={cls.input} inputMode="numeric" placeholder="500" value={minFixed} onChange={(e) => setMinFixed(e.target.value.replace(/\D/g, ""))} />
               </div>
             </div>
             <div className={cls.info}>{L.s2.info}</div>
@@ -456,7 +488,7 @@ const DemoOnboarding = ({ lang = "ru", ctaLabel }: Props) => {
             </div>
 
             <div className={cls.foot}>
-              <button type="button" className={`${cls.btnBase} ${cls.btnGhost}`} onClick={back} disabled={step === 1} style={{ visibility: backVisible ? "visible" : "hidden" }}>{L.back}</button>
+              <button type="button" className={`${cls.btnBase} ${cls.btnGhost}`} onClick={back} disabled={step === 1 || saving} style={{ visibility: backVisible ? "visible" : "hidden" }}>{L.back}</button>
               <button type="button" className={`${cls.btnBase} ${cls.btnPrimary}`} onClick={next} disabled={!canNext}>{nextLabel}</button>
             </div>
           </div>
